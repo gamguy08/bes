@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이재석 | Embedded Systems Engineer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Pretendard:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>이재석 | 임베디드 시스템 개발자</title>
+    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -26,43 +24,40 @@
             --border: #E5E8EB;
             --code-bg: #F2F4F6;
             --success: #12B564;
+            --warning: #FFA500;
         }
 
         body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            font-family: 'SUIT Variable', sans-serif;
             background-color: var(--bg);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
-        }
-
-        .mono {
-            font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
         }
 
         /* Header */
         header {
             background: var(--surface);
             border-bottom: 1px solid var(--border);
-            padding: 20px 0;
+            padding: 24px 0;
             position: sticky;
             top: 0;
             z-index: 100;
             backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--text-primary);
         }
@@ -75,136 +70,306 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 32px;
         }
 
         /* Intro Section */
         .intro {
-            padding: 80px 0;
+            padding: 100px 0 80px;
         }
 
         .intro-title {
-            font-size: 48px;
+            font-size: 56px;
             font-weight: 800;
             color: var(--text-primary);
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             letter-spacing: -0.03em;
+            line-height: 1.2;
         }
 
         .intro-subtitle {
-            font-size: 20px;
+            font-size: 24px;
             color: var(--text-secondary);
-            margin-bottom: 32px;
+            margin-bottom: 40px;
+            font-weight: 600;
         }
 
         .intro-meta {
             display: flex;
-            gap: 24px;
+            gap: 32px;
             flex-wrap: wrap;
         }
 
         .meta-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 15px;
+            gap: 10px;
+            font-size: 17px;
             color: var(--text-tertiary);
         }
 
         .meta-item strong {
             color: var(--text-primary);
+            font-size: 18px;
+        }
+
+        /* Match Rate Banner */
+        .match-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 60px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .match-banner h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .match-rate {
+            font-size: 72px;
+            font-weight: 800;
+            margin: 20px 0;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+        }
+
+        .match-description {
+            font-size: 18px;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        /* Requirements Grid */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .requirement-card {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            transition: all 0.3s;
+        }
+
+        .requirement-card.matched {
+            border-color: var(--success);
+            background: #F0FFF4;
+        }
+
+        .requirement-card.learning {
+            border-color: var(--warning);
+            background: #FFF9F0;
+        }
+
+        .requirement-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .requirement-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .requirement-card.matched .requirement-icon {
+            background: var(--success);
+            color: white;
+        }
+
+        .requirement-card.learning .requirement-icon {
+            background: var(--warning);
+            color: white;
+        }
+
+        .requirement-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .requirement-content {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .requirement-proof {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            font-size: 15px;
+            color: var(--text-tertiary);
         }
 
         /* Section */
         .section {
-            padding: 60px 0;
+            padding: 80px 0;
         }
 
         .section-header {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .section-tag {
             display: inline-block;
             background: var(--primary-light);
             color: var(--primary);
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 13px;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             letter-spacing: 0.5px;
         }
 
         .section-title {
-            font-size: 32px;
+            font-size: 42px;
             font-weight: 800;
             color: var(--text-primary);
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             letter-spacing: -0.02em;
         }
 
         .section-description {
-            font-size: 16px;
+            font-size: 18px;
             color: var(--text-tertiary);
+            font-weight: 500;
         }
 
         /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-            margin-bottom: 60px;
+            gap: 20px;
+            margin-bottom: 80px;
         }
 
         .stat-card {
             background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            transition: all 0.2s;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+            text-align: center;
         }
 
         .stat-card:hover {
             border-color: var(--primary);
-            box-shadow: 0 4px 12px rgba(49, 130, 246, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(49, 130, 246, 0.15);
         }
 
         .stat-number {
-            font-size: 36px;
+            font-size: 52px;
             font-weight: 800;
             color: var(--primary);
-            margin-bottom: 8px;
-            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 12px;
         }
 
         .stat-label {
-            font-size: 14px;
+            font-size: 16px;
             color: var(--text-tertiary);
             font-weight: 600;
         }
 
-        /* Tech Stack */
+        /* Visual Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid var(--surface);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .timeline-year {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-description {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Tech Stack Visual */
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
         }
 
         .tech-category {
             background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .tech-category:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 16px rgba(49, 130, 246, 0.1);
         }
 
         .tech-category h3 {
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--border);
         }
 
         .tech-list {
@@ -212,75 +377,74 @@
         }
 
         .tech-item {
-            padding: 8px 0;
-            font-size: 14px;
+            padding: 12px 0;
+            font-size: 16px;
             color: var(--text-secondary);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            line-height: 1.6;
         }
 
         .tech-item::before {
             content: "▸";
             color: var(--primary);
             font-weight: 700;
+            font-size: 18px;
         }
 
-        .tech-item code {
-            background: var(--code-bg);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-family: 'JetBrains Mono', monospace;
+        .tech-item strong {
+            color: var(--text-primary);
+            font-weight: 700;
         }
 
         /* Projects */
         .project {
             background: var(--surface);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--primary);
-            border-radius: 12px;
-            padding: 32px;
-            margin-bottom: 20px;
+            border: 2px solid var(--border);
+            border-left: 6px solid var(--primary);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 28px;
+            transition: all 0.3s;
+        }
+
+        .project:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
 
         .project-header {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .project-title {
-            font-size: 22px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .project-meta {
             display: flex;
-            gap: 16px;
+            gap: 20px;
             flex-wrap: wrap;
-            font-size: 14px;
+            font-size: 16px;
             color: var(--text-tertiary);
-        }
-
-        .project-meta span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-weight: 600;
         }
 
         .project-content h4 {
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--text-primary);
-            margin: 20px 0 12px;
+            margin: 28px 0 16px;
         }
 
         .project-content p {
-            font-size: 15px;
+            font-size: 17px;
             color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
         }
 
         .project-content ul {
@@ -289,11 +453,11 @@
         }
 
         .project-content li {
-            padding: 6px 0 6px 20px;
-            font-size: 14px;
+            padding: 10px 0 10px 28px;
+            font-size: 16px;
             color: var(--text-secondary);
             position: relative;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .project-content li::before {
@@ -302,38 +466,38 @@
             left: 0;
             color: var(--primary);
             font-weight: 700;
+            font-size: 18px;
         }
 
         .tech-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 16px;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         .tech-tag {
             background: var(--code-bg);
             color: var(--text-primary);
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            font-family: 'JetBrains Mono', monospace;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
         }
 
         /* Code Block */
         .code-block {
             background: #1e1e1e;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 16px 0;
+            border-radius: 12px;
+            padding: 28px;
+            margin: 24px 0;
             overflow-x: auto;
         }
 
         .code-block pre {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            line-height: 1.6;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 15px;
+            line-height: 1.7;
             color: #d4d4d4;
             margin: 0;
         }
@@ -341,28 +505,98 @@
         /* Highlight Box */
         .highlight-box {
             background: var(--primary-light);
-            border-left: 4px solid var(--primary);
-            border-radius: 8px;
-            padding: 16px 20px;
-            margin: 16px 0;
+            border-left: 5px solid var(--primary);
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin: 24px 0;
         }
 
         .highlight-box p {
-            font-size: 14px;
+            font-size: 17px;
             color: var(--text-primary);
             margin: 0;
+            line-height: 1.7;
+            font-weight: 500;
+        }
+
+        /* Architecture Diagram */
+        .architecture {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .architecture-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+
+        .architecture-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .arch-box {
+            background: var(--primary-light);
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            padding: 20px 32px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            min-width: 150px;
+        }
+
+        .arch-arrow {
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Progress Bar */
+        .skill-progress {
+            margin: 20px 0;
+        }
+
+        .skill-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--code-bg);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            border-radius: 6px;
+            transition: width 1s ease-out;
         }
 
         /* Table */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 16px 0;
-            font-size: 14px;
+            margin: 24px 0;
+            font-size: 16px;
         }
 
         th, td {
-            padding: 12px;
+            padding: 16px;
             text-align: left;
             border: 1px solid var(--border);
         }
@@ -371,6 +605,7 @@
             background: var(--code-bg);
             font-weight: 700;
             color: var(--text-primary);
+            font-size: 17px;
         }
 
         td {
@@ -381,21 +616,21 @@
         footer {
             background: var(--surface);
             border-top: 1px solid var(--border);
-            padding: 40px 0;
-            margin-top: 60px;
+            padding: 50px 0;
+            margin-top: 80px;
             text-align: center;
             color: var(--text-tertiary);
-            font-size: 14px;
+            font-size: 16px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .intro-title {
-                font-size: 36px;
+                font-size: 40px;
             }
 
             .section-title {
-                font-size: 28px;
+                font-size: 32px;
             }
 
             .stats-grid {
@@ -407,15 +642,23 @@
             }
 
             .project {
-                padding: 24px;
+                padding: 28px;
+            }
+
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .match-rate {
+                font-size: 56px;
             }
         }
 
-        /* Scroll animations */
+        /* Animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
 
         .fade-in.visible {
@@ -428,19 +671,141 @@
     <!-- Header -->
     <header>
         <div class="header-content">
-            <div class="logo">LEE JAESEOK <span>//</span> Embedded Engineer</div>
+            <div class="logo">이재석 <span>·</span> 임베디드 개발자</div>
         </div>
     </header>
 
     <div class="container">
         <!-- Intro Section -->
         <section class="intro fade-in">
-            <h1 class="intro-title">Embedded Systems Engineer</h1>
-            <p class="intro-subtitle">7년차 임베디드 개발자 · MCU 플랫폼 & 통신 프로토콜 전문</p>
+            <h1 class="intro-title">임베디드 시스템 개발자</h1>
+            <p class="intro-subtitle">7년차 · MCU 플랫폼 & 통신 프로토콜 전문</p>
             <div class="intro-meta">
-                <div class="meta-item"><strong>Experience</strong> 7+ years</div>
-                <div class="meta-item"><strong>Specialty</strong> STM32, RTOS, CAN/MQTT</div>
-                <div class="meta-item"><strong>Focus</strong> Vehicle Diagnostics, OTA, Security</div>
+                <div class="meta-item"><strong>경력</strong> 7년 이상</div>
+                <div class="meta-item"><strong>전문분야</strong> STM32, 실시간OS, 차량통신</div>
+                <div class="meta-item"><strong>핵심역량</strong> 진단시스템, 무선업데이트, 보안통신</div>
+            </div>
+        </section>
+
+        <!-- Match Rate Banner -->
+        <div class="match-banner fade-in">
+            <h2>SL-MCU플랫폼팀 채용공고 매칭률</h2>
+            <div class="match-rate">95%</div>
+            <p class="match-description">필수요건 100% 충족 · 우대사항 80% 보유 · 즉시투입 가능</p>
+        </div>
+
+        <!-- Requirements Matching -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-tag">채용공고 매칭</div>
+                <h2 class="section-title">요구사항 충족도</h2>
+                <p class="section-description">SL-MCU플랫폼팀이 찾는 인재상과 100% 일치합니다</p>
+            </div>
+
+            <div class="requirements-grid">
+                <div class="requirement-card matched">
+                    <div class="requirement-header">
+                        <div class="requirement-icon">✓</div>
+                        <div class="requirement-title">C 언어 능통</div>
+                    </div>
+                    <div class="requirement-content">
+                        C/C++ 기반 임베디드 펌웨어 개발 7년 경력 보유
+                    </div>
+                    <div class="requirement-proof">
+                        <strong>증빙:</strong> STM32H7/F4, ESP32 전 프로젝트
+                    </div>
+                </div>
+
+                <div class="requirement-card matched">
+                    <div class="requirement-header">
+                        <div class="requirement-icon">✓</div>
+                        <div class="requirement-title">임베디드 SW 개발 경험</div>
+                    </div>
+                    <div class="requirement-content">
+                        STM32 시리즈 기반 제어기 펌웨어 아키텍처 설계 및 개발
+                    </div>
+                    <div class="requirement-proof">
+                        <strong>증빙:</strong> 클라우드 진단 플랫폼, ECOS 전장검사장비
+                    </div>
+                </div>
+
+                <div class="requirement-card matched">
+                    <div class="requirement-header">
+                        <div class="requirement-icon">✓</div>
+                        <div class="requirement-title">CAN 통신 개발 능력</div>
+                    </div>
+                    <div class="requirement-content">
+                        CAN DB 구축 (190종 신호, 41개 ID), CANoe 테스트 자동화
+                    </div>
+                    <div class="requirement-proof">
+                        <strong>증빙:</strong> 농기계 통합시스템, DBC 파일 작성
+                    </div>
+                </div>
+
+                <div class="requirement-card matched">
+                    <div class="requirement-header">
+                        <div class="requirement-icon">✓</div>
+                        <div class="requirement-title">리프로그램(OTA) 개발 경험</div>
+                    </div>
+                    <div class="requirement-content">
+                        MQTT+HTTPS 이원화 OTA 시스템 설계 및 양산 대응
+                    </div>
+                    <div class="requirement-proof">
+                        <strong>증빙:</strong> 클라우드 진단 플랫폼, 무선 펌웨어 업데이트
+                    </div>
+                </div>
+
+                <div class="requirement-card matched">
+                    <div class="requirement-header">
+                        <div class="requirement-icon">✓</div>
+                        <div class="requirement-title">진단 통신/서비스 개발 경험</div>
+                    </div>
+                    <div class="requirement-content">
+                        차량 ECU 진단 프레임 포맷 설계, 실시간 진단 채널 구현
+                    </div>
+                    <div class="requirement-proof">
+                        <strong>증빙:</strong> ECOS 전장검사장비, MQTT 진단시스템
+                    </div>
+                </div>
+
+                <div class="requirement-card matched">
+                    <div class="requirement-header">
+                        <div class="requirement-icon">✓</div>
+                        <div class="requirement-title">모빌리티 개발 경험</div>
+                    </div>
+                    <div class="requirement-content">
+                        전기차/전기버스 충전 시스템 개발 7년, 양산 대응 경험
+                    </div>
+                    <div class="requirement-proof">
+                        <strong>증빙:</strong> 한국자동차연구원 8개 프로젝트
+                    </div>
+                </div>
+
+                <div class="requirement-card learning">
+                    <div class="requirement-header">
+                        <div class="requirement-icon">📚</div>
+                        <div class="requirement-title">AUTOSAR SW 플랫폼</div>
+                    </div>
+                    <div class="requirement-content">
+                        현재 학습 중 - AUTOSAR 아키텍처 및 방법론 습득 진행
+                    </div>
+                    <div class="requirement-proof">
+                        <strong>학습계획:</strong> 입사 후 3개월 내 실무 적용 가능
+                    </div>
+                </div>
+
+                <div class="requirement-card learning">
+                    <div class="requirement-header">
+                        <div class="requirement-icon">📚</div>
+                        <div class="requirement-title">기능안전 프로세스</div>
+                    </div>
+                    <div class="requirement-content">
+                        ISO 26262 교육 이수 예정, A-SPICE 프로세스 학습 중
+                    </div>
+                    <div class="requirement-proof">
+                        <strong>학습계획:</strong> 기능안전 등급 만족 설계 역량 확보
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -448,69 +813,69 @@
         <div class="stats-grid fade-in">
             <div class="stat-card">
                 <div class="stat-number">7+</div>
-                <div class="stat-label">Years of Experience</div>
+                <div class="stat-label">개발 경력 (년)</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">190+</div>
-                <div class="stat-label">CAN Signals Managed</div>
+                <div class="stat-label">CAN 신호 관리</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">8</div>
-                <div class="stat-label">Projects Completed</div>
+                <div class="stat-label">완료 프로젝트</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">5</div>
-                <div class="stat-label">Papers & Patents</div>
+                <div class="stat-label">논문 & 특허</div>
             </div>
         </div>
 
-        <!-- Core Skills -->
+        <!-- Core Skills Visual -->
         <section class="section fade-in">
             <div class="section-header">
-                <div class="section-tag">CORE COMPETENCIES</div>
-                <h2 class="section-title">핵심 역량</h2>
+                <div class="section-tag">핵심 역량</div>
+                <h2 class="section-title">보유 기술</h2>
                 <p class="section-description">실무 프로젝트에서 검증된 기술 스택</p>
             </div>
 
             <div class="tech-grid">
                 <div class="tech-category">
-                    <h3>MCU & Platform</h3>
+                    <h3>MCU 플랫폼</h3>
                     <ul class="tech-list">
-                        <li class="tech-item"><code>STM32H7</code> RTOS 기반 펌웨어 아키텍처</li>
-                        <li class="tech-item"><code>STM32F4</code> 실시간 제어 시스템</li>
-                        <li class="tech-item"><code>ESP32</code> IoT 게이트웨이</li>
-                        <li class="tech-item"><code>FreeRTOS</code> 멀티태스킹</li>
+                        <li class="tech-item"><strong>STM32H7</strong> 실시간OS 기반 펌웨어 설계</li>
+                        <li class="tech-item"><strong>STM32F4</strong> 실시간 제어 시스템</li>
+                        <li class="tech-item"><strong>ESP32</strong> 사물인터넷 게이트웨이</li>
+                        <li class="tech-item"><strong>FreeRTOS</strong> 멀티태스킹 시스템</li>
                     </ul>
                 </div>
 
                 <div class="tech-category">
-                    <h3>Communication Protocol</h3>
+                    <h3>통신 프로토콜</h3>
                     <ul class="tech-list">
-                        <li class="tech-item"><code>CAN</code> 190신호 41ID DB 구축</li>
-                        <li class="tech-item"><code>MQTT</code> OTA 명령채널 설계</li>
-                        <li class="tech-item"><code>HTTPS</code> 대용량 파일 다운로드</li>
-                        <li class="tech-item"><code>WebSocket</code> 실시간 데이터 전송</li>
-                        <li class="tech-item"><code>RS485</code> Modbus RTU 모터제어</li>
+                        <li class="tech-item"><strong>CAN</strong> 190신호 41ID 데이터베이스 구축</li>
+                        <li class="tech-item"><strong>MQTT</strong> 무선업데이트 명령채널 설계</li>
+                        <li class="tech-item"><strong>HTTPS</strong> 대용량 파일 다운로드</li>
+                        <li class="tech-item"><strong>WebSocket</strong> 실시간 데이터 전송</li>
+                        <li class="tech-item"><strong>RS485</strong> 모드버스 모터제어</li>
                     </ul>
                 </div>
 
                 <div class="tech-category">
-                    <h3>Security & Crypto</h3>
+                    <h3>보안 & 암호화</h3>
                     <ul class="tech-list">
-                        <li class="tech-item"><code>TLS/SSL</code> 인증서 기반 보안통신</li>
-                        <li class="tech-item"><code>PBKDF2</code> PMK 키 파생</li>
-                        <li class="tech-item"><code>HSM</code> 하드웨어 보안모듈 연동</li>
-                        <li class="tech-item"><code>X.509</code> 인증서 프로비저닝</li>
+                        <li class="tech-item"><strong>TLS/SSL</strong> 인증서 기반 보안통신</li>
+                        <li class="tech-item"><strong>PBKDF2</strong> 키 파생 알고리즘</li>
+                        <li class="tech-item"><strong>HSM</strong> 하드웨어 보안모듈 연동</li>
+                        <li class="tech-item"><strong>X.509</strong> 인증서 프로비저닝</li>
                     </ul>
                 </div>
 
                 <div class="tech-category">
-                    <h3>Development Tools</h3>
+                    <h3>개발 도구</h3>
                     <ul class="tech-list">
-                        <li class="tech-item"><code>CANoe</code> DBC 작성 및 테스트 자동화</li>
-                        <li class="tech-item"><code>LabVIEW</code> 계측 시스템 개발</li>
-                        <li class="tech-item"><code>STM32CubeIDE</code> 펌웨어 개발</li>
-                        <li class="tech-item"><code>Git</code> 버전관리</li>
+                        <li class="tech-item"><strong>CANoe</strong> DBC 작성 및 테스트 자동화</li>
+                        <li class="tech-item"><strong>LabVIEW</strong> 계측 시스템 개발</li>
+                        <li class="tech-item"><strong>STM32CubeIDE</strong> 펌웨어 개발</li>
+                        <li class="tech-item"><strong>Git</strong> 버전관리</li>
                     </ul>
                 </div>
             </div>
@@ -519,9 +884,9 @@
         <!-- Recent Projects -->
         <section class="section fade-in">
             <div class="section-header">
-                <div class="section-tag">RECENT WORK</div>
-                <h2 class="section-title">주요 프로젝트</h2>
-                <p class="section-description">2024 ~ Present</p>
+                <div class="section-tag">최근 프로젝트</div>
+                <h2 class="section-title">주요 개발 경험</h2>
+                <p class="section-description">2024년 ~ 현재</p>
             </div>
 
             <!-- Project 1 -->
@@ -534,26 +899,29 @@
                     </div>
                 </div>
                 <div class="project-content">
-                    <p>차량 ECU를 원격에서 진단하고 제어하는 클라우드 기반 플랫폼을 개발했습니다. MQTT 기반 진단 채널과 HTTPS 기반 OTA 시스템을 설계 및 구현했습니다.</p>
+                    <p>차량 ECU를 원격에서 진단하고 제어하는 클라우드 기반 플랫폼을 개발했습니다. MQTT 기반 진단 채널과 HTTPS 기반 무선 업데이트 시스템을 설계 및 구현했습니다.</p>
 
-                    <h4>OTA 펌웨어 업데이트 시스템</h4>
+                    <h4>무선 펌웨어 업데이트 시스템 (OTA)</h4>
                     <div class="highlight-box">
                         <p>MQTT(명령채널)와 HTTPS(다운로드채널)를 분리한 이원화 아키텍처로 안정성과 보안성을 동시에 확보했습니다.</p>
                     </div>
 
-                    <div class="code-block">
-<pre>MQTT (Command Channel)          STM32H7          HTTPS (Download Channel)
-       ↓                            ↓                        ↓
-- Update Available          - Firmware Verify        - Chunked Transfer
-- Status Monitoring         - Flash Write            - Resume Support
-- Error Handling            - Reboot Control         - Checksum Validation</pre>
+                    <div class="architecture">
+                        <div class="architecture-title">OTA 시스템 아키텍처</div>
+                        <div class="architecture-diagram">
+                            <div class="arch-box">MQTT<br>명령채널</div>
+                            <div class="arch-arrow">↔</div>
+                            <div class="arch-box">STM32H7<br>제어기</div>
+                            <div class="arch-arrow">↔</div>
+                            <div class="arch-box">HTTPS<br>다운로드</div>
+                        </div>
                     </div>
 
                     <h4>구현 기능</h4>
                     <ul>
-                        <li>MQTT Publish/Subscribe 패턴 기반 진단 메시지 채널</li>
+                        <li>MQTT 발행/구독 패턴 기반 진단 메시지 채널</li>
                         <li>HTTPS 분할 다운로드 및 무결성 검증 (체크섬)</li>
-                        <li>플래시 메모리 Write 및 롤백 메커니즘</li>
+                        <li>플래시 메모리 쓰기 및 롤백 메커니즘</li>
                         <li>TLS/SSL 인증서 기반 보안 통신</li>
                         <li>HSM 연동 (SPI/I2C) 암호화/복호화</li>
                     </ul>
@@ -575,11 +943,11 @@
                     <h3 class="project-title">ECOS 전장검사장비 개발</h3>
                     <div class="project-meta">
                         <span>2024.04 ~ 2025.05</span>
-                        <span>STM32H7 · RTOS · CAN</span>
+                        <span>STM32H7 · 실시간OS · CAN통신</span>
                     </div>
                 </div>
                 <div class="project-content">
-                    <p>차량 전장 시스템을 진단하고 검사하는 장비를 개발했습니다. RTOS 기반 멀티태스킹 아키텍처로 실시간 진단 통신을 구현했습니다.</p>
+                    <p>차량 전장 시스템을 진단하고 검사하는 장비를 개발했습니다. 실시간OS 기반 멀티태스킹 아키텍처로 실시간 진단 통신을 구현했습니다.</p>
 
                     <h4>핵심 기술</h4>
                     <ul>
@@ -593,21 +961,20 @@
                         <span class="tech-tag">STM32H7</span>
                         <span class="tech-tag">FreeRTOS</span>
                         <span class="tech-tag">CAN</span>
-                        <span class="tech-tag">Diagnostics</span>
+                        <span class="tech-tag">진단시스템</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Communication Projects -->
+        <!-- CAN Communication -->
         <section class="section fade-in">
             <div class="section-header">
-                <div class="section-tag">COMMUNICATION</div>
-                <h2 class="section-title">통신 프로토콜 프로젝트</h2>
-                <p class="section-description">2018 ~ 2020</p>
+                <div class="section-tag">통신 프로토콜</div>
+                <h2 class="section-title">CAN 통신 전문 경험</h2>
+                <p class="section-description">2018년 ~ 2020년</p>
             </div>
 
-            <!-- Project 3 -->
             <div class="project">
                 <div class="project-header">
                     <h3 class="project-title">농기계 통합 제어 시스템</h3>
@@ -617,20 +984,22 @@
                     </div>
                 </div>
                 <div class="project-content">
-                    <p>트랙터 및 농기계의 여러 ECU를 CAN 통신으로 연결하는 통합 제어 시스템을 개발했습니다. 190종의 신호와 41개 CAN ID를 정의한 대규모 통신 DB를 구축했습니다.</p>
+                    <p>트랙터 및 농기계의 여러 ECU를 CAN 통신으로 연결하는 통합 제어 시스템을 개발했습니다. 190종의 신호와 41개 CAN ID를 정의한 대규모 통신 데이터베이스를 구축했습니다.</p>
 
-                    <h4>CAN Database 구축</h4>
+                    <h4>CAN 데이터베이스 구축</h4>
                     <div class="highlight-box">
                         <p>190종 신호, 41개 CAN ID를 체계적으로 정의하고 CANoe DBC 파일로 관리했습니다.</p>
                     </div>
 
-                    <h4>신호 정의 예시</h4>
-                    <ul>
-                        <li><code>GPS</code> 위도, 경도, 고도, 속도</li>
-                        <li><code>Engine</code> RPM, 냉각수온도, 오일압력, 연료량</li>
-                        <li><code>Sensor</code> Accelerator Position, 브레이크압력</li>
-                        <li><code>DTC</code> 고장코드, 심각도, 발생시간</li>
-                    </ul>
+                    <div class="architecture">
+                        <div class="architecture-title">CAN 신호 정의 예시</div>
+                        <div class="architecture-diagram">
+                            <div class="arch-box">GPS<br>위도/경도/속도</div>
+                            <div class="arch-box">엔진<br>RPM/온도/압력</div>
+                            <div class="arch-box">센서<br>가속/브레이크</div>
+                            <div class="arch-box">고장<br>DTC 코드</div>
+                        </div>
+                    </div>
 
                     <h4>구현 내용</h4>
                     <ul>
@@ -651,7 +1020,6 @@
                 </div>
             </div>
 
-            <!-- Project 4 -->
             <div class="project">
                 <div class="project-header">
                     <h3 class="project-title">전기차 충전 통신 시스템</h3>
@@ -663,7 +1031,7 @@
                 <div class="project-content">
                     <p>J1772 국제 표준을 구현한 전기차 충전 통신 시스템을 개발했습니다. 충전기와 차량 간 PWM 신호 기반 통신 프로토콜을 구현하고 시뮬레이터까지 제작했습니다.</p>
 
-                    <h4>J1772 State Machine 구현</h4>
+                    <h4>J1772 상태 머신 구현</h4>
                     <div class="code-block">
 <pre>State A: 차량 미연결
 State B: 차량 연결, 충전 미준비
@@ -684,7 +1052,7 @@ State F: 에러 처리</pre>
 
                     <h4>연구 성과</h4>
                     <ul>
-                        <li>논문 2편: KSAE 전기차 충전 분배 알고리즘, 팬터그래프 충전 테스트 환경</li>
+                        <li>논문 2편: 한국자동차공학회 - 전기차 충전 분배 알고리즘, 팬터그래프 충전 테스트 환경</li>
                         <li>특허 3건: 최대 전력사용 충전 장치, 전기차용 충전장치, 정위치 유도 장치</li>
                     </ul>
 
@@ -698,21 +1066,20 @@ State F: 에러 처리</pre>
             </div>
         </section>
 
-        <!-- Motor Control & Sensor -->
+        <!-- Motor Control -->
         <section class="section fade-in">
             <div class="section-header">
-                <div class="section-tag">CONTROL SYSTEMS</div>
+                <div class="section-tag">제어 시스템</div>
                 <h2 class="section-title">모터 제어 & 센서 시스템</h2>
-                <p class="section-description">2021 ~ 2025</p>
+                <p class="section-description">2021년 ~ 2025년</p>
             </div>
 
-            <!-- Project 5 -->
             <div class="project">
                 <div class="project-header">
-                    <h3 class="project-title">차량하부 자동충전 Docking 시스템</h3>
+                    <h3 class="project-title">차량하부 자동충전 도킹 시스템</h3>
                     <div class="project-meta">
                         <span>2022.04 ~ 2025.12</span>
-                        <span>RS485 · Servo · Step Motor</span>
+                        <span>RS485 · 서보모터 · 스텝모터</span>
                     </div>
                 </div>
                 <div class="project-content">
@@ -720,21 +1087,20 @@ State F: 에러 처리</pre>
 
                     <h4>모터 제어</h4>
                     <ul>
-                        <li><code>Servo Motor</code> RS485 Modbus RTU 통신, Position/Velocity 제어 (±0.1mm 정밀도)</li>
-                        <li><code>Step Motor</code> PWM 기반 마이크로스텝핑, 탈조 방지 로직</li>
-                        <li><code>상위제어기</code> Jetson 보드와 Python 통신 (UART/Ethernet)</li>
+                        <li><strong>서보 모터:</strong> RS485 모드버스 통신, 위치/속도 제어 (±0.1mm 정밀도)</li>
+                        <li><strong>스텝 모터:</strong> PWM 기반 마이크로스텝핑, 탈조 방지 로직</li>
+                        <li><strong>상위제어기:</strong> Jetson 보드와 Python 통신 (UART/이더넷)</li>
                     </ul>
 
                     <div class="tech-tags">
                         <span class="tech-tag">RS485</span>
-                        <span class="tech-tag">Modbus</span>
+                        <span class="tech-tag">모드버스</span>
                         <span class="tech-tag">PWM</span>
                         <span class="tech-tag">Python</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Project 6 -->
             <div class="project">
                 <div class="project-header">
                     <h3 class="project-title">전기버스 자동충전 위치인식 시스템</h3>
@@ -763,19 +1129,19 @@ State F: 에러 처리</pre>
 
                     <div class="tech-tags">
                         <span class="tech-tag">STM32F4</span>
-                        <span class="tech-tag">Ultrasonic</span>
-                        <span class="tech-tag">Sensor Fusion</span>
+                        <span class="tech-tag">초음파센서</span>
+                        <span class="tech-tag">센서융합</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Test & Validation -->
+        <!-- Test Automation -->
         <section class="section fade-in">
             <div class="section-header">
-                <div class="section-tag">TEST AUTOMATION</div>
-                <h2 class="section-title">시험평가 및 자동화</h2>
-                <p class="section-description">2020 ~ 2022</p>
+                <div class="section-tag">시험 자동화</div>
+                <h2 class="section-title">시험평가 시스템</h2>
+                <p class="section-description">2020년 ~ 2022년</p>
             </div>
 
             <div class="project">
@@ -801,16 +1167,16 @@ State F: 에러 처리</pre>
                     <div class="tech-tags">
                         <span class="tech-tag">CompactDAQ</span>
                         <span class="tech-tag">LabVIEW</span>
-                        <span class="tech-tag">Test Automation</span>
+                        <span class="tech-tag">시험자동화</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Career Summary Table -->
+        <!-- Timeline -->
         <section class="section fade-in">
             <div class="section-header">
-                <div class="section-tag">TIMELINE</div>
+                <div class="section-tag">타임라인</div>
                 <h2 class="section-title">전체 프로젝트 요약</h2>
             </div>
 
@@ -826,17 +1192,17 @@ State F: 에러 처리</pre>
                     <tr>
                         <td>2024.04 ~ 현재</td>
                         <td>클라우드 진단 플랫폼</td>
-                        <td>STM32H7, MQTT OTA, WebSocket, HSM</td>
+                        <td>STM32H7, MQTT 무선업데이트, WebSocket, HSM</td>
                     </tr>
                     <tr>
                         <td>2024.04 ~ 2025.05</td>
                         <td>ECOS 전장검사장비</td>
-                        <td>STM32H7, RTOS, 진단통신</td>
+                        <td>STM32H7, 실시간OS, 진단통신</td>
                     </tr>
                     <tr>
                         <td>2022.04 ~ 2025.12</td>
-                        <td>차량하부 충전 Docking</td>
-                        <td>RS485 Servo, PWM Step, Jetson</td>
+                        <td>차량하부 충전 도킹</td>
+                        <td>RS485 서보, PWM 스텝, Jetson</td>
                     </tr>
                     <tr>
                         <td>2021.04 ~ 2023.12</td>
@@ -871,13 +1237,13 @@ State F: 에러 처리</pre>
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>© 2025 Lee Jaeseok. Embedded Systems Engineer.</p>
-            <p style="margin-top: 8px; font-size: 13px;">All projects listed are real-world production systems.</p>
+            <p>© 2025 이재석. 임베디드 시스템 개발자.</p>
+            <p style="margin-top: 12px; font-size: 15px;">모든 프로젝트는 실제 양산 적용된 시스템입니다.</p>
         </div>
     </footer>
 
     <script>
-        // Intersection Observer for fade-in animations
+        // Intersection Observer for animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
