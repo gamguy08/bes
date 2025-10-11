@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이재석 | 리드 임베디드 엔지니어</title>
+    <title>이재석 | MCU 플랫폼 엔지니어</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=SUIT:wght@400;600;700&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
     <style>
         :root {
             --gradient-start: #00A4FF;
-            --gradient-end: #8A2BE2;
+            --gradient-end: #00DDDD;
             --bg-primary: #101010;
             --bg-secondary: #181818;
             --text-primary: #F0F0F0;
@@ -30,7 +30,7 @@
         }
 
         .container {
-            max-width: 850px;
+            max-width: 900px;
             margin: 80px auto;
             padding: 0 20px;
         }
@@ -50,15 +50,8 @@
             opacity: 1;
             transform: translateY(0);
         }
-        
-        .profile-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-        }
 
         header h1 {
-            font-family: 'SUIT', sans-serif;
             font-size: 48px;
             font-weight: 700;
             color: #FFFFFF;
@@ -76,105 +69,65 @@
 
         .section h2 {
             font-family: 'Fira Code', monospace;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 500;
             color: var(--text-primary);
             margin: 0 0 24px 0;
             padding-bottom: 16px;
             border-bottom: 1px solid var(--border-color);
         }
-        
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-            font-size: 16px;
-        }
-        .info-item i {
+        .section h2 i {
+            margin-right: 12px;
             color: var(--gradient-start);
-            font-size: 18px;
-            width: 20px;
-            text-align: center;
         }
 
-        .education-item, .project {
-            margin-bottom: 24px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .education-item:last-child, .project:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-        .education-item h4 {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 0 0 4px 0;
-        }
-        .education-item .school {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin: 0 0 8px 0;
-        }
-
-        .company h3 {
-            font-size: 22px;
+        .subsection h3 {
+            font-size: 20px;
             font-weight: 700;
-            color: #FFFFFF;
-            margin: 0 0 24px 0;
+            color: var(--gradient-start);
+            margin: 40px 0 20px 0;
+            padding-left: 12px;
+            border-left: 4px solid var(--gradient-start);
         }
 
         .project h4 {
             font-size: 18px;
             font-weight: 600;
             color: var(--text-primary);
-            margin: 0 0 8px 0;
-        }
-        
-        .project .duration {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
+            margin: 24px 0 8px 0;
         }
 
-        .project p, .project ul {
-            font-size: 15px;
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin: 8px 0;
-        }
-        
-        .project ul {
-            padding-left: 20px;
-        }
-
-        .tech-description {
-            font-size: 13px !important;
-            font-style: italic;
-            color: #888 !important;
-            background-color: rgba(255, 255, 255, 0.03);
-            padding: 8px;
-            border-radius: 6px;
-            margin-top: 8px !important;
-        }
-
-        .achievements {
-            margin-top: 16px;
+        pre, .code-block {
+            background-color: #101010;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             padding: 16px;
-            background-color: rgba(0, 164, 255, 0.05);
-            border-radius: 12px;
-            border: 1px solid rgba(0, 164, 255, 0.15);
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.7;
+            color: #C0C0C0;
+            white-space: pre-wrap;
         }
 
-        .achievements h5 {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--gradient-start);
-            margin: 0 0 10px 0;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #222;
+            font-weight: 600;
+        }
+        td:first-child { font-weight: 600; color: var(--text-primary); }
+        .check-icon { color: #28a745; }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
 
         footer {
             text-align: center;
@@ -182,181 +135,137 @@
             color: var(--text-secondary);
             font-size: 14px;
         }
-
     </style>
 </head>
 <body>
     <div class="container">
         <div class="card">
             <header>
-                <h1>이재석</h1>
-                <p>리드 임베디드 시스템 엔지니어</p>
+                <h1>이재석 | 포트폴리오</h1>
+                <p>MCU 플랫폼 엔지니어 (SL-MCU플랫폼팀 지원)</p>
             </header>
         </div>
-        
-        <div class="profile-grid">
-            <div class="card" id="profile-info">
-                <h2>// Profile</h2>
-                <div class="info-item"><i class="fa-solid fa-cake-candles"></i> <span>1992.08.18</span></div>
-                <div class="info-item"><i class="fa-solid fa-location-dot"></i> <span>Seoul, South Korea</span></div>
-                <div class="info-item"><i class="fa-solid fa-envelope"></i> <span>dayungh10@naver.com</span></div>
-                <div class="info-item"><i class="fa-solid fa-phone"></i> <span>010-9054-7352</span></div>
-            </div>
-            <div class="card" id="interests">
-                <h2>// Interests</h2>
-                <div class="info-item"><i class="fa-solid fa-person-running"></i> <span>Marathon</span></div>
-                <div class="info-item"><i class="fa-solid fa-golf-ball-tee"></i> <span>Golf</span></div>
+
+        <div class="card" id="summary">
+            <div class="section">
+                <h2><i class="fa-solid fa-bullseye"></i>핵심 역량 요약</h2>
+                <pre>✅ C/C++ 임베디드 펌웨어 개발: 7년+ 경력
+✅ MCU 플랫폼: STM32H7/F4 시리즈 실전 경험
+✅ CAN 통신: 프로토콜 설계/구현/DB 구축 경험
+✅ 리프로그램/OTA: MQTT+HTTPS 이원화 업데이트 시스템 설계
+✅ 진단 통신: MQTT 기반 진단 채널 설계 및 차량 통신 프로토콜 구현
+✅ 양산 대응: 실증 사이트 구축 및 현장 이슈 대응 경험</pre>
             </div>
         </div>
 
-        <div class="card" id="about">
-            <h2>// About</h2>
-            <p style="font-size: 16px; line-height: 1.8; color: var(--text-primary);">
-                MCU 플랫폼 설계를 지향하는 리드 임베디드 시스템 엔지니어입니다. 자동차 전장 및 EV 충전 시스템 분야에서 저수준 펌웨어부터 클라우드 연동 시스템 아키텍처 설계까지, 복잡한 기술적 과제를 해결하는 데 강점이 있습니다. 특히 RTOS 기반의 고신뢰성 시스템 설계와 보안 통신 프로토콜 구현을 주도합니다.
-            </p>
+        <div class="card" id="priority-experience">
+            <div class="section">
+                <h2><i class="fa-solid fa-chart-simple"></i>우선순위별 경력 재구성</h2>
+                
+                <div class="subsection">
+                    <h3>[Priority 1] MCU 플랫폼 & 통신 개발 경험</h3>
+                    <h4>1-1. 차량 진단/제어 플랫폼 개발 (2024.04~현재)</h4>
+                    <p><b>프로젝트:</b> 클라우드 진단 플랫폼 & ECOS 전장검사장비 개발</p>
+                    <p><b>핵심 기술 역량:</b></p>
+                    <ul>
+                        <li><b>MCU 플랫폼:</b> STM32H7 시리즈, RTOS 기반 펌웨어 아키텍처 설계</li>
+                        <li><b>통신 프로토콜 구현:</b> CAN, MQTT, WebSocket, HTTPS 기반 설계</li>
+                    </ul>
+                    <p><b>리프로그램/OTA 시스템 설계:</b></p>
+                    <div class="code-block"><b>[구현한 OTA 아키텍처]</b>
+MQTT(명령채널) ←→ STM32H7 ←→ HTTPS(다운로드채널)
+    ↓                ↓                ↓
+상태모니터링      펌웨어 검증      분할전송/재개
+에러처리          플래시 Write     무결성 검증
+롤백 메커니즘      재부팅 제어      대역폭 관리</div>
+
+                    <h4>1-2. CAN 통신 전문 경험 (2018.10~2020.09)</h4>
+                    <p><b>프로젝트:</b> 농기계 통합 시스템 개발</p>
+                    <p><b>CAN 통신 핵심 역량:</b></p>
+                    <ul>
+                        <li><b>CAN DB 구축:</b> 190종 신호, 41개 CAN ID 정의</li>
+                        <li><b>CANoe 활용:</b> DBC 파일 작성, 실시간 모니터링, 제어기 성능 테스트 자동화</li>
+                        <li><b>CAN 펌웨어 구현:</b> 필터/마스크, 인터럽트 기반 수신, 메시지 큐 관리</li>
+                        <li><b>통신 게이트웨이 개발:</b> CAN to UDP 변환 보드 개발 (ESP32)</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>[Priority 2] 리프로그램 & 진단 시스템 개발</h3>
+                    <h4>2-1. 보안 채널 설계 구현 (2024.04~현재)</h4>
+                    <ul>
+                        <li><b>인증서 기반 보안 통신:</b> CA/클라이언트 인증서 프로비저닝, Private Key 보안 저장, TLS/SSL 구현</li>
+                        <li><b>암호화 시스템:</b> WPA2 PSK 환경 PBKDF2 기반 PMK 파생, HSM 연동 (SPI/I2C)</li>
+                        <li><b>진단 프로토콜 구현:</b> MQTT 기반 실시간 진단 메시지 채널 및 프레임 포맷 설계</li>
+                    </ul>
+
+                    <h4>2-2. J1772 표준 기반 충전 통신 (2016.12~2019.12)</h4>
+                    <ul>
+                        <li><b>충전 제어 파일럿 통신 구현:</b> PWM 신호 생성/해석, J1772 State Machine 구현</li>
+                        <li><b>STM32F4 기반 시뮬레이터 개발:</b> 충전기/OBC 모의 장치 및 배터리 프로파일 에뮬레이션</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div class="card" id="education">
-            <h2>// Education</h2>
-            <div class="education-item">
-                <h4>석사, 정보통신공학</h4>
-                <p class="school">공주대학교 (Kongju National University) | 4.38 / 4.5</p>
-                <p class="duration">2020.03 - 2022.02</p>
-            </div>
-            <div class="education-item">
-                <h4>학사, 전자공학</h4>
-                <p class="school">단국대학교 (Dankook University) | 3.09 / 4.5</p>
-                <p class="duration">2011.03 - 2017.02</p>
-            </div>
-            <div class="education-item">
-                <h4>인문계 졸업</h4>
-                <p class="school">현화고등학교 (Hyeonhwa High School)</p>
-                <p class="duration">2008.03 - 2011.02</p>
+        <div class="card" id="matching-analysis">
+            <div class="section">
+                <h2><i class="fa-solid fa-check-double"></i>채용 공고 요구사항 매칭 분석</h2>
+                <h4>✅ 필수 요구사항 (100% 충족)</h4>
+                <table>
+                    <thead><tr><th>요구사항</th><th>보유 역량</th><th>증빙 프로젝트</th></tr></thead>
+                    <tbody>
+                        <tr><td><b>C 언어 능통</b></td><td>C/C++ 7년+ 경력</td><td>전 프로젝트</td></tr>
+                        <tr><td><b>임베디드 SW 개발</b></td><td>STM32H7/F4/ESP32</td><td>클라우드 진단, ECOS, 농기계</td></tr>
+                    </tbody>
+                </table>
+                <h4>✅ 우대 사항 (80% 충족)</h4>
+                <table>
+                    <thead><tr><th>요구사항</th><th>보유 역량</th><th>증빙</th></tr></thead>
+                    <tbody>
+                        <tr><td><b>CAN FD/LIN 통신</b></td><td>CAN 통신 190신호/41ID DB 구축</td><td>농기계 프로젝트</td></tr>
+                        <tr><td><b>리프로그램(OTA)</b></td><td>MQTT+HTTPS 이원화 OTA 설계/구현</td><td>클라우드 진단 플랫폼</td></tr>
+                        <tr><td><b>진단 통신/서비스</b></td><td>MQTT 진단 채널, J1772 충전 통신</td><td>클라우드 진단, 충전 시스템</td></tr>
+                    </tbody>
+                </table>
+                 <h4>🔺 학습 필요 영역</h4>
+                <table>
+                    <thead><tr><th>요구사항</th><th>현재 수준</th><th>학습 계획</th></tr></thead>
+                    <tbody>
+                        <tr><td><b>AUTOSAR</b></td><td>미경험</td><td>AUTOSAR 아키텍처 및 방법론 학습 중</td></tr>
+                        <tr><td><b>기능안전/A-SPICE</b></td><td>프로세스 미경험</td><td>ISO 26262 교육 이수 및 적용 예정</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <div class="card" id="experience">
-            <h2>// Experience</h2>
-            <div class="company">
-                <h3>지아이티 (GIT)</h3>
-                <div class="project">
-                    <h4>클라우드 진단 플랫폼</h4>
-                    <p class="duration">2024.04 - 진행중</p>
-                    <p><strong>주요 역할:</strong> 클라우드 플랫폼과 연동한 자동차 진단장비 개발</p>
-                    <ul>
-                        <li>서버-장비 간 통신 프로토콜 및 프레임 포맷 설계/구현
-                            <ul>
-                                <li>MQTT 기반 진단 및 제어 메시지 채널 설계/구현
-                                    <p class="tech-description"><b>MQTT:</b> 저전력/저대역폭 IoT 환경에 최적화된 발행-구독 모델의 경량 메시징 프로토콜입니다.</p></li>
-                                <li>MQTT(명령) + HTTPS(대용량 다운로드) 기반 이원화 OTA 업데이트 시퀀스 및 전송 로직 설계/구현</li>
-                                <li>WebSocket 기반 지속 및 대용량 데이터 전송 아키텍처 설계/구현 (ECU 업그레이드 등)
-                                    <p class="tech-description"><b>WebSocket:</b> 단일 TCP 연결 상에서 실시간 양방향 통신을 지원하여, 지연 시간이 낮은 데이터 교환에 유리합니다.</p></li>
-                            </ul>
-                        </li>
-                        <li>보안 채널 설계 및 구현
-                            <ul>
-                                <li>인증서(CA/클라이언트, Private Key) 프로비저닝 및 로드 로직 구현</li>
-                                <li>WPA2 PSK 환경에서 PBKDF2 기반 PMK 파생 로직 구현 및 검증</li>
-                                <li>외부 HSM 모듈을 시스템에 연동 (하드웨어 인터페이스 및 통신 프로토콜 구현)
-                                    <p class="tech-description"><b>HSM (Hardware Security Module):</b> 암호화 키 생성, 저장, 관리 등 암호화 연산을 물리적으로 안전하게 처리하는 전용 하드웨어 장치입니다.</p></li>
-                            </ul>
-                        </li>
-                        <li><strong>적용 환경:</strong> STM32H7시리즈, RTOS기반 펌웨어</li>
-                    </ul>
+        <div class="card" id="tech-stack">
+            <div class="section">
+                <h2><i class="fa-solid fa-microchip"></i>보유 기술 스택</h2>
+                <div class="subsection">
+                    <h3>핵심 기술</h3>
+                    <pre>MCU: STM32H7, STM32F4, ESP32
+RTOS: FreeRTOS 기반 멀티태스킹
+통신: CAN, MQTT, WebSocket, HTTPS, RS485
+프로토콜: J1772, Oppcharge, PBKDF2, TLS/SSL</pre>
                 </div>
-                <div class="project">
-                    <h4>ECOS(전장검사장비) 개발</h4>
-                    <p class="duration">2024.04 – 2025.05.31</p>
-                    <p><strong>주요 역할:</strong> SP2(셀토스)기반 전장 검사 장비 개발</p>
-                    <ul>
-                        <li>서버-장비 간 통신 프로토콜 및 프레임 포맷 설계/구현 (MQTT, HTTPS, WebSocket)</li>
-                        <li>보안 채널 설계 및 구현 (인증서 프로비저닝, PBKDF2, HSM 연동)</li>
-                        <li><strong>적용 환경:</strong> STM32H7시리즈, RTOS기반 펌웨어</li>
-                    </ul>
+                <div class="subsection">
+                    <h3>개발 도구</h3>
+                    <pre>IDE: STM32CubeIDE, Keil, Arduino IDE
+테스트: CANoe, LabVIEW, CompactDAQ
+언어: C/C++, Python
+버전관리: Git</pre>
                 </div>
             </div>
+        </div>
 
-            <div class="company">
-                <h3>한국자동차연구원 (KATECH)</h3>
-                <div class="project">
-                    <h4>지능형 완속/급속용 전기차 분산 충전 배전반 기술 개발</h4>
-                    <p class="duration">2017.05 – 2019.12</p>
-                    <p><strong>주요 역할:</strong> 지능형 전력 분산 알고리즘 검증 시뮬레이션 및 성능 평가 테스트베드 구축 (실무 책임자)</p>
-                    <ul>
-                        <li>J1772 표준 기반 충전 하드웨어 구축
-                            <p class="tech-description"><b>SAE J1772:</b> 북미 표준 AC 전기차 충전 방식으로, 커넥터 사양과 제어 파일럿 통신 프로토콜을 정의합니다.</p></li>
-                        <li>충전기 및 OBC 모사 수행 장치 개발(stm32F4 기반 보드 개발)</li>
-                        <li>Labview 기반 기능 검증용 시뮬레이션 및 데이터 수집/분석 S/W 개발</li>
-                    </ul>
-                    <div class="achievements">
-                        <h5>핵심 성과</h5>
-                        <ul>
-                            <li>논문: "실시간 충전 전력분석을 통한 전기 자동차 충전기의 효율적인 충전 분배 알고리즘에 관한 연구", 한국자동차공학회 논문집, Vol. 28, No. 8, 2020</li>
-                            <li>특허: "최대 전력사용이 가능한 전기자동차 충전 장치 및 방법" (등록번호: 10-2259780)</li>
-                            <li>특허: "전기자동차용 충전장치 및 그 제어방법" (등록번호: 10-2138096)</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="project">
-                    <h4>전기차 비상 충전을 위한 2kW급 이동식 소형 발전 장치 응용기술 개발</h4>
-                    <p class="duration">2016.12 – 2018.12.01</p>
-                    <p><strong>주요 역할:</strong> 이동식 소형 비상발전장치 통합제어기 개발 (실무 책임자)</p>
-                    <ul>
-                        <li>상용 OBC 사양 분석 기반 통합제어기 입출력 신호 정의</li>
-                        <li>충전제어파일럿(PWM 통신) 모듈 기능 설계 및 프로토콜 분석/구현</li>
-                    </ul>
-                </div>
-                <div class="project">
-                    <h4>400kW급 대용량 충전 대응을 위한 xEV 차량 부품 및 시스템 기술 개발</h4>
-                    <p class="duration">2020.04 – 2022.12.31</p>
-                    <p><strong>주요 역할:</strong> 팬터그래프 방식 전기버스용 충전개발품 내환경성 평가 (실무 책임자)</p>
-                    <ul>
-                        <li>Oppcharge 표준 기반 동작내구성 평가환경 구축
-                            <p class="tech-description"><b>OppCharge:</b> 전기 버스를 위한 개방형 고속 충전 표준으로, 정류장에서 판토그래프를 통해 자동으로 급속 충전을 수행합니다.</p></li>
-                        <li>CompactDAQ 테스트베드 구축 및 신호측정(전압, 전류, DIO, 저항, 접촉력)</li>
-                        <li>Labview 기반 내구성 시험 평가 SW 개발 및 평가 절차서 작성</li>
-                    </ul>
-                    <div class="achievements">
-                        <h5>핵심 성과</h5>
-                        <ul>
-                            <li>논문: "팬터그래프 충전 시스템 노화도 측정용 테스트 환경 구축", 한국자동차공학회 춘계학술대회</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="project">
-                    <h4>지붕 접속 방식의 전기버스 접속부 이송형 자동 충전 시스템 개발 및 실증</h4>
-                    <p class="duration">2021.04 – 2023.12.31</p>
-                    <p><strong>주요 역할:</strong> 차량 정위치 인식/유도 기술 개발</p>
-                    <ul>
-                        <li>초음파 센서 기반 차량 유도장치 펌웨어 프로그래밍(stm32F4 기반)</li>
-                        <li>정위치 인식 알고리즘 개발(기울기, 앞뒤거리 등)</li>
-                    </ul>
-                    <div class="achievements">
-                        <h5>핵심 성과</h5>
-                        <ul>
-                            <li>특허: "팬터그래프 충전식 전기 차량의 정위치 유도 장치 및 방법" (출원번호: 10-2022-0178242)</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="project">
-                    <h4>차량하부 충전방식 자동충전 및 관제 시스템 개발</h4>
-                    <p class="duration">2022.04 – 2025.12.31</p>
-                    <p><strong>주요 역할:</strong> 차량 하부 충전을 위한 Docking System 구동부 파일럿 제품 설계 및 제작</p>
-                    <ul>
-                        <li>하부충전용 Docking System 제어기 개발 (RS485, PWM Step Motor 제어)</li>
-                        <li>Jetson보드 제어기 간 통신 시스템 구성(Python)</li>
-                    </ul>
-                </div>
-                <div class="project">
-                    <h4>농기계 관리 및 제어를 위한 유무선 통신 기반 일체형 통합 시스템 개발</h4>
-                    <p class="duration">2018.10 – 2020.09.30</p>
-                    <p><strong>주요 역할:</strong> CAN 통신 진단 및 모니터링 소프트웨어 개발</p>
-                    <ul>
-                        <li>CANoe를 이용한 차량 상태 및 고장정보 통신프로토콜 정의 및 CAN DB 구축 (약 190종)
-                            <p class="tech-description"><b>Vector CANoe:</b> 자동차 ECU 및 통신 네트워크의 개발, 분석, 시뮬레이션, 테스트를 위한 업계 표준 소프트웨어 툴입니다.</p></li>
-                        <li>CAN to UDP 통신 보드 개발 (ESP32 / C++)</li>
-                    </ul>
-                </div>
+        <div class="card" id="achievements">
+            <div class="section">
+                <h2><i class="fa-solid-award"></i>연구 성과</h2>
+                <ul>
+                    <li><b>논문 2편:</b> 전기차 충전 분배 알고리즘 (KSAE, 2020), 팬터그래프 충전 테스트 환경 구축 (KSAE)</li>
+                    <li><b>특허 3건 (등록 2, 출원 1):</b> 최대 전력사용 충전 장치, 전기차용 충전장치, 정위치 유도 장치</li>
+                </ul>
             </div>
         </div>
 
@@ -372,13 +281,8 @@
                     entry.target.classList.add('is-visible');
                 }
             });
-        }, {
-            threshold: 0.1
-        });
-
-        document.querySelectorAll('.card').forEach(card => {
-            observer.observe(card);
-        });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.card').forEach(card => { observer.observe(card); });
     </script>
 </body>
 </html>
