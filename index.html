@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=SUIT:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
             --gradient-start: #00A4FF;
@@ -49,6 +50,12 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
 
         header h1 {
             font-family: 'SUIT', sans-serif;
@@ -76,11 +83,19 @@
             padding-bottom: 16px;
             border-bottom: 1px solid var(--border-color);
         }
-
-        #about p {
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
             font-size: 16px;
-            line-height: 1.8;
-            color: var(--text-primary);
+        }
+        .info-item i {
+            color: var(--gradient-start);
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
         }
 
         .company h3 {
@@ -140,11 +155,6 @@
             margin: 0 0 10px 0;
         }
 
-        #contact p {
-            font-size: 16px;
-            color: var(--text-secondary);
-        }
-
         footer {
             text-align: center;
             margin-top: 60px;
@@ -162,11 +172,26 @@
                 <p>리드 임베디드 시스템 엔지니어</p>
             </header>
         </div>
+        
+        <div class="profile-grid">
+            <div class="card" id="profile-info">
+                <h2>// Profile</h2>
+                <div class="info-item"><i class="fa-solid fa-cake-candles"></i> <span>1992.08.18</span></div>
+                <div class="info-item"><i class="fa-solid fa-location-dot"></i> <span>Seoul, South Korea</span></div>
+                <div class="info-item"><i class="fa-solid fa-envelope"></i> <span>dayungh10@naver.com</span></div>
+                <div class="info-item"><i class="fa-solid fa-phone"></i> <span>010-9054-7352</span></div>
+            </div>
+            <div class="card" id="interests">
+                <h2>// Interests</h2>
+                <div class="info-item"><i class="fa-solid fa-person-running"></i> <span>Marathon</span></div>
+                <div class="info-item"><i class="fa-solid fa-golf-ball-tee"></i> <span>Golf</span></div>
+            </div>
+        </div>
 
         <div class="card" id="about">
             <h2>// About</h2>
-            <p>
-                자동차 전장 및 EV 충전 시스템 분야의 리드 임베디드 시스템 엔지니어입니다. 저수준 펌웨어부터 클라우드 연동 시스템 아키텍처 설계까지, 복잡한 기술적 과제를 해결하는 데 강점이 있습니다. 특히 실시간 운영체제(RTOS) 기반의 고신뢰성 시스템 설계와 보안 통신 프로토콜 구현을 주도합니다.
+            <p style="font-size: 16px; line-height: 1.8; color: var(--text-primary);">
+                MCU 플랫폼 설계를 지향하는 리드 임베디드 시스템 엔지니어입니다. 자동차 전장 및 EV 충전 시스템 분야에서 저수준 펌웨어부터 클라우드 연동 시스템 아키텍처 설계까지, 복잡한 기술적 과제를 해결하는 데 강점이 있습니다. 특히 RTOS 기반의 고신뢰성 시스템 설계와 보안 통신 프로토콜 구현을 주도합니다.
             </p>
         </div>
 
@@ -205,42 +230,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="project">
-                    <h4>대용량 급속 충전 시스템 기술 개발</h4>
-                    <p class="duration">2020.04 – 2022.12</p>
-                    <p><strong>주요 역할:</strong> 팬터그래프 충전기 내환경성 및 내구성 평가 시스템 개발 (실무 책임자)</p>
-                    <ul>
-                        <li>Oppcharge 표준 기반 동작 내구성 평가 환경 및 CompactDAQ 테스트베드 구축</li>
-                        <li>LabVIEW 기반 시험 평가 소프트웨어 및 노화도 모델 개발</li>
-                    </ul>
-                    <div class="achievements">
-                        <h5>핵심 성과</h5>
-                        <ul>
-                            <li>논문: 팬터그래프 충전 시스템 노화도 측정 환경 구축 (KSAE)</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="project">
-                    <h4>전기버스 자동 충전 시스템 개발</h4>
-                    <p class="duration">2021.04 – 2023.12</p>
-                    <p><strong>주요 역할:</strong> 정위치 인식 및 차량 유도 기술 개발</p>
-                    <ul>
-                        <li>초음파 센서 기반 차량 유도 장치 펌웨어 및 정위치 인식 알고리즘 개발 (STM32F4)</li>
-                    </ul>
-                    <div class="achievements">
-                        <h5>핵심 성과</h5>
-                        <ul>
-                            <li>특허 출원 1건 (정위치 유도 장치 및 방법 관련)</li>
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
 
-        <div class="card" id="contact">
-            <h2>// Contact</h2>
-            <p>연락처 정보는 요청 시 제공해 드립니다.</p>
-        </div>
     </div>
     <footer>
         <p>&copy; 2025 이재석. All Rights Reserved.</p>
