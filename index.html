@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이재석 | 리드 임베디드 엔지니어</title>
-    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&family=SUIT:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --toss-blue: #0070F3;
-            --toss-grey-100: #F9FAFB;
-            --toss-grey-200: #F2F4F6;
-            --toss-grey-400: #E5E8EB;
-            --toss-grey-600: #B0B8C1;
-            --toss-grey-800: #4E5968;
-            --toss-black: #333D4B;
+            --neon-blue: #00BFFF;
+            --bg-primary: #121212;
+            --bg-secondary: #1E1E1E;
+            --text-primary: #E0E0E0;
+            --text-secondary: #A0A0A0;
+            --border-color: #333333;
         }
 
         body {
-            font-family: 'SUIT Variable', sans-serif;
+            font-family: 'SUIT', sans-serif;
             margin: 0;
-            background-color: var(--toss-grey-100);
-            color: var(--toss-black);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             word-break: keep-all;
@@ -29,41 +30,51 @@
         .container {
             max-width: 850px;
             margin: 60px auto;
+            padding: 0 20px;
         }
 
         .card {
-            background-color: #FFFFFF;
-            border-radius: 20px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
             padding: 40px;
             margin-bottom: 24px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.15);
         }
 
         header h1 {
+            font-family: 'Fira Code', monospace;
             font-size: 40px;
-            font-weight: 700;
+            font-weight: 500;
+            color: #FFFFFF;
             margin: 0 0 8px 0;
         }
 
         header p {
             font-size: 20px;
-            color: var(--toss-grey-800);
+            color: var(--text-secondary);
             margin: 0;
         }
 
         .section h2 {
+            font-family: 'Fira Code', monospace;
             font-size: 22px;
-            font-weight: 700;
-            color: var(--toss-black);
+            font-weight: 500;
+            color: var(--neon-blue);
             margin: 0 0 24px 0;
             padding-bottom: 16px;
-            border-bottom: 1px solid var(--toss-grey-200);
+            border-bottom: 1px solid var(--border-color);
         }
 
         #about p {
             font-size: 16px;
             line-height: 1.8;
-            color: var(--toss-grey-800);
+            color: var(--text-primary);
         }
 
         .company {
@@ -77,12 +88,19 @@
         .company h3 {
             font-size: 20px;
             font-weight: 700;
-            color: var(--toss-blue);
+            color: #FFFFFF;
             margin: 0 0 24px 0;
         }
 
         .project {
+            border-left: 3px solid var(--neon-blue);
+            padding-left: 24px;
             margin-bottom: 32px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .project:hover {
+            border-left-color: #FFFFFF;
         }
 
         .project:last-child {
@@ -92,43 +110,40 @@
         .project h4 {
             font-size: 18px;
             font-weight: 600;
+            color: var(--text-primary);
             margin: 0 0 8px 0;
         }
         
         .project .duration {
             font-size: 14px;
-            color: var(--toss-grey-600);
+            color: var(--text-secondary);
             margin-bottom: 12px;
         }
 
         .project p, .project ul {
             font-size: 15px;
             line-height: 1.8;
-            color: var(--toss-grey-800);
+            color: var(--text-secondary);
             margin: 8px 0;
         }
-
-        .project ul {
-            padding-left: 24px;
-        }
         
+        .project ul {
+            padding-left: 20px;
+        }
+
         .achievements {
             margin-top: 16px;
             padding: 16px;
-            background-color: var(--toss-grey-100);
+            background-color: rgba(0, 191, 255, 0.05);
             border-radius: 12px;
-            border: 1px solid var(--toss-grey-200);
+            border: 1px solid rgba(0, 191, 255, 0.2);
         }
 
         .achievements h5 {
             font-size: 16px;
-            font-weight: 700;
+            font-weight: 600;
+            color: var(--neon-blue);
             margin: 0 0 10px 0;
-        }
-
-        .achievements ul {
-            padding-left: 20px;
-            margin: 0;
         }
 
         #contact h2 {
@@ -136,13 +151,13 @@
         }
         #contact p {
             font-size: 16px;
-            color: var(--toss-grey-600);
+            color: var(--text-secondary);
         }
 
         footer {
             text-align: center;
             margin-top: 60px;
-            color: var(--toss-grey-600);
+            color: var(--text-secondary);
             font-size: 14px;
         }
 
@@ -152,20 +167,20 @@
     <div class="container">
         <div class="card">
             <header>
-                <h1>이재석</h1>
-                <p>리드 임베디드 시스템 엔지니어</p>
+                <h1>JaeSeok Lee</h1>
+                <p>Lead Embedded Systems Engineer</p>
             </header>
         </div>
 
         <div class="card" id="about">
-            <h2>About</h2>
+            <h2>// About</h2>
             <p>
                 자동차 전장 및 EV 충전 시스템 분야의 리드 임베디드 시스템 엔지니어입니다. 저수준 펌웨어부터 클라우드 연동 시스템 아키텍처 설계까지, 복잡한 기술적 과제를 해결하는 데 강점이 있습니다. 특히 실시간 운영체제(RTOS) 기반의 고신뢰성 시스템 설계와 보안 통신 프로토콜 구현을 주도합니다.
             </p>
         </div>
 
         <div class="card" id="experience">
-            <h2>Experience</h2>
+            <h2>// Experience</h2>
             <div class="company">
                 <h3>지아이티 (GIT)</h3>
                 <div class="project">
@@ -232,12 +247,12 @@
         </div>
 
         <div class="card" id="contact">
-            <h2>Contact</h2>
+            <h2>// Contact</h2>
             <p>연락처 정보는 요청 시 제공해 드립니다.</p>
         </div>
     </div>
     <footer>
-        <p>&copy; 2025 이재석. All Rights Reserved.</p>
+        <p>&copy; 2025 JaeSeok Lee. All Rights Reserved.</p>
     </footer>
 </body>
 </html>
