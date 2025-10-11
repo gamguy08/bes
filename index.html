@@ -98,6 +98,28 @@
             text-align: center;
         }
 
+        .education-item {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .education-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .education-item h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 4px 0;
+        }
+        .education-item .school {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin: 0 0 8px 0;
+        }
+
         .company h3 {
             font-size: 22px;
             font-weight: 700;
@@ -193,6 +215,25 @@
             <p style="font-size: 16px; line-height: 1.8; color: var(--text-primary);">
                 MCU 플랫폼 설계를 지향하는 리드 임베디드 시스템 엔지니어입니다. 자동차 전장 및 EV 충전 시스템 분야에서 저수준 펌웨어부터 클라우드 연동 시스템 아키텍처 설계까지, 복잡한 기술적 과제를 해결하는 데 강점이 있습니다. 특히 RTOS 기반의 고신뢰성 시스템 설계와 보안 통신 프로토콜 구현을 주도합니다.
             </p>
+        </div>
+
+        <div class="card" id="education">
+            <h2>// Education</h2>
+            <div class="education-item">
+                <h4>석사, 정보통신공학</h4>
+                <p class="school">공주대학교 (Kongju National University) | 4.38 / 4.5</p>
+                <p class="duration">2020.03 - 2022.02</p>
+            </div>
+            <div class="education-item">
+                <h4>학사, 전자공학</h4>
+                <p class="school">단국대학교 (Dankook University) | 3.09 / 4.5</p>
+                <p class="duration">2011.03 - 2017.02</p>
+            </div>
+            <div class="education-item">
+                <h4>인문계 졸업</h4>
+                <p class="school">현화고등학교 (Hyeonhwa High School)</p>
+                <p class="duration">2008.03 - 2011.02</p>
+            </div>
         </div>
 
         <div class="card" id="experience">
