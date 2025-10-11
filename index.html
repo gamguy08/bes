@@ -76,6 +76,26 @@
         /* Intro Section */
         .intro {
             padding: 100px 0 80px;
+            display: flex;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .intro-content {
+            flex: 1;
+        }
+
+        .intro-photo {
+            flex-shrink: 0;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 3px solid var(--border);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
         }
 
         .intro-title {
@@ -111,6 +131,38 @@
         .meta-item strong {
             color: var(--text-primary);
             font-size: 18px;
+        }
+
+        /* Profile Info */
+        .profile-info {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 80px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            font-size: 17px;
+        }
+
+        .info-label {
+            font-weight: 700;
+            color: var(--text-primary);
+            min-width: 100px;
+        }
+
+        .info-value {
+            color: var(--text-secondary);
         }
 
         /* Match Rate Banner */
@@ -625,6 +677,15 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .intro {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .intro-photo {
+                order: -1;
+            }
+
             .intro-title {
                 font-size: 40px;
             }
@@ -652,6 +713,10 @@
             .match-rate {
                 font-size: 56px;
             }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Animations */
@@ -678,12 +743,76 @@
     <div class="container">
         <!-- Intro Section -->
         <section class="intro fade-in">
-            <h1 class="intro-title">임베디드 시스템 개발자</h1>
-            <p class="intro-subtitle">7년차 · MCU 플랫폼 & 통신 프로토콜 전문</p>
-            <div class="intro-meta">
-                <div class="meta-item"><strong>경력</strong> 7년 이상</div>
-                <div class="meta-item"><strong>전문분야</strong> STM32, 실시간OS, 차량통신</div>
-                <div class="meta-item"><strong>핵심역량</strong> 진단시스템, 무선업데이트, 보안통신</div>
+            <div class="intro-content">
+                <h1 class="intro-title">이재석</h1>
+                <p class="intro-subtitle">임베디드 시스템 개발자 · 7년차</p>
+                <div class="intro-meta">
+                    <div class="meta-item"><strong>전문분야</strong> STM32, 실시간OS, 차량통신</div>
+                    <div class="meta-item"><strong>핵심역량</strong> 진단시스템, 무선업데이트, 보안통신</div>
+                </div>
+            </div>
+            <div class="intro-photo">
+                <img src="https://slworld.recruiter.co.kr/mrs2/attachFile/showFile?fileUid=1109801a-f0ca-4540-9cea-af28a3e2339b.jpg" alt="이재석 프로필 사진" class="profile-photo">
+            </div>
+        </section>
+
+        <!-- Profile Info -->
+        <div class="profile-info fade-in">
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">이메일</span>
+                    <span class="info-value">dayungh10@naver.com</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">연락처</span>
+                    <span class="info-value">010-9054-7352</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">생년월일</span>
+                    <span class="info-value">1992.08.18</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">거주지</span>
+                    <span class="info-value">서울특별시 송파구</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">병역</span>
+                    <span class="info-value">육군 헌병 병장 만기제대 (2012.04 ~ 2014.01)</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">특기</span>
+                    <span class="info-value">마라톤 / 골프</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <section class="section fade-in">
+            <div class="section-header">
+                <div class="section-tag">학력</div>
+                <h2 class="section-title">교육</h2>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h3 class="project-title">공주대학교 대학원 정보통신공학과</h3>
+                    <div class="project-meta">
+                        <span>2020.03 ~ 2022.02</span>
+                        <span>석사과정 수료</span>
+                        <span>평점 4.38 / 4.5</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h3 class="project-title">단국대학교 전자공학과</h3>
+                    <div class="project-meta">
+                        <span>2011.03 ~ 2017.02</span>
+                        <span>학사 졸업</span>
+                        <span>평점 3.09 / 4.5</span>
+                    </div>
+                </div>
             </div>
         </section>
 
