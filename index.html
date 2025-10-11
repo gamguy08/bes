@@ -187,7 +187,53 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header and Profile Cards -->
+        <div class="card">
+            <header>
+                <h1>이재석</h1>
+                <p>리드 임베디드 시스템 엔지니어</p>
+            </header>
+        </div>
+        
+        <div class="profile-grid">
+            <div class="card" id="profile-info">
+                <h2>// Profile</h2>
+                <div class="info-item"><i class="fa-solid fa-cake-candles"></i> <span>1992.08.18</span></div>
+                <div class="info-item"><i class="fa-solid fa-location-dot"></i> <span>Seoul, South Korea</span></div>
+                <div class="info-item"><i class="fa-solid fa-envelope"></i> <span>dayungh10@naver.com</span></div>
+                <div class="info-item"><i class="fa-solid fa-phone"></i> <span>010-9054-7352</span></div>
+            </div>
+            <div class="card" id="interests">
+                <h2>// Interests</h2>
+                <div class="info-item"><i class="fa-solid fa-person-running"></i> <span>Marathon</span></div>
+                <div class="info-item"><i class="fa-solid fa-golf-ball-tee"></i> <span>Golf</span></div>
+            </div>
+        </div>
+
+        <div class="card" id="about">
+            <h2>// About</h2>
+            <p style="font-size: 16px; line-height: 1.8; color: var(--text-primary);">
+                MCU 플랫폼 설계를 지향하는 리드 임베디드 시스템 엔지니어입니다. 자동차 전장 및 EV 충전 시스템 분야에서 저수준 펌웨어부터 클라우드 연동 시스템 아키텍처 설계까지, 복잡한 기술적 과제를 해결하는 데 강점이 있습니다. 특히 RTOS 기반의 고신뢰성 시스템 설계와 보안 통신 프로토콜 구현을 주도합니다.
+            </p>
+        </div>
+
+        <div class="card" id="education">
+            <h2>// Education</h2>
+            <div class="education-item">
+                <h4>석사, 정보통신공학</h4>
+                <p class="school">공주대학교 (Kongju National University) | 4.38 / 4.5</p>
+                <p class="duration">2020.03 - 2022.02</p>
+            </div>
+            <div class="education-item">
+                <h4>학사, 전자공학</h4>
+                <p class="school">단국대학교 (Dankook University) | 3.09 / 4.5</p>
+                <p class="duration">2011.03 - 2017.02</p>
+            </div>
+            <div class="education-item">
+                <h4>인문계 졸업</h4>
+                <p class="school">현화고등학교 (Hyeonhwa High School)</p>
+                <p class="duration">2008.03 - 2011.02</p>
+            </div>
+        </div>
 
         <div class="card" id="experience">
             <h2>// Experience</h2>
@@ -223,7 +269,7 @@
             <div class="company">
                 <h3>한국자동차연구원 (KATECH)</h3>
                 <div class="project">
-                    <h4>지능형 완속/급속용 전기차 분산 충전 배전반 기술 개발</h4>
+                    <h4>지능형 EV 충전 배전반 기술 개발</h4>
                     <p class="duration">2017.05 – 2019.12</p>
                     <p><strong>주요 역할:</strong> 지능형 전력 분산 알고리즘 검증 시뮬레이션 및 성능 평가 테스트베드 구축 (실무 책임자)</p>
                     <ul>
@@ -242,7 +288,7 @@
                     </div>
                 </div>
                 <div class="project">
-                    <h4>400kW급 대용량 충전 대응을 위한 xEV 차량 부품 및 시스템 기술 개발</h4>
+                    <h4>400kW급 대용량 충전 대응 xEV 차량 부품 및 시스템 기술 개발</h4>
                     <p class="duration">2020.04 – 2022.12</p>
                     <p><strong>주요 역할:</strong> 팬터그래프 방식 전기버스용 충전개발품 내환경성 평가 (실무 책임자)</p>
                     <ul>
@@ -271,15 +317,25 @@
             </div>
         </div>
 
-        <!-- Other sections like Education, Profile etc. would go here -->
-
     </div>
     <footer>
         <p>&copy; 2025 이재석. All Rights Reserved.</p>
     </footer>
 
     <script>
-        // Script for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
     </script>
 </body>
 </html>
