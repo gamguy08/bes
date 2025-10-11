@@ -3,104 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이재석 | 임베디드 개발자 포트폴리오</title>
+    <title>이재석 | 임베디드 개발자</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+        :root {
+            --toss-blue: #0070F3;
+            --toss-grey-100: #F9FAFB;
+            --toss-grey-200: #F2F4F6;
+            --toss-grey-400: #E5E8EB;
+            --toss-grey-600: #B0B8C1;
+            --toss-grey-800: #4E5968;
+            --toss-black: #333D4B;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             margin: 0;
-            background-color: #f0f2f5;
-            color: #333;
+            background-color: var(--toss-grey-100);
+            color: var(--toss-black);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
+
         .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 60px auto;
         }
-        header {
-            text-align: center;
-            border-bottom: 2px solid #e9ecef;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
         }
+
         header h1 {
-            margin: 0;
-            color: #212529;
-            font-size: 2.8em;
+            font-size: 42px;
             font-weight: 700;
+            margin: 0 0 8px 0;
         }
+
         header p {
-            margin: 5px 0 0;
-            color: #6c757d;
-            font-size: 1.3em;
+            font-size: 20px;
+            color: var(--toss-grey-800);
+            margin: 0;
         }
-        .section {
-            margin-bottom: 40px;
-        }
+
         .section h2 {
-            font-size: 1.8em;
-            color: #0056b3;
-            border-bottom: 3px solid #0056b3;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--toss-black);
+            margin: 0 0 24px 0;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--toss-grey-200);
         }
+
+        #about p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--toss-grey-800);
+        }
+
         .company {
-            margin-bottom: 30px;
-            padding: 20px;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
+            margin-bottom: 32px;
         }
+
+        .company:last-child {
+            margin-bottom: 0;
+        }
+
         .company h3 {
-            font-size: 1.5em;
-            color: #343a40;
-            margin-top: 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--toss-blue);
+            margin: 0 0 20px 0;
         }
+
         .project {
-            border-left: 4px solid #007bff;
-            padding-left: 20px;
-            margin-bottom: 25px;
+            margin-bottom: 28px;
         }
+
+        .project:last-child {
+            margin-bottom: 0;
+        }
+
         .project h4 {
-            font-size: 1.2em;
-            margin: 0 0 10px 0;
-            color: #343a40;
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0 0 8px 0;
         }
+        
+        .project .duration {
+            font-size: 14px;
+            color: var(--toss-grey-600);
+            margin-bottom: 12px;
+        }
+
         .project p, .project ul {
-            margin: 5px 0;
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--toss-grey-800);
+            margin: 8px 0;
         }
+
         .project ul {
-            padding-left: 20px;
+            padding-left: 24px;
         }
+        
         .achievements {
-            margin-top: 15px;
+            margin-top: 16px;
+            padding: 16px;
+            background-color: var(--toss-grey-100);
+            border-radius: 12px;
         }
+
         .achievements h5 {
-            font-size: 1.1em;
-            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 10px 0;
         }
+
         .achievements ul {
-            list-style-type: square;
+            padding-left: 20px;
+            margin: 0;
         }
+
+        #contact p {
+            font-size: 16px;
+        }
+
+        #contact a {
+            color: var(--toss-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        #contact a:hover {
+            text-decoration: underline;
+        }
+
         footer {
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #e9ecef;
-            color: #6c757d;
+            margin-top: 60px;
+            color: var(--toss-grey-600);
+            font-size: 14px;
         }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>이재석</h1>
-            <p>고급 임베디드 시스템 개발자</p>
-        </header>
+        <div class="card">
+            <header>
+                <h1>이재석</h1>
+                <p>고급 임베디드 시스템 개발자</p>
+            </header>
+        </div>
 
-        <div class="section" id="about">
+        <div class="card" id="about">
             <h2>About Me</h2>
             <p>
                 하드웨어와 소프트웨어의 경계에서 복잡한 문제를 해결하는 것을 즐기는 높은 수준의 임베디드 개발자입니다.
@@ -109,36 +171,18 @@
             </p>
         </div>
 
-        <div class="section" id="experience">
+        <div class="card" id="experience">
             <h2>Work Experience</h2>
             <div class="company">
                 <h3>지아이티 (GIT)</h3>
                 <div class="project">
-                    <h4>클라우드 진단 플랫폼 (2024.04 - 진행중)</h4>
+                    <h4>클라우드 진단 플랫폼</h4>
+                    <p class="duration">2024.04 - 진행중</p>
                     <p><strong>주요 역할:</strong> 클라우드 플랫폼과 연동한 자동차 진단장비 개발</p>
                     <ul>
-                        <li>서버-장비 간 통신 프로토콜 및 프레임 포맷 설계/구현
-                            <ul>
-                                <li>MQTT 기반 진단 및 제어 메시지 채널 설계/구현</li>
-                                <li>MQTT(명령) + HTTPS(대용량 다운로드) 기반 이원화 OTA 업데이트 시퀀스 및 전송 로직 설계/구현</li>
-                                <li>WebSocket 기반 지속 및 대용량 데이터 전송 아키텍처 설계/구현 (ECU 업그레이드 등)</li>
-                            </ul>
-                        </li>
-                        <li>보안 채널 설계 및 구현
-                            <ul>
-                                <li>인증서(CA/클라이언트, Private Key) 프로비저닝 및 로드 로직 구현</li>
-                                <li>WPA2 PSK 환경에서 PBKDF2 기반 PMK 파생 로직 구현 및 검증</li>
-                                <li>외부 HSM 모듈을 시스템에 연동 (하드웨어 인터페이스 및 통신 프로토콜 구현)</li>
-                            </ul>
-                        </li>
-                        <li><strong>적용 환경:</strong> STM32H7 시리즈, RTOS 기반 펌웨어</li>
-                    </ul>
-                </div>
-                <div class="project">
-                    <h4>ECOS(전장검사장비) 개발 (2024.04 - 2025.05)</h4>
-                    <p><strong>주요 역할:</strong> SP2(셀토스) 기반 전장 검사 장비 개발</p>
-                    <ul>
-                        <li>통신 및 보안 채널 설계/구현 (클라우드 진단 플랫폼 프로젝트와 유사)</li>
+                        <li>서버-장비 간 통신 프로토콜 및 프레임 포맷 설계/구현 (MQTT, WebSocket, HTTPS)</li>
+                        <li>MQTT(명령) + HTTPS(대용량) 기반 이원화 OTA 업데이트 로직 설계/구현</li>
+                        <li>보안 채널 설계 및 구현 (인증서 프로비저닝, WPA2 PSK, HSM 연동)</li>
                         <li><strong>적용 환경:</strong> STM32H7 시리즈, RTOS 기반 펌웨어</li>
                     </ul>
                 </div>
@@ -147,87 +191,62 @@
             <div class="company">
                 <h3>한국자동차연구원 (KATECH)</h3>
                 <div class="project">
-                    <h4>지능형 완속/급속용 전기차 분산 충전 배전반 기술 개발 (2017.05 – 2019.12)</h4>
-                    <p><strong>주요 역할:</strong> 지능형 전력 분산 알고리즘 검증 시뮬레이션 및 성능 평가 테스트베드 구축 (실무 책임자)</p>
+                    <h4>지능형 분산 충전 배전반 기술 개발</h4>
+                    <p class="duration">2017.05 – 2019.12</p>
+                    <p><strong>주요 역할:</strong> 알고리즘 검증 시뮬레이션 및 테스트베드 구축 (실무 책임자)</p>
                     <ul>
-                        <li>J1772 표준 기반 충전 하드웨어 및 충전기/OBC 모사 장치 개발 (STM32F4)</li>
-                        <li>기능 검증용 시뮬레이션 및 데이터 수집/분석 SW 개발 (LabVIEW)</li>
-                        <li>원격 데이터 수집 장치 구축 및 실증 데이터 분석</li>
+                        <li>J1772 표준 기반 충전 H/W 및 모사 장치 개발 (STM32F4)</li>
+                        <li>기능 검증용 시뮬레이션 및 데이터 분석 S/W 개발 (LabVIEW)</li>
                     </ul>
                     <div class="achievements">
                         <h5>주요 성과</h5>
                         <ul>
-                            <li>논문: 실시간 충전 전력분석을 통한 전기 자동차 충전기의 효율적인 충전 분배 알고리즘에 관한 연구 (KSAE, 2020)</li>
-                            <li>특허 등록: 최대 전력사용이 가능한 전기자동차 충전 장치 및 방법 (10-2259780)</li>
-                            <li>특허 등록: 전기자동차용 충전장치 및 그 제어방법 (10-2138096)</li>
+                            <li>논문: 효율적인 충전 분배 알고리즘에 관한 연구 (KSAE, 2020)</li>
+                            <li>특허: 최대 전력사용이 가능한 전기자동차 충전 장치 및 방법 (등록)</li>
+                            <li>특허: 전기자동차용 충전장치 및 그 제어방법 (등록)</li>
                         </ul>
                     </div>
                 </div>
                 <div class="project">
-                    <h4>400kW급 대용량 충전 대응 xEV 차량 부품 및 시스템 기술 개발 (2020.04 – 2022.12)</h4>
-                    <p><strong>주요 역할:</strong> 팬터그래프 방식 전기버스용 충전개발품 내환경성 평가 (실무 책임자)</p>
+                    <h4>400kW급 대용량 충전 시스템 기술 개발</h4>
+                    <p class="duration">2020.04 – 2022.12</p>
+                    <p><strong>주요 역할:</strong> 팬터그래프 충전기 내환경성 평가 (실무 책임자)</p>
                     <ul>
                         <li>Oppcharge 표준 기반 동작내구성 평가환경 및 CompactDAQ 테스트베드 구축</li>
-                        <li>내구성 시험 평가 SW 개발 (LabVIEW) 및 평가 절차서 작성</li>
-                        <li>내구노화도 모델 개발 및 시험평가/성적서 발급</li>
+                        <li>LabVIEW 기반 시험 평가 S/W 개발 및 내구노화도 모델 개발</li>
                     </ul>
                     <div class="achievements">
                         <h5>주요 성과</h5>
                         <ul>
-                            <li>논문: 팬터그래프 충전 시스템 노화도 측정용 테스트 환경 구축 (KSAE 춘계학술대회)</li>
+                            <li>논문: 팬터그래프 충전 시스템 노화도 측정용 테스트 환경 구축 (KSAE)</li>
                         </ul>
                     </div>
                 </div>
                 <div class="project">
-                    <h4>지붕 접속 방식의 전기버스 접속부 이송형 자동 충전 시스템 개발 및 실증 (2021.04 – 2023.12)</h4>
+                    <h4>전기버스 자동 충전 시스템 개발 및 실증</h4>
+                    <p class="duration">2021.04 – 2023.12</p>
                     <p><strong>주요 역할:</strong> 차량 정위치 인식/유도 기술 개발</p>
                     <ul>
-                        <li>초음파 센서 기반 차량 유도장치 펌웨어 프로그래밍 (STM32F4)</li>
-                        <li>정위치 인식 알고리즘 개발 (기울기, 앞뒤거리 등)</li>
-                        <li>실증 사이트 구축</li>
+                        <li>초음파 센서 기반 차량 유도장치 펌웨어 및 알고리즘 개발 (STM32F4)</li>
                     </ul>
                     <div class="achievements">
                         <h5>주요 성과</h5>
                         <ul>
-                            <li>특허 출원: 팬터그래프 충전식 전기 차량의 정위치 유도 장치 및 방법 (10-2022-0178242)</li>
+                            <li>특허: 팬터그래프 충전식 전기 차량의 정위치 유도 장치 및 방법 (출원)</li>
                         </ul>
                     </div>
-                </div>
-                 <div class="project">
-                    <h4>차량하부 충전방식 자동충전 및 관제 시스템 개발 (2022.04 – 2025.12)</h4>
-                    <p><strong>주요 역할:</strong> 차량 하부 충전을 위한 Docking System 구동부 파일럿 제품 설계 및 제작</p>
-                    <ul>
-                        <li>하부충전용 Docking System 제어기 개발 (RS485, PWM Step Motor 제어)</li>
-                        <li>Jetson 보드와 제어기 간 통신 시스템 구성 (Python)</li>
-                    </ul>
-                </div>
-                <div class="project">
-                    <h4>농기계 관리 및 제어를 위한 유무선 통신 기반 일체형 통합 시스템 개발 (2018.10 – 2020.09)</h4>
-                    <p><strong>주요 역할:</strong> CAN 통신 진단 및 모니터링 소프트웨어 개발</p>
-                    <ul>
-                        <li>CAN 통신 프로토콜 정의 및 CAN DB 구축 (약 190종 신호, CANoe)</li>
-                        <li>CAN to UDP 통신 보드 개발 (ESP32 / C++)</li>
-                    </ul>
-                </div>
-                <div class="project">
-                    <h4>전기차 비상 충전을 위한 2kW급 이동식 소형 발전 장치 응용기술 개발 (2016.12 – 2018.12)</h4>
-                    <p><strong>주요 역할:</strong> 이동식 소형 비상발전장치 통합제어기 개발 (실무 책임자)</p>
-                    <ul>
-                        <li>충전제어파일럿(PWM 통신) 모듈 기능 설계 및 프로토콜 분석/구현</li>
-                    </ul>
                 </div>
             </div>
         </div>
 
-        <div class="section" id="contact">
+        <div class="card" id="contact">
             <h2>Contact</h2>
-            <p>Email: your.email@example.com</p>
-            <p>GitHub: github.com/your_username</p>
+            <p><a href="mailto:your.email@example.com">your.email@example.com</a></p>
+            <p><a href="https://github.com/your_username" target="_blank">github.com/your_username</a></p>
         </div>
-
-        <footer>
-            <p>&copy; 2025 이재석. All Rights Reserved.</p>
-        </footer>
     </div>
+    <footer>
+        <p>&copy; 2025 이재석. All Rights Reserved.</p>
+    </footer>
 </body>
 </html>
