@@ -28,11 +28,12 @@
         }
 
         body {
-            font-family: 'SUIT Variable', sans-serif;
+            font-family: 'SUIT Variable', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
             background-color: var(--bg);
             color: var(--text-primary);
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Header */
@@ -43,6 +44,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.95);
         }
@@ -854,7 +856,7 @@
                 <div class="tech-category">
                     <h3>통신 프로토콜</h3>
                     <ul class="tech-list">
-                        <li class="tech-item"><strong>CAN</strong> 데이터베이스 구축 및 DBC 파일 작성</li>
+                        <li class="tech-item"><strong>CAN</strong> DBC 데이터베이스 구축</li>
                         <li class="tech-item"><strong>MQTT</strong> 무선업데이트 명령채널 설계</li>
                         <li class="tech-item"><strong>HTTPS</strong> 대용량 파일 다운로드</li>
                         <li class="tech-item"><strong>WebSocket</strong> 실시간 데이터 전송</li>
@@ -877,7 +879,7 @@
                     <ul class="tech-list">
                         <li class="tech-item"><strong>CANoe</strong> DBC 작성 및 테스트 자동화</li>
                         <li class="tech-item"><strong>LabVIEW</strong> 계측 시스템 개발</li>
-                        <li class="tech-item"><strong>STM32CubeIDE</strong> 펌웨어 개발</li>
+                        <li class="tech-item"><strong>IAR Embedded Workbench</strong> 펌웨어 개발</li>
                         <li class="tech-item"><strong>Git</strong> 버전관리</li>
                     </ul>
                 </div>
@@ -1010,7 +1012,6 @@
                         <li>신호 추출 및 물리값 변환 알고리즘</li>
                         <li>CANoe DBC 파일 작성 및 실시간 모니터링</li>
                         <li>CAN to UDP 게이트웨이 개발 (ESP32)</li>
-                        <li>자동화 테스트 시나리오 작성</li>
                     </ul>
 
                     <div class="tech-tags">
@@ -1032,25 +1033,43 @@
                     </div>
                 </div>
                 <div class="project-content">
-                    <p>J1772 국제 표준을 구현한 전기차 충전 통신 시스템을 개발했습니다. 충전기와 차량 간 PWM 신호 기반 통신 프로토콜을 구현하고 시뮬레이터까지 제작했습니다.</p>
+                    <p>SAE J1772 국제 표준을 구현한 전기차 충전 통신 시스템을 개발했습니다. 충전기(EVSE)와 차량(EV) 간 Pilot 신호 기반 통신 프로토콜을 완전히 구현하고, 양방향 시뮬레이터까지 제작했습니다.</p>
 
-                    <h4>J1772 상태 머신 구현</h4>
-                    <div class="code-block">
-<pre>State A: 차량 미연결
-State B: 차량 연결, 충전 미준비
-State C: 충전 진행
-State D: 환기 요청
-State E: 단락 감지
-State F: 에러 처리</pre>
+                    <h4>J1772 Pilot 신호 상태 머신 구현</h4>
+                    <div class="highlight-box">
+                        <p>1kHz PWM(±12V) 신호의 전압 레벨로 충전 상태를 제어하고, 듀티 사이클로 최대 공급 전류를 전달하는 양방향 통신 시스템</p>
                     </div>
 
-                    <h4>구현 기능</h4>
+                    <div class="code-block">
+<pre>State A (12V): 차량 미연결 - 대기 상태
+State B (9V):  차량 연결 (2.74kΩ 저항) - 충전 준비
+State C (6V):  충전 진행 (882Ω 저항) - 전력 공급 중
+State D (3V):  환기 요청 (246Ω 저항) - 특수 충전 모드
+State E (0V):  전원 차단 - 비상 정지
+State F (-12V): EVSE 오류 - 충전 불가</pre>
+                    </div>
+
+                    <h4>PWM 듀티 사이클 기반 전류 제한 통신</h4>
                     <ul>
-                        <li>PWM 신호 생성/해석 (1kHz, 듀티 10~96%)</li>
-                        <li>전류 제한 정보 듀티 사이클 변조</li>
-                        <li>차량 상태 감지 (저항값 측정)</li>
-                        <li>STM32F4 기반 충전기/OBC 시뮬레이터 개발</li>
-                        <li>배터리 충전 프로파일 에뮬레이션</li>
+                        <li><strong>1kHz PWM 신호 생성:</strong> ±12V 구형파, TIM2 하드웨어 타이머 활용</li>
+                        <li><strong>듀티 사이클 → 전류 변환 로직:</strong>
+                            <ul style="margin-top: 8px; padding-left: 20px;">
+                                <li>16% 듀티 → 10A 공급</li>
+                                <li>25% 듀티 → 16A 공급</li>
+                                <li>50% 듀티 → 32A 공급</li>
+                                <li>90% 듀티 → 고속 충전 플래그</li>
+                            </ul>
+                        </li>
+                        <li><strong>전류 계산 알고리즘 구현:</strong> 0~850μs 구간 (0.6A/10μs), 850μs 초과 시 ((듀티-640μs)/10μs × 2.5A) 공식 적용</li>
+                        <li><strong>차량 저항 감지:</strong> ADC로 Pilot 전압 측정 → 상태 판별 (2.74kΩ/882Ω/246Ω)</li>
+                        <li><strong>상태 천이 로직:</strong> 전압 변화 감지 → 릴레이 제어 → 충전 시작/종료</li>
+                    </ul>
+
+                    <h4>시뮬레이터 개발</h4>
+                    <ul>
+                        <li><strong>EVSE 시뮬레이터:</strong> 듀티 사이클 가변 PWM 생성, 차량 저항 감지 및 상태 표시</li>
+                        <li><strong>OBC 시뮬레이터:</strong> 가변 저항 회로로 상태 전환(State B/C), 배터리 충전 프로파일 에뮬레이션</li>
+                        <li><strong>안전 기능:</strong> State E 비상 정지, State F 오류 감지, 접지 연속성 확인</li>
                     </ul>
 
                     <h4>연구 성과</h4>
