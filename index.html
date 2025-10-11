@@ -3,9 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>이재석 | 임베디드 개발자 포트폴리오</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            max-width: 960px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            margin: 0;
+            color: #212529;
+            font-size: 2.5em;
+        }
+        header p {
+            margin: 5px 0 0;
+            color: #6c757d;
+            font-size: 1.2em;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skills-list li {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.95em;
+        }
+        .project {
+            border-left: 4px solid #007bff;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        .project h3 {
+            margin: 0 0 5px 0;
+            color: #343a40;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>이재석</h1>
+            <p>임베디드 시스템 개발자</p>
+        </header>
 
+        <div class="section" id="about">
+            <h2>About Me</h2>
+            <p>
+                이곳에 본인에 대한 소개를 작성합니다. 하드웨어와 소프트웨어의 경계에서 문제 해결을 즐기는 임베디드 개발자 이재석입니다. 
+                저전력 시스템 설계, 실시간 운영체제(RTOS) 경험, 그리고 다양한 마이크로컨트롤러(MCU)를 다룬 경험이 있습니다.
+            </p>
+        </div>
+
+        <div class="section" id="skills">
+            <h2>Skills</h2>
+            <ul class="skills-list">
+                <li>C / C++</li>
+                <li>Python</li>
+                <li>RTOS (FreeRTOS, Zephyr 등)</li>
+                <li>Linux Kernel</li>
+                <li>ARM Architecture</li>
+                <li>MCU (STM32, AVR, ESP32 등)</li>
+                <li>I2C, SPI, UART</li>
+                <li>Git</li>
+                <li>Docker</li>
+            </ul>
+        </div>
+
+        <div class="section" id="projects">
+            <h2>Projects</h2>
+            <div class="project">
+                <h3>프로젝트 이름 1 (YYYY.MM - YYYY.MM)</h3>
+                <p><strong>설명:</strong> 프로젝트에 대한 간략한 설명입니다.</p>
+                <p><strong>역할:</strong> 담당했던 역할과 기여한 부분을 작성합니다.</p>
+                <p><strong>사용한 기술:</strong> C++, FreeRTOS, STM32F4</p>
+            </div>
+            <div class="project">
+                <h3>프로젝트 이름 2 (YYYY.MM - YYYY.MM)</h3>
+                <p><strong>설명:</strong> 프로젝트에 대한 간략한 설명입니다.</p>
+                <p><strong>역할:</strong> 담당했던 역할과 기여한 부분을 작성합니다.</p>
+                <p><strong>사용한 기술:</strong> Linux, Python, Raspberry Pi</p>
+            </div>
+        </div>
+
+        <div class="section" id="contact">
+            <h2>Contact</h2>
+            <p>Email: your.email@example.com</p>
+            <p>GitHub: github.com/your_username</p>
+            <p>LinkedIn: linkedin.com/in/your_profile</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 이재석. All Rights Reserved.</p>
+        </footer>
+    </div>
 </body>
 </html>
