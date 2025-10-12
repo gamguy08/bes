@@ -732,6 +732,87 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Print Styles for PDF */
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+
+            body {
+                background: white;
+            }
+
+            /* Remove animations for PDF */
+            .fade-in {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+
+            /* Adjust profile photo size for print */
+            .profile-photo {
+                width: 120px !important;
+                height: 150px !important;
+            }
+
+            /* Reduce padding for print */
+            .intro {
+                padding: 40px 0 30px !important;
+            }
+
+            .section {
+                padding: 40px 0 !important;
+                page-break-inside: avoid;
+            }
+
+            .project {
+                page-break-inside: avoid;
+                margin-bottom: 20px !important;
+                padding: 30px !important;
+            }
+
+            .profile-info {
+                margin-bottom: 40px !important;
+                padding: 30px !important;
+            }
+
+            .stats-grid {
+                margin-bottom: 40px !important;
+            }
+
+            /* Hide sticky header for print */
+            header {
+                position: relative !important;
+                padding: 16px 0 !important;
+            }
+
+            /* Prevent page breaks inside elements */
+            .project-content,
+            .tech-category,
+            .stat-card,
+            table {
+                page-break-inside: avoid;
+            }
+
+            /* Adjust font sizes for print */
+            .intro-title {
+                font-size: 42px !important;
+            }
+
+            .section-title {
+                font-size: 32px !important;
+            }
+
+            .project-title {
+                font-size: 22px !important;
+            }
+        }
     </style>
 </head>
 <body>
