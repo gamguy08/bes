@@ -913,10 +913,22 @@
 
                     <div class="architecture">
                         <div class="architecture-title">통신 아키텍처 전환</div>
-                        <div class="architecture-diagram">
-                            <div class="arch-box">기존<br>디바이스 → 태블릿 (BT)</div>
-                            <div class="arch-arrow">→</div>
-                            <div class="arch-box">변경<br>디바이스 → 클라우드 서버<br>(MQTT/WebSocket/HTTPS)</div>
+                        <div class="architecture-diagram" style="flex-direction: column; gap: 16px;">
+                            <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+                                <div style="font-size: 14px; font-weight: 700; color: var(--text-tertiary);">[ 기존 ]</div>
+                                <div class="arch-box" style="background: #FFF9F0; border-color: var(--warning);">디바이스 (STM32H7)</div>
+                                <div class="arch-arrow" style="transform: rotate(90deg);">→</div>
+                                <div class="arch-box" style="background: #FFF9F0; border-color: var(--warning);">태블릿</div>
+                                <div style="font-size: 13px; color: var(--text-tertiary); font-weight: 600;">Bluetooth</div>
+                            </div>
+                            <div class="arch-arrow" style="font-size: 32px; margin: 8px 0;">⬇</div>
+                            <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+                                <div style="font-size: 14px; font-weight: 700; color: var(--primary);">[ 변경 후 ]</div>
+                                <div class="arch-box">디바이스 (STM32H7)</div>
+                                <div class="arch-arrow" style="transform: rotate(90deg);">→</div>
+                                <div class="arch-box">클라우드 서버</div>
+                                <div style="font-size: 13px; color: var(--primary); font-weight: 600;">MQTT / WebSocket / HTTPS</div>
+                            </div>
                         </div>
                     </div>
 
@@ -959,20 +971,21 @@
                     </div>
                 </div>
                 <div class="project-content">
-                    <p>SP2 차량 전장검사에 사용되던 외부 장비를 자체 기술로 내재화하는 프로젝트를 수행했습니다. 하드웨어/사양팀과 협업하여 기존 9장의 보드를 회로 분석 및 리버스 엔지니어링으로 기능을 파악하고, 이를 5장으로 통합 고도화했습니다.</p>
+                    <p>SP2 차량 전장검사에 사용되던 외부 장비를 자체 기술로 내재화하는 프로젝트를 수행했습니다. 하드웨어/사양팀과 협업하여 기존 9장의 보드를 회로 분석 및 리버스 엔지니어링으로 기능을 파악하고, 이를 5장으로 통합 고도화하여 최종 검사 시간(CT)을 15% 단축(28초 → 25초)했습니다.</p>
 
                     <h4>리버스 엔지니어링 및 기능 분석</h4>
                     <div class="highlight-box">
-                        <p>9장의 보드를 데이터시트와 회로도 기반으로 분석하여 CAN 진단, 블로워 모터 전압 제어, 전원 제어 등 각 보드의 기능을 파악하고 펌웨어 요구사항을 도출했습니다.</p>
+                        <p>9장의 보드를 데이터시트와 회로도 기반으로 분석하여 각 보드의 기능을 파악하고 펌웨어 요구사항을 도출했습니다. (대표 기능: CAN 진단, 블로워 모터 전압 제어, 전원 제어 등)</p>
                     </div>
 
                     <h4>핵심 작업 내용</h4>
                     <ul>
                         <li><strong>회로 분석:</strong> 하드웨어/사양팀과 협업하여 9장 보드의 회로 및 동작 원리 분석</li>
-                        <li><strong>기능 파악:</strong> CAN 진단 기능, 블로워 모터 등 전압 가변 하드웨어 제어, 전원 제어 기능 리버스 엔지니어링</li>
+                        <li><strong>기능 파악:</strong> 보드별 고유 기능 리버스 엔지니어링 (CAN 진단, 전압 가변 제어, 전원 제어 등 9가지 기능)</li>
                         <li><strong>보드 통합:</strong> 9장 보드를 5장으로 통합 설계 및 고도화</li>
                         <li><strong>펌웨어 통합 설계:</strong> 진단 펌웨어와 제어 펌웨어 2종류로 구성, 보드 ID별 동작 지원으로 관리 효율화</li>
                         <li><strong>STM32H7 + FreeRTOS:</strong> 멀티태스킹 기반 실시간 진단 및 제어 시스템 구현</li>
+                        <li><strong>성과:</strong> 최종 검사 시간(CT) 15% 단축 (28초 → 25초)</li>
                     </ul>
 
                     <div class="tech-tags">
