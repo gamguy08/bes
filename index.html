@@ -742,11 +742,18 @@
 
             @page {
                 size: A4;
-                margin: 15mm;
+                margin: 12mm 10mm;
             }
 
             body {
                 background: white;
+                font-size: 11px;
+                line-height: 1.4;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 0 8px;
             }
 
             /* Remove animations for PDF */
@@ -755,62 +762,237 @@
                 transform: translateY(0) !important;
             }
 
-            /* Adjust profile photo size for print */
-            .profile-photo {
-                width: 120px !important;
-                height: 150px !important;
-            }
-
-            /* Reduce padding for print */
-            .intro {
-                padding: 40px 0 30px !important;
-            }
-
-            .section {
-                padding: 40px 0 !important;
-                page-break-inside: avoid;
-            }
-
-            .project {
-                page-break-inside: avoid;
-                margin-bottom: 20px !important;
-                padding: 30px !important;
-            }
-
-            .profile-info {
-                margin-bottom: 40px !important;
-                padding: 30px !important;
-            }
-
-            .stats-grid {
-                margin-bottom: 40px !important;
-            }
-
-            /* Hide sticky header for print */
+            /* Header */
             header {
                 position: relative !important;
-                padding: 16px 0 !important;
+                padding: 8px 0 !important;
+                margin-bottom: 12px !important;
             }
 
-            /* Prevent page breaks inside elements */
-            .project-content,
-            .tech-category,
-            .stat-card,
-            table {
-                page-break-inside: avoid;
+            .logo {
+                font-size: 14px !important;
             }
 
-            /* Adjust font sizes for print */
+            /* Intro Section */
+            .intro {
+                padding: 16px 0 12px !important;
+                gap: 20px !important;
+            }
+
+            .profile-photo {
+                width: 80px !important;
+                height: 100px !important;
+            }
+
             .intro-title {
-                font-size: 42px !important;
+                font-size: 28px !important;
+                margin-bottom: 8px !important;
+            }
+
+            .intro-subtitle {
+                font-size: 16px !important;
+                margin-bottom: 16px !important;
+            }
+
+            .meta-item {
+                font-size: 12px !important;
+            }
+
+            .meta-item strong {
+                font-size: 13px !important;
+            }
+
+            /* Profile Info */
+            .profile-info {
+                margin-bottom: 16px !important;
+                padding: 16px !important;
+            }
+
+            .info-item {
+                font-size: 11px !important;
+            }
+
+            .info-label {
+                min-width: 70px !important;
+                font-size: 11px !important;
+            }
+
+            /* Stats Grid - 3개 한 줄에 강제 */
+            .stats-grid {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 12px !important;
+                margin-bottom: 20px !important;
+            }
+
+            .stat-card {
+                padding: 16px !important;
+            }
+
+            .stat-number {
+                font-size: 28px !important;
+                margin-bottom: 6px !important;
+            }
+
+            .stat-label {
+                font-size: 11px !important;
+            }
+
+            /* Sections */
+            .section {
+                padding: 20px 0 !important;
+            }
+
+            .section-header {
+                margin-bottom: 16px !important;
+            }
+
+            .section-tag {
+                font-size: 10px !important;
+                padding: 4px 10px !important;
+                margin-bottom: 8px !important;
             }
 
             .section-title {
-                font-size: 32px !important;
+                font-size: 20px !important;
+                margin-bottom: 6px !important;
+            }
+
+            .section-description {
+                font-size: 12px !important;
+            }
+
+            /* Tech Grid */
+            .tech-grid {
+                gap: 12px !important;
+            }
+
+            .tech-category {
+                padding: 16px !important;
+            }
+
+            .tech-category h3 {
+                font-size: 14px !important;
+                margin-bottom: 12px !important;
+                padding-bottom: 8px !important;
+            }
+
+            .tech-item {
+                padding: 6px 0 !important;
+                font-size: 11px !important;
+            }
+
+            .tech-item::before {
+                font-size: 12px !important;
+            }
+
+            /* Projects */
+            .project {
+                page-break-inside: avoid;
+                margin-bottom: 12px !important;
+                padding: 16px !important;
+            }
+
+            .project-header {
+                margin-bottom: 12px !important;
             }
 
             .project-title {
-                font-size: 22px !important;
+                font-size: 16px !important;
+                margin-bottom: 6px !important;
+            }
+
+            .project-meta {
+                font-size: 11px !important;
+                gap: 12px !important;
+            }
+
+            .project-content h4 {
+                font-size: 14px !important;
+                margin: 12px 0 8px !important;
+            }
+
+            .project-content p {
+                font-size: 11px !important;
+                line-height: 1.5 !important;
+                margin-bottom: 10px !important;
+            }
+
+            .project-content li {
+                padding: 5px 0 5px 20px !important;
+                font-size: 11px !important;
+                line-height: 1.5 !important;
+            }
+
+            .project-content li::before {
+                font-size: 12px !important;
+            }
+
+            /* Highlight Box */
+            .highlight-box {
+                padding: 12px 16px !important;
+                margin: 12px 0 !important;
+            }
+
+            .highlight-box p {
+                font-size: 11px !important;
+            }
+
+            /* Architecture Diagram */
+            .architecture {
+                padding: 16px !important;
+                margin: 12px 0 !important;
+            }
+
+            .architecture-title {
+                font-size: 13px !important;
+                margin-bottom: 12px !important;
+            }
+
+            .arch-box {
+                padding: 10px 16px !important;
+                font-size: 11px !important;
+                min-width: 100px !important;
+            }
+
+            .arch-arrow {
+                font-size: 16px !important;
+            }
+
+            /* Tech Tags */
+            .tech-tags {
+                gap: 6px !important;
+                margin-top: 10px !important;
+            }
+
+            .tech-tag {
+                padding: 4px 10px !important;
+                font-size: 10px !important;
+            }
+
+            /* Table */
+            table {
+                font-size: 11px !important;
+                margin: 12px 0 !important;
+            }
+
+            th, td {
+                padding: 8px !important;
+            }
+
+            th {
+                font-size: 12px !important;
+            }
+
+            /* Footer */
+            footer {
+                padding: 20px 0 !important;
+                margin-top: 24px !important;
+                font-size: 10px !important;
+            }
+
+            footer p {
+                font-size: 10px !important;
             }
         }
     </style>
