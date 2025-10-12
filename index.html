@@ -897,27 +897,27 @@
             <!-- Project 1 -->
             <div class="project">
                 <div class="project-header">
-                    <h3 class="project-title">클라우드 진단 플랫폼 개발</h3>
+                    <h3 class="project-title">클라우드 진단 플랫폼 대응 디바이스 펌웨어 리팩토링</h3>
                     <div class="project-meta">
                         <span>2024.04 ~ 현재</span>
                         <span>STM32H7 · MQTT · HTTPS · WebSocket</span>
                     </div>
                 </div>
                 <div class="project-content">
-                    <p>차량 ECU를 원격에서 진단하고 제어하는 클라우드 기반 플랫폼을 개발했습니다. 기존 Bluetooth 기반 태블릿 통신 시스템을 클라우드 서버 기반으로 전환하면서, MQTT/WebSocket/HTTPS 통신 프로토콜로 재설계했습니다.</p>
+                    <p>차량 ECU를 원격 진단하는 클라우드 플랫폼에 대응하는 디바이스 펌웨어를 리팩토링했습니다. 기존 Bluetooth 기반 태블릿 통신에서 클라우드 서버 기반 MQTT/WebSocket/HTTPS 통신으로 전환하는 작업을 수행했습니다.</p>
 
-                    <h4>통신 아키텍처 전환 및 시스템 리팩토링</h4>
+                    <h4>통신 프로토콜 전환 및 펌웨어 리팩토링</h4>
                     <div class="highlight-box">
-                        <p>입사 직후 기존 Bluetooth 통신 체계 전체를 분석하고, 디바이스 동작 시퀀스를 파악하여 클라우드 환경에 적합하게 재설계했습니다.</p>
+                        <p>입사 직후 기존 Bluetooth 통신 체계와 디바이스 동작 시퀀스를 완전히 파악한 후, 클라우드 환경에 맞춰 펌웨어를 전면 리팩토링했습니다.</p>
                     </div>
 
                     <div class="architecture">
-                        <div class="architecture-title">통신 아키텍처 전환</div>
+                        <div class="architecture-title">디바이스 통신 방식 변경</div>
                         <div class="architecture-diagram">
-                            <div class="arch-box">BT<br>(기존)</div>
-                            <div class="arch-arrow">→</div>
-                            <div class="arch-box">MQTT<br>WebSocket<br>HTTPS</div>
-                            <div class="arch-arrow">→</div>
+                            <div class="arch-box">디바이스<br>(STM32H7)</div>
+                            <div class="arch-arrow">↓</div>
+                            <div class="arch-box">BT → MQTT/WebSocket/HTTPS</div>
+                            <div class="arch-arrow">↓</div>
                             <div class="arch-box">클라우드<br>서버</div>
                         </div>
                     </div>
@@ -925,8 +925,9 @@
                     <h4>핵심 작업 내용</h4>
                     <ul>
                         <li><strong>시스템 분석:</strong> 기존 BT 통신 기반 디바이스 동작 시퀀스 전체 파악 및 문서화</li>
-                        <li><strong>프로토콜 전환:</strong> Bluetooth → MQTT/WebSocket/HTTPS로 통신 계층 재설계</li>
-                        <li><strong>성능 최적화:</strong> 무선 통신으로 증가한 데이터 처리 로직 리팩토링 및 속도 개선</li>
+                        <li><strong>프로토콜 전환:</strong> Bluetooth → MQTT/WebSocket/HTTPS 통신 계층 구현</li>
+                        <li><strong>성능 최적화:</strong> 무선 통신으로 증가한 데이터 처리를 위한 벌크 처리 기능 추가 (단일 명령 → 다중 명령 일괄 처리)</li>
+                        <li><strong>처리 속도 향상:</strong> 명령 큐 최적화 및 비동기 처리로 응답 속도 개선</li>
                         <li><strong>시스템 확장:</strong> 클라우드 전환으로 추가된 OTA 업데이트 기능 구현 및 최적화</li>
                         <li><strong>보안 통신:</strong> TLS/SSL 인증서 기반 암호화 및 HSM 연동</li>
                     </ul>
