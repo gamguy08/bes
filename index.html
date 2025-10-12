@@ -742,7 +742,7 @@
 
             @page {
                 size: A4;
-                margin: 15mm 18mm;
+                margin: 15mm 25mm;
             }
 
             body {
@@ -753,7 +753,7 @@
 
             .container {
                 max-width: 100%;
-                padding: 0 20px;
+                padding: 0 16px;
             }
 
             /* Remove animations for PDF */
@@ -766,17 +766,18 @@
             header {
                 position: relative !important;
                 padding: 8px 0 !important;
-                margin-bottom: 12px !important;
+                margin-bottom: 10px !important;
             }
 
             .logo {
                 font-size: 14px !important;
             }
 
-            /* Intro Section */
+            /* Intro Section - 사진 오른쪽, 텍스트 왼쪽 */
             .intro {
-                padding: 16px 0 12px !important;
+                padding: 14px 0 10px !important;
                 gap: 20px !important;
+                flex-direction: row-reverse !important;
             }
 
             .profile-photo {
@@ -804,8 +805,8 @@
 
             /* Profile Info */
             .profile-info {
-                margin-bottom: 24px !important;
-                padding: 20px !important;
+                margin-bottom: 16px !important;
+                padding: 16px !important;
             }
 
             .info-item {
@@ -821,17 +822,17 @@
             .stats-grid {
                 display: grid !important;
                 grid-template-columns: repeat(3, 1fr) !important;
-                gap: 18px !important;
-                margin-bottom: 28px !important;
+                gap: 14px !important;
+                margin-bottom: 20px !important;
             }
 
             .stat-card {
-                padding: 20px !important;
+                padding: 16px !important;
             }
 
             .stat-number {
-                font-size: 30px !important;
-                margin-bottom: 8px !important;
+                font-size: 28px !important;
+                margin-bottom: 6px !important;
             }
 
             .stat-label {
@@ -840,11 +841,12 @@
 
             /* Sections */
             .section {
-                padding: 24px 0 !important;
+                padding: 16px 0 !important;
             }
 
             .section-header {
-                margin-bottom: 18px !important;
+                margin-bottom: 14px !important;
+                page-break-after: avoid !important;
             }
 
             .section-tag {
@@ -866,21 +868,21 @@
             .tech-grid {
                 display: grid !important;
                 grid-template-columns: repeat(2, 1fr) !important;
-                gap: 16px !important;
+                gap: 12px !important;
             }
 
             .tech-category {
-                padding: 18px !important;
+                padding: 14px !important;
             }
 
             .tech-category h3 {
                 font-size: 13px !important;
-                margin-bottom: 14px !important;
-                padding-bottom: 10px !important;
+                margin-bottom: 10px !important;
+                padding-bottom: 8px !important;
             }
 
             .tech-item {
-                padding: 7px 0 !important;
+                padding: 5px 0 !important;
                 font-size: 10.5px !important;
             }
 
@@ -891,39 +893,41 @@
             /* Projects */
             .project {
                 page-break-inside: avoid;
-                margin-bottom: 16px !important;
-                padding: 20px !important;
+                margin-bottom: 12px !important;
+                padding: 16px !important;
             }
 
             .project-header {
-                margin-bottom: 14px !important;
+                margin-bottom: 10px !important;
+                page-break-after: avoid !important;
             }
 
             .project-title {
                 font-size: 16px !important;
-                margin-bottom: 8px !important;
+                margin-bottom: 6px !important;
             }
 
             .project-meta {
                 font-size: 11px !important;
-                gap: 14px !important;
+                gap: 12px !important;
             }
 
             .project-content h4 {
                 font-size: 14px !important;
-                margin: 14px 0 10px !important;
+                margin: 12px 0 8px !important;
+                page-break-after: avoid !important;
             }
 
             .project-content p {
                 font-size: 11px !important;
-                line-height: 1.6 !important;
-                margin-bottom: 12px !important;
+                line-height: 1.55 !important;
+                margin-bottom: 10px !important;
             }
 
             .project-content li {
-                padding: 6px 0 6px 22px !important;
+                padding: 5px 0 5px 22px !important;
                 font-size: 11px !important;
-                line-height: 1.6 !important;
+                line-height: 1.55 !important;
             }
 
             .project-content li::before {
@@ -932,28 +936,28 @@
 
             /* Highlight Box */
             .highlight-box {
-                padding: 14px 18px !important;
-                margin: 14px 0 !important;
+                padding: 12px 14px !important;
+                margin: 10px 0 !important;
             }
 
             .highlight-box p {
                 font-size: 11px !important;
-                line-height: 1.6 !important;
+                line-height: 1.55 !important;
             }
 
             /* Architecture Diagram */
             .architecture {
-                padding: 18px !important;
-                margin: 14px 0 !important;
+                padding: 14px !important;
+                margin: 10px 0 !important;
             }
 
             .architecture-title {
                 font-size: 13px !important;
-                margin-bottom: 14px !important;
+                margin-bottom: 10px !important;
             }
 
             .arch-box {
-                padding: 12px 18px !important;
+                padding: 10px 14px !important;
                 font-size: 11px !important;
                 min-width: 100px !important;
             }
@@ -964,23 +968,23 @@
 
             /* Tech Tags */
             .tech-tags {
-                gap: 8px !important;
-                margin-top: 12px !important;
+                gap: 6px !important;
+                margin-top: 10px !important;
             }
 
             .tech-tag {
-                padding: 5px 12px !important;
+                padding: 4px 10px !important;
                 font-size: 10px !important;
             }
 
             /* Table */
             table {
                 font-size: 11px !important;
-                margin: 14px 0 !important;
+                margin: 10px 0 !important;
             }
 
             th, td {
-                padding: 10px 12px !important;
+                padding: 8px 10px !important;
             }
 
             th {
@@ -989,8 +993,8 @@
 
             /* Footer */
             footer {
-                padding: 24px 0 !important;
-                margin-top: 28px !important;
+                padding: 16px 0 !important;
+                margin-top: 20px !important;
                 font-size: 10px !important;
             }
 
