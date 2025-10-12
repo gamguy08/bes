@@ -908,17 +908,15 @@
 
                     <h4>통신 프로토콜 전환 및 펌웨어 리팩토링</h4>
                     <div class="highlight-box">
-                        <p>입사 직후 기존 Bluetooth 통신 체계와 디바이스 동작 시퀀스를 완전히 파악한 후, 클라우드 환경에 맞춰 펌웨어를 전면 리팩토링했습니다.</p>
+                        <p>기존 Bluetooth 통신 체계와 디바이스 동작 시퀀스를 완전히 파악한 후, 클라우드 환경에 맞춰 펌웨어를 전면 리팩토링했습니다.</p>
                     </div>
 
                     <div class="architecture">
-                        <div class="architecture-title">디바이스 통신 방식 변경</div>
+                        <div class="architecture-title">통신 아키텍처 전환</div>
                         <div class="architecture-diagram">
-                            <div class="arch-box">디바이스<br>(STM32H7)</div>
-                            <div class="arch-arrow">↓</div>
-                            <div class="arch-box">BT → MQTT/WebSocket/HTTPS</div>
-                            <div class="arch-arrow">↓</div>
-                            <div class="arch-box">클라우드<br>서버</div>
+                            <div class="arch-box">기존<br>디바이스 → 태블릿 (BT)</div>
+                            <div class="arch-arrow">→</div>
+                            <div class="arch-box">변경<br>디바이스 → 클라우드 서버<br>(MQTT/WebSocket/HTTPS)</div>
                         </div>
                     </div>
 
@@ -954,28 +952,35 @@
             <!-- Project 2 -->
             <div class="project">
                 <div class="project-header">
-                    <h3 class="project-title">ECOS 전장검사장비 개발</h3>
+                    <h3 class="project-title">ECOS 전장검사장비 내재화 프로젝트</h3>
                     <div class="project-meta">
                         <span>2024.04 ~ 2025.05</span>
-                        <span>STM32H7 · 실시간OS · CAN통신</span>
+                        <span>STM32H7 · 실시간OS · CAN진단 · 리버스 엔지니어링</span>
                     </div>
                 </div>
                 <div class="project-content">
-                    <p>차량 전장 시스템을 진단하고 검사하는 장비를 개발했습니다. 실시간OS 기반 멀티태스킹 아키텍처로 실시간 진단 통신을 구현했습니다.</p>
+                    <p>SP2 차량 전장검사에 사용되던 외부 장비를 자체 기술로 내재화하는 프로젝트를 수행했습니다. 하드웨어/사양팀과 협업하여 기존 9장의 보드를 회로 분석 및 리버스 엔지니어링으로 기능을 파악하고, 이를 5장으로 통합 고도화했습니다.</p>
 
-                    <h4>핵심 기술</h4>
+                    <h4>리버스 엔지니어링 및 기능 분석</h4>
+                    <div class="highlight-box">
+                        <p>9장의 보드를 데이터시트와 회로도 기반으로 분석하여 CAN 진단, 블로워 모터 전압 제어, 전원 제어 등 각 보드의 기능을 파악하고 펌웨어 요구사항을 도출했습니다.</p>
+                    </div>
+
+                    <h4>핵심 작업 내용</h4>
                     <ul>
-                        <li>STM32H7 + FreeRTOS 멀티태스킹 시스템</li>
-                        <li>CAN 기반 차량 진단 프레임 포맷 설계</li>
-                        <li>실시간 ECU 데이터 수집 및 분석</li>
-                        <li>진단 요청/응답 프로토콜 구현</li>
+                        <li><strong>회로 분석:</strong> 하드웨어/사양팀과 협업하여 9장 보드의 회로 및 동작 원리 분석</li>
+                        <li><strong>기능 파악:</strong> CAN 진단 기능, 블로워 모터 등 전압 가변 하드웨어 제어, 전원 제어 기능 리버스 엔지니어링</li>
+                        <li><strong>보드 통합:</strong> 9장 보드를 5장으로 통합 설계 및 고도화</li>
+                        <li><strong>펌웨어 통합 설계:</strong> 진단 펌웨어와 제어 펌웨어 2종류로 구성, 보드 ID별 동작 지원으로 관리 효율화</li>
+                        <li><strong>STM32H7 + FreeRTOS:</strong> 멀티태스킹 기반 실시간 진단 및 제어 시스템 구현</li>
                     </ul>
 
                     <div class="tech-tags">
                         <span class="tech-tag">STM32H7</span>
                         <span class="tech-tag">FreeRTOS</span>
-                        <span class="tech-tag">CAN</span>
-                        <span class="tech-tag">진단시스템</span>
+                        <span class="tech-tag">CAN 진단</span>
+                        <span class="tech-tag">리버스 엔지니어링</span>
+                        <span class="tech-tag">회로 분석</span>
                     </div>
                 </div>
             </div>
