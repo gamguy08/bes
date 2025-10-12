@@ -913,21 +913,21 @@
 
                     <div class="architecture">
                         <div class="architecture-title">통신 아키텍처 전환</div>
-                        <div class="architecture-diagram" style="flex-direction: column; gap: 16px;">
+                        <div class="architecture-diagram" style="gap: 32px;">
                             <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
-                                <div style="font-size: 14px; font-weight: 700; color: var(--text-tertiary);">[ 기존 ]</div>
-                                <div class="arch-box" style="background: #FFF9F0; border-color: var(--warning);">디바이스 (STM32H7)</div>
-                                <div class="arch-arrow" style="transform: rotate(90deg);">→</div>
+                                <div style="font-size: 14px; font-weight: 700; color: var(--text-tertiary); margin-bottom: 8px;">[ 기존 ]</div>
+                                <div class="arch-box" style="background: #FFF9F0; border-color: var(--warning);">디바이스<br>(STM32H7)</div>
+                                <div class="arch-arrow" style="transform: rotate(90deg); margin: 4px 0;">→</div>
                                 <div class="arch-box" style="background: #FFF9F0; border-color: var(--warning);">태블릿</div>
-                                <div style="font-size: 13px; color: var(--text-tertiary); font-weight: 600;">Bluetooth</div>
+                                <div style="font-size: 13px; color: var(--text-tertiary); font-weight: 600; margin-top: 8px;">Bluetooth</div>
                             </div>
-                            <div class="arch-arrow" style="font-size: 32px; margin: 8px 0;">⬇</div>
+                            <div class="arch-arrow" style="font-size: 32px;">⇨</div>
                             <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
-                                <div style="font-size: 14px; font-weight: 700; color: var(--primary);">[ 변경 후 ]</div>
-                                <div class="arch-box">디바이스 (STM32H7)</div>
-                                <div class="arch-arrow" style="transform: rotate(90deg);">→</div>
+                                <div style="font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">[ 변경 후 ]</div>
+                                <div class="arch-box">디바이스<br>(STM32H7)</div>
+                                <div class="arch-arrow" style="transform: rotate(90deg); margin: 4px 0;">→</div>
                                 <div class="arch-box">클라우드 서버</div>
-                                <div style="font-size: 13px; color: var(--primary); font-weight: 600;">MQTT / WebSocket / HTTPS</div>
+                                <div style="font-size: 13px; color: var(--primary); font-weight: 600; margin-top: 8px;">MQTT / WebSocket / HTTPS</div>
                             </div>
                         </div>
                     </div>
@@ -1127,7 +1127,7 @@ State F (-12V): EVSE 오류 - 충전 불가</pre>
                 <div class="project-header">
                     <h3 class="project-title">차량하부 자동충전 도킹 시스템</h3>
                     <div class="project-meta">
-                        <span>2022.04 ~ 2025.12</span>
+                        <span>2022.04 ~ 2024.04</span>
                         <span>RS485 · 서보모터 · 스텝모터</span>
                     </div>
                 </div>
@@ -1249,7 +1249,7 @@ State F (-12V): EVSE 오류 - 충전 불가</pre>
                         <td>STM32H7, 실시간OS, 진단통신</td>
                     </tr>
                     <tr>
-                        <td>2022.04 ~ 2025.12</td>
+                        <td>2022.04 ~ 2024.04</td>
                         <td>차량하부 충전 도킹</td>
                         <td>RS485 서보, PWM 스텝, Jetson</td>
                     </tr>
