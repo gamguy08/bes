@@ -1093,14 +1093,14 @@
 
             <div class="project">
                 <div class="project-header">
-                    <h3 class="project-title">급속충전검사장비 개발</h3>
+                    <h3 class="project-title">급속충전검사장비 PoC 개발</h3>
                     <div class="project-meta">
-                        <span>2025.03 ~ 현재 (실차 검증 진행중)</span>
-                        <span>STM32H7 · GBT/CHAdeMO/AC · 타이머 캡처 · 다채널 ADC</span>
+                        <span>2025.03 ~ 현재 (PoC 개발)</span>
+                        <span>AT32F403A · GBT/CHAdeMO/AC · 타이머 캡처 · 다채널 ADC</span>
                     </div>
                 </div>
                 <div class="project-content">
-                    <p>급속충전검사장비 펌웨어 오류 해결 및 장비간 통신 시퀀스 검증을 수행했습니다. GBT/CHAdeMO/AC 멀티 프로토콜 지원 환경에서 CP 신호 측정 정확도를 향상시키고, 통신 안정성을 확보했습니다.</p>
+                    <p>급속충전검사장비 PoC 펌웨어 개발 및 장비간 통신 시퀀스 검증을 수행했습니다. Artery AT32F403A 기반으로 GBT/CHAdeMO/AC 멀티 프로토콜 지원 환경에서 CP 신호 측정 정확도를 향상시키고, 통신 안정성을 확보했습니다.</p>
 
                     <h4>핵심 작업 내용</h4>
 
@@ -1109,6 +1109,7 @@
                     </div>
 
                     <ul>
+                        <li><strong>핀 포팅:</strong> AT32F403A 레퍼런스 매뉴얼 분석하여 타이머 캡처 및 ADC 트리거 지원 핀 선정, 하드웨어 제약사항 고려한 핀 매핑 재설계</li>
                         <li><strong>타이머-ADC 동기화:</strong> TIM 캡처 모드로 PWM 상승/하강 엣지 검출 → 하이 레벨 중간 시점 계산 → ADC 트리거 타이밍 동기화</li>
                         <li><strong>다채널 ADC 구성:</strong> CP, PP, 전압, 전류 신호 동시 샘플링 및 DMA 전송</li>
                         <li><strong>CP 전압 레벨 판별:</strong> 12V(Idle), 9V(Charging Request), 6V(Charging), 3V(Fault) 상태 정확히 구분</li>
@@ -1123,15 +1124,15 @@
                     </ul>
 
                     <div class="tech-tags">
-                        <span class="tech-tag">STM32H7</span>
+                        <span class="tech-tag">AT32F403A</span>
                         <span class="tech-tag">GBT/CHAdeMO/AC</span>
+                        <span class="tech-tag">핀 포팅</span>
                         <span class="tech-tag">타이머 캡처</span>
                         <span class="tech-tag">ADC 트리거</span>
                         <span class="tech-tag">다채널 ADC</span>
                         <span class="tech-tag">CP/PP 신호</span>
                         <span class="tech-tag">PWM 동기화</span>
                         <span class="tech-tag">MQTT</span>
-                        <span class="tech-tag">타이머 관리</span>
                     </div>
                 </div>
             </div>
@@ -1297,8 +1298,8 @@
                 <tbody>
                     <tr>
                         <td>2025.03 ~ 현재</td>
-                        <td>급속충전검사장비</td>
-                        <td>STM32H7, GBT/CHAdeMO/AC, 타이머 캡처, ADC</td>
+                        <td>급속충전검사장비 PoC</td>
+                        <td>AT32F403A, GBT/CHAdeMO/AC, 핀 포팅, 타이머 캡처</td>
                     </tr>
                     <tr>
                         <td>2025</td>
