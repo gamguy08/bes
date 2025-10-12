@@ -839,7 +839,7 @@
                 font-size: 11px !important;
             }
 
-            /* Sections */
+            /* Sections - 내용 연속 */
             .section {
                 padding: 16px 0 !important;
             }
@@ -847,6 +847,7 @@
             .section-header {
                 margin-bottom: 14px !important;
                 page-break-after: avoid !important;
+                page-break-inside: avoid !important;
             }
 
             .section-tag {
@@ -890,9 +891,8 @@
                 font-size: 11px !important;
             }
 
-            /* Projects */
+            /* Projects - 중간에 잘려도 됨 */
             .project {
-                page-break-inside: avoid;
                 margin-bottom: 12px !important;
                 padding: 16px !important;
             }
