@@ -1053,50 +1053,23 @@
 
             <div class="project">
                 <div class="project-header">
-                    <h3 class="project-title">전기차 충전 통신 시스템</h3>
+                    <h3 class="project-title">전기차 충전 분배 알고리즘 연구 및 시뮬레이터 개발</h3>
                     <div class="project-meta">
                         <span>2016.12 ~ 2019.12</span>
-                        <span>STM32F4 · J1772 · PWM</span>
+                        <span>STM32F4 · J1772 · LabVIEW · Simulink</span>
                     </div>
                 </div>
                 <div class="project-content">
-                    <p>SAE J1772 국제 표준을 구현한 전기차 충전 통신 시스템을 개발했습니다. 충전기(EVSE)와 차량(EV) 간 Pilot 신호 기반 통신 프로토콜을 완전히 구현하고, 양방향 시뮬레이터까지 제작했습니다.</p>
+                    <p>SAE J1772 표준 기반 전기차 충전 분배 알고리즘을 연구하고, LabVIEW 기반 EVSE/OBC 양방향 시뮬레이터를 개발했습니다.</p>
 
-                    <h4>J1772 Pilot 신호 상태 머신 구현</h4>
-                    <div class="highlight-box">
-                        <p>1kHz PWM(±12V) 신호의 전압 레벨로 충전 상태를 제어하고, 듀티 사이클로 최대 공급 전류를 전달하는 양방향 통신 시스템</p>
-                    </div>
-
-                    <div class="code-block">
-<pre>State A (12V): 차량 미연결 - 대기 상태
-State B (9V):  차량 연결 (2.74kΩ 저항) - 충전 준비
-State C (6V):  충전 진행 (882Ω 저항) - 전력 공급 중
-State D (3V):  환기 요청 (246Ω 저항) - 특수 충전 모드
-State E (0V):  전원 차단 - 비상 정지
-State F (-12V): EVSE 오류 - 충전 불가</pre>
-                    </div>
-
-                    <h4>PWM 듀티 사이클 기반 전류 제한 통신</h4>
+                    <h4>핵심 작업 내용</h4>
                     <ul>
-                        <li><strong>1kHz PWM 신호 생성:</strong> ±12V 구형파, TIM2 하드웨어 타이머 활용</li>
-                        <li><strong>듀티 사이클 → 전류 변환 로직:</strong>
-                            <ul style="margin-top: 8px; padding-left: 20px;">
-                                <li>16% 듀티 → 10A 공급</li>
-                                <li>25% 듀티 → 16A 공급</li>
-                                <li>50% 듀티 → 32A 공급</li>
-                                <li>90% 듀티 → 고속 충전 플래그</li>
-                            </ul>
-                        </li>
-                        <li><strong>전류 계산 알고리즘 구현:</strong> 0~850μs 구간 (0.6A/10μs), 850μs 초과 시 ((듀티-640μs)/10μs × 2.5A) 공식 적용</li>
-                        <li><strong>차량 저항 감지:</strong> ADC로 Pilot 전압 측정 → 상태 판별 (2.74kΩ/882Ω/246Ω)</li>
-                        <li><strong>상태 천이 로직:</strong> 전압 변화 감지 → 릴레이 제어 → 충전 시작/종료</li>
-                    </ul>
-
-                    <h4>시뮬레이터 개발</h4>
-                    <ul>
-                        <li><strong>EVSE 시뮬레이터:</strong> 듀티 사이클 가변 PWM 생성, 차량 저항 감지 및 상태 표시</li>
-                        <li><strong>OBC 시뮬레이터:</strong> 가변 저항 회로로 상태 전환(State B/C), 배터리 충전 프로파일 에뮬레이션</li>
-                        <li><strong>안전 기능:</strong> State E 비상 정지, State F 오류 감지, 접지 연속성 확인</li>
+                        <li>J1772 Pilot 신호 전압 측정 및 상태 확인 (12V, 9V, 6V, 3V, 0V, -12V)</li>
+                        <li>PWM 듀티 사이클 기반 전류 제한 통신 구현</li>
+                        <li>프로그래머블 파워서플라이 연동으로 듀티에 따른 전류 출력 자동 제어</li>
+                        <li>LabVIEW 기반 EVSE 시뮬레이터 개발 (듀티 사이클 가변 제어)</li>
+                        <li>OBC 시뮬레이터: 전류 측정 및 Simulink 배터리 모델 연동으로 충전량 시각화</li>
+                        <li>충전 분배 알고리즘 검증용 실험 환경 구축</li>
                     </ul>
 
                     <h4>연구 성과</h4>
@@ -1110,6 +1083,52 @@ State F (-12V): EVSE 오류 - 충전 불가</pre>
                         <span class="tech-tag">J1772</span>
                         <span class="tech-tag">PWM</span>
                         <span class="tech-tag">LabVIEW</span>
+                        <span class="tech-tag">Simulink</span>
+                        <span class="tech-tag">프로그래머블 파워서플라이</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h3 class="project-title">급속충전검사장비 개발 및 앱-펌웨어 시퀀스 협업</h3>
+                    <div class="project-meta">
+                        <span>2025.03 ~ 현재 (실차 검증 진행중)</span>
+                        <span>STM32H7 · GBT/CHAdeMO/AC · MQTT · 다채널 ADC</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <p>급속충전검사장비의 펌웨어 정확도 개선 및 앱과의 시퀀스 협업을 수행했습니다. 프로젝트 막바지에 투입되어 CP 신호 측정 오류를 해결하고, 멀티 프로토콜 공통 상태머신을 설계했습니다.</p>
+
+                    <h4>펌웨어 정확도 개선</h4>
+                    <div class="highlight-box">
+                        <p>CP 신호 측정 정확도 향상: 다채널 ADC로 CP, PP, 전압, 전류 신호 주기 샘플링. 기존 문제였던 CP 신호(PWM 파형) 샘플링 타이밍 미제어로 인한 평균 전압 낮게 측정 현상을 PWM 동기 샘플링으로 하이 레벨 구간만 정확히 측정하도록 ADC 트리거 타이밍 조정하여 해결.</p>
+                    </div>
+                    <ul>
+                        <li>CP High 전압 레벨별 상태 구분: 12V(Idle), 9V(Charging Request), 6V(Charging), 3V(Fault)</li>
+                        <li>풀다운 저항 설정 문제 확인 및 소프트웨어 보정값 적용</li>
+                    </ul>
+
+                    <h4>앱-펌웨어 협업</h4>
+
+                    <div class="highlight-box">
+                        <p>비동기 이벤트 처리 구조: 실시간 충전 상태 감지 및 조건부 이벤트 통지 방식 구현. VCP 신호 디바운싱 로직 (3회 연속 검출 + 10초 타임아웃)</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <p>타이머 리소스 관리 및 생명주기 동기화: 500ms 주기 VCP 모니터링 타이머가 BT 연결 해제 후에도 계속 실행되는 문제 발견. 반복 응답 현상 디버깅 중 타이머 해제 누락 확인. 연결 종료 이벤트 핸들러에 타이머 정리 로직 추가로 리소스 누수 해결.</p>
+                    </div>
+
+                    <div class="tech-tags">
+                        <span class="tech-tag">STM32H7</span>
+                        <span class="tech-tag">GBT/CHAdeMO/AC</span>
+                        <span class="tech-tag">다채널 ADC</span>
+                        <span class="tech-tag">CP/PP 신호</span>
+                        <span class="tech-tag">PWM 동기 샘플링</span>
+                        <span class="tech-tag">MQTT</span>
+                        <span class="tech-tag">BT 통신</span>
+                        <span class="tech-tag">타이머 관리</span>
+                        <span class="tech-tag">상태머신</span>
                     </div>
                 </div>
             </div>
@@ -1239,6 +1258,11 @@ State F (-12V): EVSE 오류 - 충전 불가</pre>
                 </thead>
                 <tbody>
                     <tr>
+                        <td>2025.03 ~ 현재</td>
+                        <td>급속충전검사장비</td>
+                        <td>STM32H7, GBT/CHAdeMO/AC, 다채널 ADC, 앱 협업</td>
+                    </tr>
+                    <tr>
                         <td>2024.04 ~ 현재</td>
                         <td>클라우드 진단 플랫폼</td>
                         <td>STM32H7, MQTT 무선업데이트, WebSocket, HSM</td>
@@ -1269,14 +1293,9 @@ State F (-12V): EVSE 오류 - 충전 불가</pre>
                         <td>ESP32, CAN DB, CANoe</td>
                     </tr>
                     <tr>
-                        <td>2017.05 ~ 2019.12</td>
-                        <td>지능형 배전반</td>
-                        <td>STM32F4, J1772, LabVIEW</td>
-                    </tr>
-                    <tr>
-                        <td>2016.12 ~ 2018.12</td>
-                        <td>이동식 비상발전</td>
-                        <td>J1772 PWM 통신, OBC 연동</td>
+                        <td>2016.12 ~ 2019.12</td>
+                        <td>전기차 충전 분배 알고리즘</td>
+                        <td>STM32F4, J1772, LabVIEW, Simulink</td>
                     </tr>
                 </tbody>
             </table>
