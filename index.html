@@ -775,14 +775,20 @@
 
             /* Intro Section - 사진 오른쪽, 텍스트 왼쪽 */
             .intro {
-                padding: 14px 0 10px !important;
+                padding: 14px 0 12px !important;
                 gap: 20px !important;
                 flex-direction: row-reverse !important;
             }
 
+            .intro-photo {
+                flex-shrink: 0 !important;
+            }
+
             .profile-photo {
-                width: 80px !important;
-                height: 100px !important;
+                width: 110px !important;
+                height: 138px !important;
+                object-fit: cover !important;
+                border-radius: 12px !important;
             }
 
             .intro-title {
