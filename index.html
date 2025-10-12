@@ -939,7 +939,8 @@
                         <li><strong>성능 최적화:</strong> 무선 통신으로 증가한 데이터 처리를 위한 벌크 처리 기능 추가 (단일 명령 → 다중 명령 일괄 처리)</li>
                         <li><strong>처리 속도 향상:</strong> 명령 큐 최적화 및 비동기 처리로 응답 속도 개선</li>
                         <li><strong>시스템 확장:</strong> 클라우드 전환으로 추가된 OTA 업데이트 기능 구현 및 최적화</li>
-                        <li><strong>보안 통신:</strong> TLS/SSL 인증서 기반 암호화 및 HSM 연동</li>
+                        <li><strong>보안 통신 구현:</strong> Python 기반 TLS 테스트베드 자체 구축 및 PoC 검증</li>
+                        <li><strong>AWS IoT 연동:</strong> X.509 인증서 프로비저닝 및 mTLS 기반 End-to-End 보안 채널 수립</li>
                     </ul>
 
                     <h4>OTA 시스템 최적화</h4>
@@ -956,7 +957,8 @@
                         <span class="tech-tag">WebSocket</span>
                         <span class="tech-tag">HTTPS</span>
                         <span class="tech-tag">TLS/SSL</span>
-                        <span class="tech-tag">HSM</span>
+                        <span class="tech-tag">AWS IoT</span>
+                        <span class="tech-tag">X.509</span>
                     </div>
                 </div>
             </div>
@@ -1306,7 +1308,7 @@
                     <tr>
                         <td>2024.04 ~ 현재</td>
                         <td>클라우드 진단 플랫폼</td>
-                        <td>STM32H7, MQTT 무선업데이트, WebSocket, HSM</td>
+                        <td>STM32H7, MQTT 무선업데이트, WebSocket, AWS IoT</td>
                     </tr>
                     <tr>
                         <td>2024.04 ~ 2025.05</td>
