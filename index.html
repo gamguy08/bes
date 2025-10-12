@@ -825,7 +825,7 @@
                 <div class="stat-label">개발 경력 (년)</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">8</div>
+                <div class="stat-number">9</div>
                 <div class="stat-label">완료 프로젝트</div>
             </div>
             <div class="stat-card">
@@ -1091,44 +1091,80 @@
 
             <div class="project">
                 <div class="project-header">
-                    <h3 class="project-title">급속충전검사장비 개발 및 앱-펌웨어 시퀀스 협업</h3>
+                    <h3 class="project-title">급속충전검사장비 개발</h3>
                     <div class="project-meta">
                         <span>2025.03 ~ 현재 (실차 검증 진행중)</span>
-                        <span>STM32H7 · GBT/CHAdeMO/AC · MQTT · 다채널 ADC</span>
+                        <span>STM32H7 · GBT/CHAdeMO/AC · 타이머 캡처 · 다채널 ADC</span>
                     </div>
                 </div>
                 <div class="project-content">
-                    <p>급속충전검사장비의 펌웨어 정확도 개선 및 앱과의 시퀀스 협업을 수행했습니다. 프로젝트 막바지에 투입되어 CP 신호 측정 오류를 해결하고, 멀티 프로토콜 공통 상태머신을 설계했습니다.</p>
+                    <p>급속충전검사장비 펌웨어 오류 해결 및 장비간 통신 시퀀스 검증을 수행했습니다. GBT/CHAdeMO/AC 멀티 프로토콜 지원 환경에서 CP 신호 측정 정확도를 향상시키고, 통신 안정성을 확보했습니다.</p>
 
-                    <h4>펌웨어 정확도 개선</h4>
+                    <h4>핵심 작업 내용</h4>
+
                     <div class="highlight-box">
-                        <p>CP 신호 측정 정확도 향상: 다채널 ADC로 CP, PP, 전압, 전류 신호 주기 샘플링. 기존 문제였던 CP 신호(PWM 파형) 샘플링 타이밍 미제어로 인한 평균 전압 낮게 측정 현상을 PWM 동기 샘플링으로 하이 레벨 구간만 정확히 측정하도록 ADC 트리거 타이밍 조정하여 해결.</p>
+                        <p><strong>타이머 캡처 기반 ADC 샘플링 타이밍 최적화:</strong> CP 신호(1kHz PWM) 하이 레벨 중간 시점을 타이머 캡처로 감지하고, 해당 이벤트를 ADC 트리거 소스로 설정하여 정확한 전압 측정 구현. 기존 평균 전압 오차 문제 해결.</p>
                     </div>
+
                     <ul>
-                        <li>CP High 전압 레벨별 상태 구분: 12V(Idle), 9V(Charging Request), 6V(Charging), 3V(Fault)</li>
-                        <li>풀다운 저항 설정 문제 확인 및 소프트웨어 보정값 적용</li>
+                        <li><strong>타이머-ADC 동기화:</strong> TIM 캡처 모드로 PWM 상승/하강 엣지 검출 → 하이 레벨 중간 시점 계산 → ADC 트리거 타이밍 동기화</li>
+                        <li><strong>다채널 ADC 구성:</strong> CP, PP, 전압, 전류 신호 동시 샘플링 및 DMA 전송</li>
+                        <li><strong>CP 전압 레벨 판별:</strong> 12V(Idle), 9V(Charging Request), 6V(Charging), 3V(Fault) 상태 정확히 구분</li>
+                        <li><strong>통신 시퀀스 검증:</strong> VCP 신호 디바운싱 로직 (3회 연속 검출 + 10초 타임아웃) 구현으로 오검출 방지</li>
+                        <li><strong>타이머 리소스 관리:</strong> 500ms 주기 VCP 모니터링 타이머의 생명주기를 통신 세션과 동기화하여 리소스 누수 해결</li>
                     </ul>
 
-                    <h4>앱-펌웨어 협업</h4>
-
-                    <div class="highlight-box">
-                        <p>비동기 이벤트 처리 구조: 실시간 충전 상태 감지 및 조건부 이벤트 통지 방식 구현. VCP 신호 디바운싱 로직 (3회 연속 검출 + 10초 타임아웃)</p>
-                    </div>
-
-                    <div class="highlight-box">
-                        <p>타이머 리소스 관리 및 생명주기 동기화: 500ms 주기 VCP 모니터링 타이머가 BT 연결 해제 후에도 계속 실행되는 문제 발견. 반복 응답 현상 디버깅 중 타이머 해제 누락 확인. 연결 종료 이벤트 핸들러에 타이머 정리 로직 추가로 리소스 누수 해결.</p>
-                    </div>
+                    <h4>성과</h4>
+                    <ul>
+                        <li>CP 신호 측정 정확도 향상으로 오판정 제로화</li>
+                        <li>멀티 프로토콜(GBT/CHAdeMO/AC) 안정적 지원</li>
+                    </ul>
 
                     <div class="tech-tags">
                         <span class="tech-tag">STM32H7</span>
                         <span class="tech-tag">GBT/CHAdeMO/AC</span>
+                        <span class="tech-tag">타이머 캡처</span>
+                        <span class="tech-tag">ADC 트리거</span>
                         <span class="tech-tag">다채널 ADC</span>
                         <span class="tech-tag">CP/PP 신호</span>
-                        <span class="tech-tag">PWM 동기 샘플링</span>
+                        <span class="tech-tag">PWM 동기화</span>
                         <span class="tech-tag">MQTT</span>
-                        <span class="tech-tag">BT 통신</span>
                         <span class="tech-tag">타이머 관리</span>
-                        <span class="tech-tag">상태머신</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <h3 class="project-title">LVDS 멀티 ECU 통합 진단 시스템</h3>
+                    <div class="project-meta">
+                        <span>약 1개월</span>
+                        <span>STM32 · CAN · 11비트/29비트 ID · 동적 필터링</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <p>여러 ECU를 통합 진단하기 위해 CAN 표준 ID(11비트)와 확장 ID(29비트)를 동시 처리하는 동적 필터 시스템을 개발했습니다. 기존 시스템은 제어기별로 ID 타입이 고정되어 있어, 확장성을 위한 구조 개선이 필요했습니다.</p>
+
+                    <h4>핵심 작업 내용</h4>
+                    <ul>
+                        <li><strong>CAN 필터 동적 설정 구조 설계:</strong> 런타임에 11비트/29비트 ID 혼용 처리 가능하도록 필터 뱅크 재설계</li>
+                        <li><strong>설정 데이터 기반 동적 처리:</strong> 제어기별 하드코딩 제거, 필터 설정 데이터 수신 → 검증 → 동적 적용 파이프라인 구현</li>
+                        <li><strong>레거시 코드 리팩토링:</strong> 예외 처리 남발 방지를 위해 CAN 필터 설정 함수를 ID 타입 매개변수화된 단일 모듈로 통합</li>
+                        <li><strong>시스템 구조 분석:</strong> CAN 설정 계층 전체 흐름 (필터링 → 데이터 수신 → 설정 확인) 완전 파악</li>
+                    </ul>
+
+                    <h4>성과</h4>
+                    <ul>
+                        <li>멀티 ECU 통합 진단 지원 (11비트/29비트 혼용)</li>
+                        <li>차기 개발자를 고려한 유지보수성 확보</li>
+                    </ul>
+
+                    <div class="tech-tags">
+                        <span class="tech-tag">STM32</span>
+                        <span class="tech-tag">CAN</span>
+                        <span class="tech-tag">11비트/29비트 ID</span>
+                        <span class="tech-tag">동적 필터링</span>
+                        <span class="tech-tag">레거시 리팩토링</span>
                     </div>
                 </div>
             </div>
@@ -1260,7 +1296,12 @@
                     <tr>
                         <td>2025.03 ~ 현재</td>
                         <td>급속충전검사장비</td>
-                        <td>STM32H7, GBT/CHAdeMO/AC, 다채널 ADC, 앱 협업</td>
+                        <td>STM32H7, GBT/CHAdeMO/AC, 타이머 캡처, ADC</td>
+                    </tr>
+                    <tr>
+                        <td>2025</td>
+                        <td>LVDS 멀티 ECU 통합진단</td>
+                        <td>STM32, CAN, 11/29비트 ID, 동적 필터링</td>
                     </tr>
                     <tr>
                         <td>2024.04 ~ 현재</td>
