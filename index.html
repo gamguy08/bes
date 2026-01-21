@@ -1103,7 +1103,7 @@
                 <div class="stat-label">개발 경력 (년)</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">9</div>
+                <div class="stat-number">10</div>
                 <div class="stat-label">완료 프로젝트</div>
             </div>
             <div class="stat-card">
@@ -1237,6 +1237,76 @@
                         <span class="tech-tag">TLS/SSL</span>
                         <span class="tech-tag">AWS IoT</span>
                         <span class="tech-tag">X.509</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project: HSM -->
+            <div class="project">
+                <div class="project-header">
+                    <h3 class="project-title">VCI3 HSM 보안 모듈 개발</h3>
+                    <div class="project-meta">
+                        <span>2024.06 ~ 현재</span>
+                        <span>STM32H7 · HSM · SPI · UART · 암호화</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <p>차량 진단기(VCI3)에 하드웨어 보안 모듈(HSM)을 연동하여 보안 통신 및 암호화 기능을 구현했습니다. 기존 UART 기반 HSM(Coregate)과 신규 SPI 기반 HSM(Autocrypt)을 모두 지원하는 듀얼 HSM 아키텍처를 설계하고 구현했습니다.</p>
+
+                    <h4>HSM 듀얼 아키텍처 설계</h4>
+                    <div class="highlight-box">
+                        <p>하드웨어 ID 핀 감지를 통해 Old HSM(UART)과 New HSM(SPI)을 런타임에 자동 판별하고, 통합 API로 상위 레이어에서 HSM 종류와 무관하게 동일한 인터페이스로 보안 기능을 사용할 수 있도록 추상화 레이어를 설계했습니다.</p>
+                    </div>
+
+                    <div class="architecture">
+                        <div class="architecture-title">HSM 추상화 아키텍처</div>
+                        <div class="architecture-diagram">
+                            <div class="arch-box">Application Layer</div>
+                            <div class="arch-arrow">→</div>
+                            <div class="arch-box">HSM Abstraction API</div>
+                            <div class="arch-arrow">→</div>
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                                <div class="arch-box" style="font-size: 14px;">Old HSM (UART)</div>
+                                <div class="arch-box" style="font-size: 14px;">New HSM (SPI)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>핵심 작업 내용</h4>
+                    <ul>
+                        <li><strong>HSM 타입 자동 감지:</strong> BOARD_ID 핀 상태로 HSM 종류 런타임 판별, 동적 핀 할당 시스템 구현</li>
+                        <li><strong>SPI 통신 프로토콜 구현:</strong> New HSM용 SPI 명령 프로토콜 설계 및 DMA 기반 고속 전송 구현</li>
+                        <li><strong>암호화 기능 연동:</strong> AES-128/256, RSA-2048, ECDSA P-256, EdDSA 서명/검증, SHA-256 해시, HMAC, CMAC</li>
+                        <li><strong>키 관리 시스템:</strong> 슬롯 기반 키 저장/생성/삭제, 키 쌍 생성(RSA/ECC), 대칭키 생성(AES)</li>
+                        <li><strong>인증서 관리:</strong> X.509 인증서 저장/읽기, CRL(인증서 폐기 목록) eMMC 저장 관리</li>
+                        <li><strong>CLI 테스트 도구:</strong> hsmtest 명령어 기반 HSM 기능 검증 도구 개발 (DMA 순환 버퍼 기반)</li>
+                    </ul>
+
+                    <h4>트러블슈팅 경험</h4>
+                    <ul>
+                        <li><strong>USB ULPI PHY 초기화 실패:</strong> USB3300 PHY 타임아웃 문제 분석 - HSM 타입과 USB GPIO 핀 설정의 잘못된 연결 발견 및 수정. NEWBOARD 매크로 기반 정적 핀 할당으로 전환하여 해결</li>
+                        <li><strong>SPI 통신 타이밍:</strong> HSM 응답 지연에 따른 타임아웃 처리 및 재시도 로직 구현</li>
+                        <li><strong>메모리 정렬:</strong> DMA 버퍼 캐시 정합성을 위한 SRAM3 배치 (0x30040000)</li>
+                    </ul>
+
+                    <h4>성과</h4>
+                    <ul>
+                        <li>단일 펌웨어로 2종류 HSM 지원 - 하드웨어 변경 없이 HSM 교체 가능</li>
+                        <li>보안 통신 인프라 구축으로 클라우드 진단 플랫폼 보안 요구사항 충족</li>
+                        <li>CLI 도구로 HSM 기능 검증 시간 80% 단축</li>
+                    </ul>
+
+                    <div class="tech-tags">
+                        <span class="tech-tag">STM32H7</span>
+                        <span class="tech-tag">HSM</span>
+                        <span class="tech-tag">SPI</span>
+                        <span class="tech-tag">UART</span>
+                        <span class="tech-tag">AES</span>
+                        <span class="tech-tag">RSA</span>
+                        <span class="tech-tag">ECDSA</span>
+                        <span class="tech-tag">X.509</span>
+                        <span class="tech-tag">DMA</span>
+                        <span class="tech-tag">FreeRTOS</span>
                     </div>
                 </div>
             </div>
@@ -1588,6 +1658,11 @@
                         <td>2024.04 ~ 현재</td>
                         <td>클라우드 진단 플랫폼</td>
                         <td>STM32H7, MQTT, WebSocket, AWS IoT</td>
+                    </tr>
+                    <tr>
+                        <td>2024.06 ~ 현재</td>
+                        <td>VCI3 HSM 보안 모듈</td>
+                        <td>STM32H7, HSM, SPI, AES, RSA, ECDSA, X.509</td>
                     </tr>
                     <tr>
                         <td>2024.04 ~ 2025.05</td>
