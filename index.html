@@ -1282,13 +1282,6 @@
                         <li><strong>CLI 테스트 도구:</strong> hsmtest 명령어 기반 HSM 기능 검증 도구 개발 (DMA 순환 버퍼 기반)</li>
                     </ul>
 
-                    <h4>트러블슈팅 경험</h4>
-                    <ul>
-                        <li><strong>USB ULPI PHY 초기화 실패:</strong> USB3300 PHY 타임아웃 문제 분석 - HSM 타입과 USB GPIO 핀 설정의 잘못된 연결 발견 및 수정. NEWBOARD 매크로 기반 정적 핀 할당으로 전환하여 해결</li>
-                        <li><strong>SPI 통신 타이밍:</strong> HSM 응답 지연에 따른 타임아웃 처리 및 재시도 로직 구현</li>
-                        <li><strong>메모리 정렬:</strong> DMA 버퍼 캐시 정합성을 위한 SRAM3 배치 (0x30040000)</li>
-                    </ul>
-
                     <h4>성과</h4>
                     <ul>
                         <li>단일 펌웨어로 2종류 HSM 지원 - 하드웨어 변경 없이 HSM 교체 가능</li>
