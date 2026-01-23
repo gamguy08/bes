@@ -719,24 +719,29 @@
             .info-grid {
                 grid-template-columns: 1fr;
             }
+        }
 
-            /* 모바일에서 fade-in 애니메이션 비활성화 - 항상 보이게 */
+        /* Animations - 데스크톱 전용 */
+        @media (min-width: 769px) {
             .fade-in {
-                opacity: 1 !important;
-                transform: translateY(0) !important;
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            }
+
+            .fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* 모바일에서는 애니메이션 완전 비활성화 - 항상 보임 */
+        @media (max-width: 768px) {
+            .fade-in {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
         }
 
         /* Print Styles for PDF */
@@ -1707,40 +1712,85 @@
     </footer>
 
     <script>
-        // 모바일 감지 (768px 이하)
-        const isMobile = window.innerWidth <= 768;
+        (function() {
+            // 모바일 감지 함수
+            function isMobile() {
+                return window.innerWidth <= 768 ||
+                       window.matchMedia('(max-width: 768px)').matches ||
+                       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            }
 
-        if (isMobile) {
-            // 모바일에서는 모든 요소를 즉시 보이게
-            document.querySelectorAll('.fade-in').forEach(el => {
-                el.classList.add('visible');
-            });
-        } else {
-            // 데스크톱에서는 Intersection Observer 사용
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.05,
-                rootMargin: '0px 0px 0px 0px'
-            });
-
-            document.querySelectorAll('.fade-in').forEach(el => {
-                observer.observe(el);
-            });
-        }
-
-        // 리사이즈 시 모바일 전환 대응
-        window.addEventListener('resize', () => {
-            if (window.innerWidth <= 768) {
-                document.querySelectorAll('.fade-in').forEach(el => {
+            // 모든 fade-in 요소를 보이게 하는 함수
+            function showAllFadeIn() {
+                document.querySelectorAll('.fade-in').forEach(function(el) {
                     el.classList.add('visible');
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
                 });
             }
-        });
+
+            // 데스크톱용 Intersection Observer 설정
+            function setupDesktopAnimation() {
+                if ('IntersectionObserver' in window) {
+                    var observer = new IntersectionObserver(function(entries) {
+                        entries.forEach(function(entry) {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                            }
+                        });
+                    }, {
+                        threshold: 0.01,
+                        rootMargin: '50px 0px 50px 0px'
+                    });
+
+                    document.querySelectorAll('.fade-in').forEach(function(el) {
+                        observer.observe(el);
+                    });
+                } else {
+                    // Intersection Observer 미지원 시 모두 보이게
+                    showAllFadeIn();
+                }
+            }
+
+            // 초기화 함수
+            function init() {
+                if (isMobile()) {
+                    showAllFadeIn();
+                } else {
+                    setupDesktopAnimation();
+                }
+            }
+
+            // DOM 로드 완료 시 실행
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+
+            // 추가 안전장치: 페이지 로드 완료 후 재확인
+            window.addEventListener('load', function() {
+                if (isMobile()) {
+                    showAllFadeIn();
+                }
+            });
+
+            // 리사이즈 대응
+            window.addEventListener('resize', function() {
+                if (isMobile()) {
+                    showAllFadeIn();
+                }
+            });
+
+            // orientation 변경 대응 (모바일 회전)
+            window.addEventListener('orientationchange', function() {
+                setTimeout(function() {
+                    if (isMobile()) {
+                        showAllFadeIn();
+                    }
+                }, 100);
+            });
+        })();
     </script>
 </body>
 </html>
