@@ -719,6 +719,12 @@
             .info-grid {
                 grid-template-columns: 1fr;
             }
+
+            /* 모바일에서 fade-in 애니메이션 비활성화 - 항상 보이게 */
+            .fade-in {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
         }
 
         /* Animations */
@@ -1701,20 +1707,39 @@
     </footer>
 
     <script>
-        // Intersection Observer for animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
+        // 모바일 감지 (768px 이하)
+        const isMobile = window.innerWidth <= 768;
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
+        if (isMobile) {
+            // 모바일에서는 모든 요소를 즉시 보이게
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.classList.add('visible');
+            });
+        } else {
+            // 데스크톱에서는 Intersection Observer 사용
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.05,
+                rootMargin: '0px 0px 0px 0px'
+            });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // 리사이즈 시 모바일 전환 대응
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768) {
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }
         });
     </script>
 </body>
