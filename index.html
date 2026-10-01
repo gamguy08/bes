@@ -18,7 +18,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 .case{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin:0 0 18px;padding:28px 32px}.case-heading{display:flex;gap:18px;align-items:flex-start}.case-number{color:var(--primary);font-size:16px;font-weight:800;line-height:1.5;padding-top:4px}.case-meta{font-size:12px;color:var(--text-tertiary);margin:0 0 4px}.case h3,.case>.case-title{font-size:23px;line-height:1.4;letter-spacing:-.015em;margin:0}.case-intro{font-size:16px;color:var(--text-secondary);margin:18px 0}.case-facts{margin:18px 0 22px;font-size:15px}.case-facts>div{display:grid;grid-template-columns:82px minmax(0,1fr);gap:14px;margin:9px 0}.case-facts dt{font-weight:800;color:var(--text-primary)}.case-facts dd{margin:0;color:var(--text-secondary)}
 .detail-list{margin-top:22px}.work-detail{border-top:1px solid var(--border);font-size:15px}.work-detail summary{padding:13px 28px 13px 0;cursor:pointer;font-weight:700;color:var(--primary);position:relative;list-style:none}.work-detail summary::-webkit-details-marker{display:none}.work-detail summary::after{content:'+';position:absolute;right:3px;top:10px;font-size:21px;font-weight:500}.work-detail[open]>summary::after{content:'−'}.work-detail[open]>summary{color:var(--text-primary)}.detail-body{padding:8px 0 22px}.detail-status{font-size:13px;color:var(--text-tertiary);margin:0 0 14px}.project-content p{font-size:15px;color:var(--text-secondary);margin:0 0 18px}.project-content h4,.project-content h5{font-size:17px;margin:25px 0 10px}.project-content ul{padding-left:22px;margin:12px 0}.project-content li{padding:5px 0;color:var(--text-secondary);font-size:15px}.project-content strong{font-weight:700;color:var(--text-primary)}
 .tech-tags{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:18px}.tech-tag{font-size:12px;color:var(--text-tertiary);background:var(--code-bg);padding:3px 8px;border-radius:4px}
-.support-heading{font-size:19px;margin:32px 0 14px}.support-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.support-item{background:#fff;border:1px solid var(--border);border-radius:10px;padding:24px}.support-item h4{font-size:18px;margin:0 0 12px}.support-item>p{font-size:15px;color:var(--text-secondary);margin:0 0 18px}
+.support-heading{font-size:19px;margin:32px 0 14px}.support-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}.support-item{background:#fff;border:1px solid var(--border);border-radius:10px;padding:24px}.support-item h4{font-size:18px;margin:0 0 12px}.support-item>p{font-size:15px;color:var(--text-secondary);margin:0 0 18px}
 .project-group{margin-top:36px}.group-title{font-size:19px;font-weight:800;margin:0 0 16px}.group-period{color:var(--text-tertiary);font-weight:500;font-size:13px;margin-left:12px}.previous-case{padding:22px 28px}.previous-case>.case-title{font-size:20px}.project-meta{display:flex;flex-wrap:wrap;gap:3px 18px;font-size:12px;color:var(--text-tertiary);margin-top:8px}.previous-case .case-intro{font-size:15px;margin:12px 0 16px}
 .tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 38px}.tech-category{padding:22px 0;border-top:1px solid var(--border)}.tech-category h3{font-size:17px;margin:0 0 12px}.tech-list{list-style:none;padding:0;margin:0}.tech-item{font-size:14px;color:var(--text-secondary);padding:5px 0;display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px}.tech-item strong{color:var(--text-primary);font-weight:650}
 .background-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px}.background-grid h3{font-size:18px;margin:0 0 20px}.education-item{margin-bottom:24px}.education-item .project-title{font-size:16px;margin:0;line-height:1.6}.publication{font-size:15px;color:var(--text-secondary);margin:10px 0}.publication strong{color:var(--text-primary)}.contact{margin-top:38px;border-top:1px solid var(--border);padding-top:24px}.contact-main{display:flex;gap:12px 28px;flex-wrap:wrap;font-size:16px}.profile-extra{margin-top:20px}.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;padding-top:10px}.info-item{font-size:13px;display:flex;gap:12px}.info-label{min-width:60px;font-weight:700}.info-value{color:var(--text-secondary)}
@@ -52,7 +52,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
         <p class="case-meta">공통 코어 · 통신·보호 로직 · 재사용 아키텍처</p><h3>재사용 가능한 모터 제어 SW 플랫폼</h3>
       </div></div>
       <p class="case-intro">제품과 MCU가 바뀌어도 제어 알고리즘을 재사용할 수 있도록 공통 코어, 하드웨어 의존 코드, 제품 설정을 분리했습니다.</p>
-      <dl class="case-facts"><div><dt>주요 작업</dt><dd>FOC 공통 모듈, Q15·Float 구현, 정적 RTE 인터페이스, LIN·Fail-Safety 통합과 제품별 패키지 구성</dd></div><div><dt>검증·상태</dt><dd>동일 입력을 사용한 수치 형식 교차 검증과 호스트 회귀 검증 수행. 제품 적용·확장 및 통합 검증 진행 중.</dd></div></dl>
+      <dl class="case-facts"><div><dt>주요 작업</dt><dd>FOC 공통 모듈, Q15·Float 구현, 정적 데이터 교환 인터페이스, LIN·보호 로직과 제품별 패키지 구성</dd></div><div><dt>검증·상태</dt><dd>동일 입력을 사용한 수치 형식 교차 검증과 호스트 회귀 검증 수행. 제품 적용·확장 및 통합 검증 진행 중.</dd></div></dl>
       <div class="detail-list"><details class="work-detail" id="hanon-platform">
       <summary>제어 코어·계층 설계·제품 변형</summary>
       <div class="detail-body"><p class="detail-status">공통 코어 구현 · 제품 적용 및 확장 진행 중</p><div class="project-content">
@@ -60,17 +60,17 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <ul>
 <li><strong>제어 코어:</strong> 좌표 변환, 전류·속도 PI 제어, SVPWM, 센서리스 관측기, 기동 상태머신을 공통 모듈로 구성</li>
 <li><strong>수치 형식:</strong> 16비트 Q15 고정소수점과 32비트 부동소수점 구현을 유지하고, 동일 입력의 출력 오차를 허용 범위 기준으로 교차 검증</li>
-<li><strong>계층 분리:</strong> ASW / 정적 RTE / BSW·CDD / MCAL 경계와 S/R·C/S 포트 인터페이스, Runnable·ISR 실행 책임을 설계</li>
+<li><strong>구조 분리:</strong> 제어 알고리즘·MCU 드라이버·제품 설정을 분리하고, 태스크와 ISR 사이의 데이터 교환 및 실행 역할 구성</li>
 <li><strong>제품 변형:</strong> MCU, 통신, 수치 형식, 외부 드라이버와 제품 파라미터를 조합하는 패키지 생성 CLI·GUI 및 검증 흐름 구현</li>
 </ul>
-<div class="tech-tags"><span class="tech-tag">C99</span><span class="tech-tag">MISRA-C</span><span class="tech-tag">Q15 / Float</span><span class="tech-tag">Static RTE</span><span class="tech-tag">MCAL</span></div>
+<div class="tech-tags"><span class="tech-tag">C99</span><span class="tech-tag">MISRA-C</span><span class="tech-tag">Q15 / Float</span><span class="tech-tag">정적 인터페이스</span><span class="tech-tag">MCAL</span></div>
 </div></div>
     </details><details class="work-detail" id="hanon-lin-protection">
       <summary>LIN 통신·진단·Fail-Safety</summary>
       <div class="detail-body"><p class="detail-status">통신·보호 로직 구현 · 제품별 통합 검증 진행 중</p><div class="project-content">
 <p>상위 제어기의 운전 명령과 모터 상태를 연결하는 LIN 통신 경로를 구성하고, 고장 검출·감속·정지·복구 정책을 제품 요구사항에 맞춰 구현했습니다.</p>
 <ul>
-<li><strong>LIN 통합:</strong> 슬레이브 스택, MCAL Lin, LinIf와 RTE 연계를 구성하고 LDF 기반 지령·상태 신호 매핑 구현</li>
+<li><strong>LIN 통신:</strong> 슬레이브 스택과 MCU 드라이버를 연결하고, LDF 기반 속도 지령·상태 신호 매핑 구현</li>
 <li><strong>인터페이스 변경:</strong> 듀티 기반 지령과 RPM 직접 지령을 구분하고, 전압·전류·실제 속도 보고값의 단위·환산·범위 검증</li>
 <li><strong>고장 대응:</strong> 과전압·저전압·과전류·과온·구속·통신 이상에 대한 디바운스, 출력 제한, 정지 래치와 재시도 제한 구현</li>
 <li><strong>제품별 설정:</strong> 보호 채널 실장 여부, 임계값과 복구 정책을 분리하고, 요구사항·설계 판단·미확정 조건의 근거 추적</li>
@@ -86,8 +86,8 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <li><strong>자산 분석:</strong> eOP·eWP·eRV 등 기존 코드의 제어 흐름, HW 의존성, 인터페이스와 변형 간 중복 구조 조사</li>
 <li><strong>구조 설계:</strong> 알고리즘, 하드웨어 접근, 제품 데이터의 분리 기준과 명명·데이터 교환·실행 컨텍스트 규약 정의</li>
 <li><strong>적용 계획:</strong> 공통 플랫폼에 재사용·이관·보완할 대상을 분류하고, 패키지 배포 기준과 변형 관리 방안 수립</li>
-<li><strong>검증 근거:</strong> 요구사항·설계·테스트·결함·릴리스 자산의 연결성을 검토하고 ASPICE 관점의 개발·검증 계획 정리</li>
-<li><strong>기술 협업:</strong> 글로벌 개발 거점과의 기술 협의·보고 자료, Jira 기반 개발 과제 관리와 팀 내 분석·인계 문서 작성</li>
+<li><strong>문서 조사:</strong> 기존 요구사항·설계·테스트·결함·릴리스 자료의 보유 현황과 재사용에 필요한 확인 항목 정리</li>
+<li><strong>기술 문서:</strong> 공통 SW 관련 보고 자료, Jira 개발 과제와 팀 내 분석·인계 문서 작성</li>
 </ul>
 <div class="tech-tags"><span class="tech-tag">SW Architecture</span><span class="tech-tag">Component Reuse</span><span class="tech-tag">Traceability</span><span class="tech-tag">Jira / PTC</span></div>
 </div></div>
@@ -137,16 +137,17 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <p>모터·보드 측정값과 제어기 설정의 관계를 정리하고, 시뮬레이션과 실기 기록을 함께 사용해 튜닝 근거를 확인하는 환경을 개발했습니다.</p>
 <ul>
 <li><strong>게인 설계:</strong> 모터 전기 파라미터, 제어주기, 전류·속도 스케일에 따른 PI 게인과 관측기 계수의 종속관계 분석</li>
-<li><strong>모델 검증:</strong> MATLAB/Simulink 기반 플랜트·제어 모델과 폐루프 시뮬레이션을 이용해 기동 파라미터와 관측기 거동 비교</li>
+<li><strong>튜닝 방법론:</strong> MATLAB/Simulink 기반 PI 튜닝 자료와 게인 유도식을 분석하고, 제어주기·스케일의 영향 정리</li>
+<li><strong>호스트 시뮬레이션:</strong> C 기반 PMSM·부하 모델과 제품 제어 코드를 연결해 기동·폐루프 전환·속도 제어·정지·재기동 거동 비교</li>
 <li><strong>튜닝 도구:</strong> 측정 데이터 분석, 게인 유도, 파라미터 변경 영향 확인과 시험 절차를 연결하는 Motor Tuning Kit 시제품 개발</li>
-<li><strong>캘리브레이션:</strong> 개체별 모터 파라미터 저장·검증·적용 구조와 NVM 연동 구현, 전체 실기 절차 검증은 후속 과제로 관리</li>
+<li><strong>캘리브레이션:</strong> 모터 파라미터 데이터·CRC 검사와 부동소수점 계수 재계산 경로 구현. 저장 경로는 RAM 기반으로 시험</li>
 <li><strong>파라미터 관리:</strong> 보드·모터·시스템·제어기 설정을 구분하고, 단위·유도식·측정 근거와 변경 이력을 문서화</li>
 </ul>
 <div class="tech-tags"><span class="tech-tag">MATLAB / Simulink</span><span class="tech-tag">PI Tuning</span><span class="tech-tag">Simulation</span><span class="tech-tag">Calibration</span></div>
 </div></div>
     </details></div>
     </article>
-<h3 class="support-heading">개발 도구·기술 지원</h3><div class="support-grid">
+<h3 class="support-heading">개발 도구·자료 분석</h3><div class="support-grid">
 <article class="support-item"><h4>계측·검증 자동화</h4><p>LIN 운전·상태 조회용 Windows 도구와 빌드·계측·회귀 검증 스크립트를 개발했습니다.</p><details class="work-detail" id="hanon-tools">
       <summary>PLIN·시험 자동화·장비 준비 상세</summary>
       <div class="detail-body"><p class="detail-status">LIN 제어 도구·검증 스크립트 구현 및 배포 패키지 제작</p><div class="project-content">
@@ -161,17 +162,16 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">PLIN-USB</span><span class="tech-tag">CLI / GUI</span><span class="tech-tag">Test Automation</span></div>
 </div></div>
     </details></article>
-<article class="support-item"><h4>통합 열관리 SW 분석</h4><p>요구사항과 기존 Simulink·AUTOSAR 모델, MIL 검증 자료를 분석하고 재사용·통합 검토를 지원했습니다.</p><details class="work-detail" id="hanon-thermal">
+<article class="support-item"><h4>통합 열관리 개발자료 정리</h4><p>수령한 요구사항·모델·시험 자료를 읽고, 주요 내용과 확인이 필요한 항목을 문서로 정리했습니다.</p><details class="work-detail" id="hanon-thermal">
       <summary>요구사항·모델·검증 자료 분석 상세</summary>
       <div class="detail-body"><p class="detail-status">요구사항·기존 모델·검증 자료 분석</p><div class="project-content">
-<p>통합 열관리 모듈의 개발 자료를 분석하고, 모터 제어 Core SW와 AUTOSAR 기반 애플리케이션·BSW 사이의 연계 및 재사용 범위를 검토했습니다.</p>
+<p>통합 열관리 모듈의 요구사항, 기존 사양·구현 모델, 시험 및 결함 자료를 검토하고 내용을 정리했습니다.</p>
 <ul>
-<li><strong>요구사항 검토:</strong> 부품·제어 요구사항과 SW 인터페이스를 대조하고 개발 범위, 불일치 및 확인 필요 항목 정리</li>
-<li><strong>모델 분석:</strong> 기존 Simulink 사양·구현 모델의 계층, 데이터 사전, AUTOSAR 인터페이스와 릴리스 간 변경점 분석</li>
-<li><strong>검증 자료:</strong> 기존 MIL 테스트, 모델 검증 및 결함 이력을 검토하고 요구사항과의 연결 관계 정리</li>
-<li><strong>통합 검토:</strong> 선행 SW의 eWP·밸브 제어 구조와 MCU·구동 IC·통신·업데이트 구성을 분석해 Core SW 재사용 및 BSW 연계 검토 지원</li>
+<li><strong>요구사항 자료:</strong> 부품·제어 요구사항 문서의 주요 기능, 입출력과 확인 필요 항목 정리</li>
+<li><strong>기존 모델:</strong> Simulink 사양·구현 모델의 계층과 데이터 사전, 릴리스 간 차이 정리</li>
+<li><strong>시험·결함 자료:</strong> 기존 MIL 테스트 현황, 모델 검증 자료와 결함 목록 정리</li>
 </ul>
-<div class="tech-tags"><span class="tech-tag">Thermal Management</span><span class="tech-tag">AUTOSAR</span><span class="tech-tag">Simulink</span><span class="tech-tag">MIL Analysis</span></div>
+<div class="tech-tags"><span class="tech-tag">개발자료 분석</span><span class="tech-tag">Simulink 모델 분석</span><span class="tech-tag">시험 현황 정리</span></div>
 </div></div>
     </details></article>
 </div></section>
@@ -214,9 +214,9 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 </ul>
 <h5>성과</h5>
 <ul>
-<li>단일 펌웨어로 2종류 HSM 지원 - 하드웨어 변경 없이 HSM 교체 가능</li>
-<li>보안 통신 인프라 구축으로 클라우드 진단 플랫폼 보안 요구사항 충족</li>
-<li>CLI 도구로 HSM 기능 검증 시간 80% 단축</li>
+<li>UART·SPI 방식의 HSM을 단일 펌웨어에서 구분해 지원</li>
+<li>HSM 암호화·키·인증서 관리 기능을 디바이스 펌웨어에 연동</li>
+<li>CLI에서 HSM 기능별 시험 명령 실행 및 결과 확인 지원</li>
 </ul>
 <div class="tech-tags">
 <span class="tech-tag">STM32H7</span>
@@ -234,39 +234,38 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
     </article><article class="case previous-case" id="project-charger">
       <h4 class="case-title">급속충전검사장비 PoC</h4><div class="project-meta">
 <span>2025.06 ~ 2025.12</span>
-<span>AT32F403A · GBT/CHAdeMO/AC · 타이머 캡처 · 다채널 ADC</span>
+<span>AT32F403A · GB/T · CHAdeMO · AC · 타이머 캡처 · 다채널 ADC</span>
 </div>
-      <p class="case-intro">AT32 기반 검사장비에서 타이머 캡처와 ADC 트리거를 동기화해 CP 전압 측정을 개선하고, 충전 프로토콜별 통신 시퀀스를 검증했습니다.</p>
+      <p class="case-intro">AT32F403A 기반 검사장비에서 타이머 캡처와 ADC 트리거를 동기화해 CP 전압 측정을 개선하고, 충전 프로토콜별 통신 시퀀스를 검증했습니다.</p>
       <details class="work-detail"><summary>급속충전검사장비 PoC 상세</summary>
       <div class="detail-body"><div class="project-content">
-<p>급속충전검사장비 PoC 펌웨어 개발 및 장비간 통신 시퀀스 검증을 수행했습니다. Artery AT32F403A 기반으로 GBT/CHAdeMO/AC 멀티 프로토콜 지원 환경에서 CP 신호 측정 정확도를 향상시키고, 통신 안정성을 확보했습니다.</p>
+<p>급속충전검사장비 PoC 펌웨어 개발 및 장비간 통신 시퀀스 검증을 수행했습니다. Artery AT32F403A 기반으로 GB/T · CHAdeMO · AC 멀티 프로토콜 지원 환경에서 CP 전압 측정과 통신 시퀀스 처리 로직을 개선했습니다.</p>
 <h5>핵심 작업 내용</h5>
 <div class="highlight-box">
-<p><strong>타이머 캡처 기반 ADC 샘플링 타이밍 최적화:</strong> CP 신호(1kHz PWM) 하이 레벨 중간 시점을 타이머 캡처로 감지하고, 해당 이벤트를 ADC 트리거 소스로 설정하여 정확한 전압 측정 구현. 기존 평균 전압 오차 문제 해결.</p>
+<p><strong>타이머 캡처 기반 ADC 샘플링 타이밍 최적화:</strong> CP PWM 신호의 엣지를 타이머 캡처로 측정하고, 하이 레벨 구간에 맞춰 ADC 샘플링 시점을 설정해 전압 측정 개선.</p>
 </div>
 <ul>
 <li><strong>핀 포팅:</strong> AT32F403A 레퍼런스 매뉴얼 분석하여 타이머 캡처 및 ADC 트리거 지원 핀 선정, 하드웨어 제약사항 고려한 핀 매핑 재설계</li>
 <li><strong>타이머-ADC 동기화:</strong> TIM 캡처 모드로 PWM 상승/하강 엣지 검출 → 하이 레벨 중간 시점 계산 → ADC 트리거 타이밍 동기화</li>
-<li><strong>다채널 ADC 구성:</strong> CP, PP, 전압, 전류 신호 동시 샘플링 및 DMA 전송</li>
-<li><strong>CP 전압 레벨 판별:</strong> 12V(Idle), 9V(Charging Request), 6V(Charging), 3V(Fault) 상태 정확히 구분</li>
+<li><strong>다채널 ADC 구성:</strong> CP, PP, 전압, 전류 신호의 다채널 ADC 샘플링 및 DMA 전송</li>
+<li><strong>CP 전압 레벨 판별:</strong> CP 전압 레벨을 이용한 연결·충전 상태 판별 로직 구현</li>
 <li><strong>통신 시퀀스 검증:</strong> VCP 신호 디바운싱 로직 (3회 연속 검출 + 10초 타임아웃) 구현으로 오검출 방지</li>
 <li><strong>타이머 리소스 관리:</strong> 500ms 주기 VCP 모니터링 타이머의 생명주기를 통신 세션과 동기화하여 리소스 누수 해결</li>
 </ul>
 <h5>성과</h5>
 <ul>
-<li>CP 신호 측정 정확도 향상으로 오판정 제로화</li>
-<li>멀티 프로토콜(GBT/CHAdeMO/AC) 안정적 지원</li>
+<li>PWM에 동기화한 CP 전압 측정과 상태 판별 로직 구현</li>
+<li>GB/T·CHAdeMO·AC 충전 검사 환경의 통신 시퀀스 검증</li>
 </ul>
 <div class="tech-tags">
 <span class="tech-tag">AT32F403A</span>
-<span class="tech-tag">GBT/CHAdeMO/AC</span>
+<span class="tech-tag">GB/T · CHAdeMO · AC</span>
 <span class="tech-tag">핀 포팅</span>
 <span class="tech-tag">타이머 캡처</span>
 <span class="tech-tag">ADC 트리거</span>
 <span class="tech-tag">다채널 ADC</span>
 <span class="tech-tag">CP/PP 신호</span>
 <span class="tech-tag">PWM 동기화</span>
-<span class="tech-tag">MQTT</span>
 </div>
 </div></div></details>
     </article><article class="case previous-case" id="project-multi-ecu">
@@ -309,7 +308,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <p>차량 ECU를 원격 진단하는 클라우드 플랫폼에 대응하는 디바이스 펌웨어를 리팩토링했습니다. 기존 Bluetooth 기반 태블릿 통신에서 클라우드 서버 기반 MQTT/WebSocket/HTTPS 통신으로 전환하는 작업을 수행했습니다.</p>
 <h5>통신 프로토콜 전환 및 펌웨어 리팩토링</h5>
 <div class="highlight-box">
-<p>기존 Bluetooth 통신 체계와 디바이스 동작 시퀀스를 완전히 파악한 후, 클라우드 환경에 맞춰 펌웨어를 전면 리팩토링했습니다.</p>
+<p>기존 Bluetooth 통신과 디바이스 동작 시퀀스를 분석하고, 클라우드 통신에 필요한 펌웨어 구조를 변경했습니다.</p>
 </div>
 <div class="architecture">
 <div class="architecture-title">통신 아키텍처 전환</div>
@@ -363,10 +362,10 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <span>2024.04 ~ 2025.05</span>
 <span>STM32H7 · CMSIS-RTOS · CAN진단 · 리버스 엔지니어링</span>
 </div>
-      <p class="case-intro">외부 장비의 회로·동작을 분석해 9개 보드를 5개로 통합하는 펌웨어를 개발하고, 검사 시간을 28초에서 25초로 단축했습니다.</p>
+      <p class="case-intro">외부 장비의 회로·동작을 분석하고, 하드웨어·사양 담당자와 협업해 9개 보드를 5개로 통합하는 장비의 펌웨어를 개발했습니다.</p>
       <details class="work-detail"><summary>전장검사장비 내재화 상세</summary>
       <div class="detail-body"><div class="project-content">
-<p>SP2 차량 전장검사에 사용되던 외부 장비를 자체 기술로 내재화하는 프로젝트를 수행했습니다. 하드웨어/사양팀과 협업하여 기존 9장의 보드를 회로 분석 및 리버스 엔지니어링으로 기능을 파악하고, 이를 5장으로 통합 고도화하여 최종 검사 시간(CT)을 28초에서 25초로 단축했습니다.</p>
+<p>SP2 차량 전장검사에 사용되던 외부 장비를 자체 기술로 내재화하는 프로젝트를 수행했습니다. 하드웨어/사양팀과 협업하여 기존 9장의 보드를 회로 분석 및 리버스 엔지니어링으로 기능을 파악하고, 5개 보드로 통합하는 장비 구성에 맞춰 펌웨어를 재구성했습니다.</p>
 <h5>리버스 엔지니어링 및 기능 분석</h5>
 <div class="highlight-box">
 <p>9장의 보드를 데이터시트와 회로도 기반으로 분석하여 각 보드의 기능을 파악하고 펌웨어 요구사항을 도출했습니다. (대표 기능: CAN 진단, 블로워 모터 전압 제어, 전원 제어 등)</p>
@@ -375,10 +374,9 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <ul>
 <li><strong>회로 분석:</strong> 하드웨어/사양팀과 협업하여 9장 보드의 회로 및 동작 원리 분석</li>
 <li><strong>기능 파악:</strong> 보드별 고유 기능 리버스 엔지니어링 (CAN 진단, 전압 가변 제어, 전원 제어 등 9가지 기능)</li>
-<li><strong>보드 통합:</strong> 9장 보드를 5장으로 통합 설계 및 고도화</li>
+<li><strong>보드 통합 대응:</strong> 9개 보드를 5개로 통합하는 장비 구성에 맞춰 펌웨어 기능 재구성</li>
 <li><strong>펌웨어 통합 설계:</strong> 진단 펌웨어와 제어 펌웨어 2종류로 구성, 보드 ID별 동작 지원으로 관리 효율화</li>
 <li><strong>STM32H7 + FreeRTOS:</strong> 멀티태스킹 기반 실시간 진단 및 제어 시스템 구현</li>
-<li><strong>성과:</strong> 최종 검사 시간(CT) 28초 → 25초로 단축</li>
 </ul>
 <div class="tech-tags">
 <span class="tech-tag">STM32H7</span>
@@ -400,7 +398,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <p>전기차 하부에 자동으로 충전 커넥터가 도킹되는 시스템의 모터 제어 펌웨어를 개발했습니다.</p>
 <h5>모터 제어</h5>
 <ul>
-<li><strong>서보 모터:</strong> RS485 모드버스 통신, 위치/속도 제어 (±0.1mm 정밀도)</li>
+<li><strong>서보 모터:</strong> RS485 Modbus 통신과 위치·속도 제어</li>
 <li><strong>스텝 모터:</strong> PWM 기반 마이크로스텝핑, 탈조 방지 로직</li>
 <li><strong>상위제어기:</strong> Jetson 보드와 Python 통신 (UART/이더넷)</li>
 </ul>
@@ -424,7 +422,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <ul>
 <li>다중 초음파 센서 데이터 융합</li>
 <li>기울기 계산 (전후/좌우)</li>
-<li>거리 오차 ±5cm 달성</li>
+<li>초음파 센서 기반 차량 거리 추정</li>
 <li>실시간 위치 보정 로직</li>
 </ul>
 <h5>실증 경험</h5>
@@ -454,7 +452,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <li>LabVIEW 데이터 수집 및 실시간 모니터링 소프트웨어</li>
 <li>동작 내구 시험 절차서 작성</li>
 <li>시험 시퀀스 자동 제어 및 리포트 생성</li>
-<li>시험 성적서 발급 (합격/불합격 판정)</li>
+<li>시험 결과의 합격/불합격 판정과 성적서 작성</li>
 </ul>
 <div class="tech-tags">
 <span class="tech-tag">CompactDAQ</span>
@@ -547,7 +545,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <h3>SW 아키텍처·검증</h3>
 <ul class="tech-list">
 <li class="tech-item"><strong>Core SW</strong> 공통 알고리즘·제품 설정 분리</li>
-<li class="tech-item"><strong>AUTOSAR 구조</strong> SWC·RTE 포트·Runnable 설계</li>
+<li class="tech-item"><strong>정적 인터페이스</strong> 제어 모듈 간 데이터 교환</li>
 <li class="tech-item"><strong>C99 / MISRA-C</strong> 정적 할당·코딩 규칙 기반 개발</li>
 <li class="tech-item"><strong>회귀 검증</strong> 골든 벡터·수치 형식 교차 검증</li>
 <li class="tech-item"><strong>Python</strong> 계측·분석·패키지 생성 자동화</li>
@@ -655,7 +653,12 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
   });
   items.forEach(item => item.addEventListener('toggle', updateToggle));
   function openHash() {
-    const id = decodeURIComponent(location.hash.slice(1));
+    let id;
+    try {
+      id = decodeURIComponent(location.hash.slice(1));
+    } catch {
+      return;
+    }
     const target = document.getElementById(id);
     if (!target) return;
     let parent = target;
