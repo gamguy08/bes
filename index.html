@@ -1,2110 +1,679 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이재석 | 임베디드 SW · 모터 제어 · Core SW Component</title>
-    <meta name="description" content="한온시스템 Core SW Component 개발자 이재석의 포트폴리오. BLDC/PMSM 센서리스 FOC, 모터 제어 공통 플랫폼, MCU 포팅, LIN 통신, 임베디드 시스템 개발 경험을 소개합니다.">
-    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #3182F6;
-            --primary-light: #E5F0FF;
-            --primary-dark: #1B64DA;
-            --bg: #FAFBFC;
-            --surface: #FFFFFF;
-            --text-primary: #191F28;
-            --text-secondary: #4E5968;
-            --text-tertiary: #6B7684;
-            --border: #E5E8EB;
-            --code-bg: #F2F4F6;
-            --success: #12B564;
-            --warning: #FFA500;
-        }
-
-        body {
-            font-family: 'SUIT Variable', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-primary);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Header */
-        header {
-            background: var(--surface);
-            border-bottom: 1px solid var(--border);
-            padding: 24px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .logo span {
-            color: var(--primary);
-        }
-
-        /* Portfolio navigation and current role */
-        .portfolio-nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px 24px;
-        }
-
-        .portfolio-nav a, .experience-link {
-            color: var(--primary-dark);
-            font-weight: 700;
-            text-underline-offset: 4px;
-        }
-
-        .portfolio-nav a {
-            text-decoration: none;
-            font-size: 15px;
-        }
-
-        a:focus-visible {
-            outline: 3px solid var(--primary);
-            outline-offset: 5px;
-        }
-
-        section[id], article[id] {
-            scroll-margin-top: 120px;
-        }
-
-        .current-role {
-            border-left: 6px solid var(--primary);
-        }
-
-        .current-role h2 {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .current-role p {
-            color: var(--text-secondary);
-            margin-top: 16px;
-        }
-
-        .table-scroll {
-            overflow-x: auto;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-
-        /* Intro Section */
-        .intro {
-            padding: 100px 0 80px;
-            display: flex;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .intro-content {
-            flex: 1;
-        }
-
-        .intro-photo {
-            flex-shrink: 0;
-        }
-
-        .profile-photo {
-            width: 200px;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 16px;
-            border: 3px solid var(--border);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-        }
-
-        .intro-title {
-            font-size: 56px;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            letter-spacing: -0.03em;
-            line-height: 1.2;
-        }
-
-        .intro-subtitle {
-            font-size: 24px;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-weight: 600;
-        }
-
-        .intro-meta {
-            display: flex;
-            gap: 32px;
-            flex-wrap: wrap;
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 17px;
-            color: var(--text-tertiary);
-        }
-
-        .meta-item strong {
-            color: var(--text-primary);
-            font-size: 18px;
-        }
-
-        /* Profile Info */
-        .profile-info {
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 80px;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
-            font-size: 17px;
-        }
-
-        .info-label {
-            font-weight: 700;
-            color: var(--text-primary);
-            min-width: 100px;
-        }
-
-        .info-value {
-            color: var(--text-secondary);
-        }
-
-        /* Match Rate Banner */
-        .match-banner {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            border-radius: 16px;
-            padding: 40px;
-            margin: 60px 0;
-            color: white;
-            text-align: center;
-        }
-
-        .match-banner h2 {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 16px;
-        }
-
-        .match-rate {
-            font-size: 72px;
-            font-weight: 800;
-            margin: 20px 0;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.2);
-        }
-
-        .match-description {
-            font-size: 18px;
-            opacity: 0.95;
-            font-weight: 500;
-        }
-
-        /* Requirements Grid */
-        .requirements-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 40px 0;
-        }
-
-        .requirement-card {
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 28px;
-            transition: all 0.3s;
-        }
-
-        .requirement-card.matched {
-            border-color: var(--success);
-            background: #F0FFF4;
-        }
-
-        .requirement-card.learning {
-            border-color: var(--warning);
-            background: #FFF9F0;
-        }
-
-        .requirement-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .requirement-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .requirement-card.matched .requirement-icon {
-            background: var(--success);
-            color: white;
-        }
-
-        .requirement-card.learning .requirement-icon {
-            background: var(--warning);
-            color: white;
-        }
-
-        .requirement-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .requirement-content {
-            font-size: 16px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .requirement-proof {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid var(--border);
-            font-size: 15px;
-            color: var(--text-tertiary);
-        }
-
-        /* Section */
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-header {
-            margin-bottom: 50px;
-        }
-
-        .section-tag {
-            display: inline-block;
-            background: var(--primary-light);
-            color: var(--primary);
-            padding: 6px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            letter-spacing: 0.5px;
-        }
-
-        .section-title {
-            font-size: 42px;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
-        }
-
-        .section-description {
-            font-size: 18px;
-            color: var(--text-tertiary);
-            font-weight: 500;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 80px;
-        }
-
-        .stat-card {
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .stat-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(49, 130, 246, 0.15);
-        }
-
-        .stat-number {
-            font-size: 52px;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-
-        .stat-label {
-            font-size: 16px;
-            color: var(--text-tertiary);
-            font-weight: 600;
-        }
-
-        /* Visual Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 40px;
-            margin: 40px 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 16px;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: var(--primary);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 40px;
-            padding-left: 40px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -24px;
-            top: 8px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--primary);
-            border: 3px solid var(--surface);
-            box-shadow: 0 0 0 3px var(--primary-light);
-        }
-
-        .timeline-year {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        .timeline-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-        }
-
-        .timeline-description {
-            font-size: 16px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* Tech Stack Visual */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-        }
-
-        .tech-category {
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s;
-        }
-
-        .tech-category:hover {
-            border-color: var(--primary);
-            box-shadow: 0 4px 16px rgba(49, 130, 246, 0.1);
-        }
-
-        .tech-category h3 {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .tech-list {
-            list-style: none;
-        }
-
-        .tech-item {
-            padding: 12px 0;
-            font-size: 16px;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            line-height: 1.6;
-        }
-
-        .tech-item::before {
-            content: "▸";
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        .tech-item strong {
-            color: var(--text-primary);
-            font-weight: 700;
-        }
-
-        /* Projects */
-        .project {
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-left: 6px solid var(--primary);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 28px;
-            transition: all 0.3s;
-        }
-
-        .project:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-        }
-
-        .project-header {
-            margin-bottom: 24px;
-        }
-
-        .project-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 12px;
-        }
-
-        .project-meta {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            font-size: 16px;
-            color: var(--text-tertiary);
-            font-weight: 600;
-        }
-
-        .project-content h4 {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 28px 0 16px;
-        }
-
-        .project-content p {
-            font-size: 17px;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .project-content ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .project-content li {
-            padding: 10px 0 10px 28px;
-            font-size: 16px;
-            color: var(--text-secondary);
-            position: relative;
-            line-height: 1.7;
-        }
-
-        .project-content li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .tech-tag {
-            background: var(--code-bg);
-            color: var(--text-primary);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        /* Code Block */
-        .code-block {
-            background: #1e1e1e;
-            border-radius: 12px;
-            padding: 28px;
-            margin: 24px 0;
-            overflow-x: auto;
-        }
-
-        .code-block pre {
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 15px;
-            line-height: 1.7;
-            color: #d4d4d4;
-            margin: 0;
-        }
-
-        /* Highlight Box */
-        .highlight-box {
-            background: var(--primary-light);
-            border-left: 5px solid var(--primary);
-            border-radius: 10px;
-            padding: 24px 28px;
-            margin: 24px 0;
-        }
-
-        .highlight-box p {
-            font-size: 17px;
-            color: var(--text-primary);
-            margin: 0;
-            line-height: 1.7;
-            font-weight: 500;
-        }
-
-        /* Architecture Diagram */
-        .architecture {
-            background: var(--surface);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 32px;
-            margin: 24px 0;
-            text-align: center;
-        }
-
-        .architecture-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-        }
-
-        .architecture-diagram {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .arch-box {
-            background: var(--primary-light);
-            border: 2px solid var(--primary);
-            border-radius: 10px;
-            padding: 20px 32px;
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--primary-dark);
-            min-width: 150px;
-        }
-
-        .arch-arrow {
-            font-size: 24px;
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        /* Progress Bar */
-        .skill-progress {
-            margin: 20px 0;
-        }
-
-        .skill-name {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-        }
-
-        .progress-bar {
-            height: 12px;
-            background: var(--code-bg);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-            border-radius: 6px;
-            transition: width 1s ease-out;
-        }
-
-        /* Table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 24px 0;
-            font-size: 16px;
-        }
-
-        th, td {
-            padding: 16px;
-            text-align: left;
-            border: 1px solid var(--border);
-        }
-
-        th {
-            background: var(--code-bg);
-            font-weight: 700;
-            color: var(--text-primary);
-            font-size: 17px;
-        }
-
-        td {
-            color: var(--text-secondary);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            padding: 50px 0;
-            margin-top: 80px;
-            text-align: center;
-            color: var(--text-tertiary);
-            font-size: 16px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            .portfolio-nav {
-                gap: 12px 16px;
-            }
-
-            .portfolio-nav a {
-                font-size: 13px;
-            }
-
-            .info-grid {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .info-item {
-                flex-wrap: wrap;
-            }
-
-            .info-value {
-                overflow-wrap: anywhere;
-            }
-
-            .table-scroll table {
-                min-width: 620px;
-            }
-
-            .intro {
-                flex-direction: column;
-                gap: 40px;
-            }
-
-            .intro-photo {
-                order: -1;
-            }
-
-            .intro-title {
-                font-size: 40px;
-            }
-
-            .section-title {
-                font-size: 32px;
-            }
-
-            .stats-grid {
-                grid-template-columns: minmax(0, 1fr);
-            }
-
-            .tech-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .project {
-                padding: 28px;
-            }
-
-            .requirements-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .match-rate {
-                font-size: 56px;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animations - 데스크톱 전용 */
-        @media (min-width: 769px) {
-            .fade-in {
-                opacity: 0;
-                transform: translateY(30px);
-                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            }
-
-            .fade-in.visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* 모바일에서는 애니메이션 완전 비활성화 - 항상 보임 */
-        @media (max-width: 768px) {
-            .fade-in {
-                opacity: 1 !important;
-                transform: none !important;
-                transition: none !important;
-            }
-        }
-
-        /* Print Styles for PDF */
-        @media print {
-            * {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            @page {
-                size: A4;
-                margin: 15mm 25mm;
-            }
-
-            body {
-                background: white;
-                font-size: 11px;
-                line-height: 1.5;
-            }
-
-            .container {
-                max-width: 100%;
-                padding: 0 16px;
-            }
-
-            /* Remove animations for PDF */
-            .fade-in {
-                opacity: 1 !important;
-                transform: translateY(0) !important;
-            }
-
-            /* Header */
-            header {
-                position: relative !important;
-                padding: 8px 0 !important;
-                margin-bottom: 10px !important;
-            }
-
-            .logo {
-                font-size: 14px !important;
-            }
-
-            /* Intro Section - 사진 오른쪽, 텍스트 왼쪽 */
-            .intro {
-                padding: 14px 0 12px !important;
-                gap: 20px !important;
-                flex-direction: row-reverse !important;
-            }
-
-            .intro-photo {
-                flex-shrink: 0 !important;
-            }
-
-            .profile-photo {
-                width: 110px !important;
-                height: 138px !important;
-                object-fit: cover !important;
-                border-radius: 12px !important;
-                border: none !important;
-                box-shadow: none !important;
-            }
-
-            .intro-title {
-                font-size: 28px !important;
-                margin-bottom: 8px !important;
-            }
-
-            .intro-subtitle {
-                font-size: 16px !important;
-                margin-bottom: 16px !important;
-            }
-
-            .meta-item {
-                font-size: 12px !important;
-            }
-
-            .meta-item strong {
-                font-size: 13px !important;
-            }
-
-            /* Profile Info */
-            .profile-info {
-                margin-bottom: 16px !important;
-                padding: 16px !important;
-            }
-
-            .info-item {
-                font-size: 11px !important;
-            }
-
-            .info-label {
-                min-width: 80px !important;
-                font-size: 11px !important;
-            }
-
-            /* Stats Grid - 3개 한 줄에 강제 */
-            .stats-grid {
-                display: grid !important;
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 14px !important;
-                margin-bottom: 20px !important;
-            }
-
-            .stat-card {
-                padding: 16px !important;
-            }
-
-            .stat-number {
-                font-size: 28px !important;
-                margin-bottom: 6px !important;
-            }
-
-            .stat-label {
-                font-size: 11px !important;
-            }
-
-            /* Sections - 내용 연속 */
-            .section {
-                padding: 16px 0 !important;
-            }
-
-            .section-header {
-                margin-bottom: 14px !important;
-                page-break-after: avoid !important;
-                page-break-inside: avoid !important;
-            }
-
-            .section-tag {
-                font-size: 10px !important;
-                padding: 4px 10px !important;
-                margin-bottom: 8px !important;
-            }
-
-            .section-title {
-                font-size: 20px !important;
-                margin-bottom: 6px !important;
-            }
-
-            .section-description {
-                font-size: 12px !important;
-            }
-
-            /* Tech Grid - 4개 병렬 배치 */
-            .tech-grid {
-                display: grid !important;
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 12px !important;
-            }
-
-            .tech-category {
-                padding: 14px !important;
-            }
-
-            .tech-category h3 {
-                font-size: 13px !important;
-                margin-bottom: 10px !important;
-                padding-bottom: 8px !important;
-            }
-
-            .tech-item {
-                padding: 5px 0 !important;
-                font-size: 10.5px !important;
-            }
-
-            .tech-item::before {
-                font-size: 11px !important;
-            }
-
-            /* Projects - 중간에 잘려도 됨 */
-            .project {
-                margin-bottom: 12px !important;
-                padding: 16px !important;
-            }
-
-            .project-header {
-                margin-bottom: 10px !important;
-                page-break-after: avoid !important;
-            }
-
-            .project-title {
-                font-size: 16px !important;
-                margin-bottom: 6px !important;
-            }
-
-            .project-meta {
-                font-size: 11px !important;
-                gap: 12px !important;
-            }
-
-            .project-content h4 {
-                font-size: 14px !important;
-                margin: 12px 0 8px !important;
-                page-break-after: avoid !important;
-            }
-
-            .project-content p {
-                font-size: 11px !important;
-                line-height: 1.55 !important;
-                margin-bottom: 10px !important;
-            }
-
-            .project-content li {
-                padding: 5px 0 5px 22px !important;
-                font-size: 11px !important;
-                line-height: 1.55 !important;
-            }
-
-            .project-content li::before {
-                font-size: 12px !important;
-            }
-
-            /* Highlight Box */
-            .highlight-box {
-                padding: 12px 14px !important;
-                margin: 10px 0 !important;
-            }
-
-            .highlight-box p {
-                font-size: 11px !important;
-                line-height: 1.55 !important;
-            }
-
-            /* Architecture Diagram */
-            .architecture {
-                padding: 14px !important;
-                margin: 10px 0 !important;
-            }
-
-            .architecture-title {
-                font-size: 13px !important;
-                margin-bottom: 10px !important;
-            }
-
-            .arch-box {
-                padding: 10px 14px !important;
-                font-size: 11px !important;
-                min-width: 100px !important;
-            }
-
-            .arch-arrow {
-                font-size: 16px !important;
-            }
-
-            /* Tech Tags */
-            .tech-tags {
-                gap: 6px !important;
-                margin-top: 10px !important;
-            }
-
-            .tech-tag {
-                padding: 4px 10px !important;
-                font-size: 10px !important;
-            }
-
-            /* Table */
-            table {
-                font-size: 11px !important;
-                margin: 10px 0 !important;
-            }
-
-            th, td {
-                padding: 8px 10px !important;
-            }
-
-            th {
-                font-size: 12px !important;
-            }
-
-            /* Footer */
-            footer {
-                padding: 16px 0 !important;
-                margin-top: 20px !important;
-                font-size: 10px !important;
-            }
-
-            footer p {
-                font-size: 10px !important;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="header-content">
-            <div class="logo">이재석 <span>·</span> 임베디드 개발자</div>
-            <nav class="portfolio-nav" aria-label="포트폴리오 섹션">
-                <a href="#hanon">한온시스템</a>
-                <a href="#skills">보유 기술</a>
-                <a href="#previous-projects">기존 개발 경험</a>
-            </nav>
-        </div>
-    </header>
-
-    <div class="container">
-        <!-- Intro Section -->
-        <section class="intro fade-in">
-            <div class="intro-content">
-                <h1 class="intro-title">이재석</h1>
-                <p class="intro-subtitle">임베디드 SW · 모터 제어 · Core SW Component</p>
-                <div class="intro-meta">
-                    <div class="meta-item"><strong>현재</strong> 한온시스템 · Platform SW</div>
-                    <div class="meta-item"><strong>전문분야</strong> 센서리스 FOC, 모터 제어 공통 플랫폼</div>
-                    <div class="meta-item"><strong>개발경험</strong> 차량 진단, 충전 시스템, 보안통신</div>
-                </div>
-            </div>
-            <div class="intro-photo">
-                <img src="profile.jpg" alt="이재석 프로필 사진" class="profile-photo">
-            </div>
-        </section>
-
-        <!-- Profile Info -->
-        <div class="profile-info fade-in">
-            <div class="info-grid">
-                <div class="info-item">
-                    <span class="info-label">이메일</span>
-                    <span class="info-value">dayungh10@naver.com</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">연락처</span>
-                    <span class="info-value">010-9054-7352</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">생년월일</span>
-                    <span class="info-value">1992.08.18</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">거주지</span>
-                    <span class="info-value">서울특별시 송파구</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">병역</span>
-                    <span class="info-value">육군 헌병 병장 만기제대 (2012.04 ~ 2014.01)</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">특기</span>
-                    <span class="info-value">마라톤 / 골프</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Current Employment -->
-        <section class="profile-info current-role fade-in" aria-labelledby="current-role-title">
-            <div class="section-tag">현재 경력</div>
-            <h2 id="current-role-title">한온시스템 <span lang="en">Hanon Systems</span></h2>
-            <div class="project-meta">
-                <span><time datetime="2026-05-18">2026.05.18</time> ~ 현재</span>
-                <span>Platform SW · Core SW Component 개발</span>
-            </div>
-            <p>자동차 열관리 부품용 BLDC/PMSM 모터 제어 펌웨어와 재사용 가능한 Core SW를 개발합니다. 공통 제어 알고리즘 설계, MCU 포팅, 보드 구동, LIN 통신, 보호 로직, 벤치 튜닝과 검증 도구 개발을 수행하고 있습니다.</p>
-            <p><a class="experience-link" href="#hanon">한온시스템 업무 상세 보기</a></p>
-        </section>
-
-        <!-- Education -->
-        <section class="section fade-in">
-            <div class="section-header">
-                <div class="section-tag">학력</div>
-                <h2 class="section-title">교육</h2>
-            </div>
-
-            <div class="project">
-                <div class="project-header">
-                    <h3 class="project-title">공주대학교 대학원 정보통신공학과</h3>
-                    <div class="project-meta">
-                        <span>2020.03 ~ 2022.02</span>
-                        <span>석사과정 수료</span>
-                        <span>평점 4.38 / 4.5</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project">
-                <div class="project-header">
-                    <h3 class="project-title">단국대학교 전자공학과</h3>
-                    <div class="project-meta">
-                        <span>2011.03 ~ 2017.02</span>
-                        <span>학사 졸업</span>
-                        <span>평점 3.09 / 4.5</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats -->
-        <div class="stats-grid fade-in">
-            <div class="stat-card">
-                <div class="stat-number">8+</div>
-                <div class="stat-label">개발 경력 (년)</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">Core SW</div>
-                <div class="stat-label">현재 개발 직무</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">5</div>
-                <div class="stat-label">논문 & 특허</div>
-            </div>
-        </div>
-
-        <!-- Core Skills Visual -->
-        <section class="section fade-in" id="skills">
-            <div class="section-header">
-                <div class="section-tag">핵심 역량</div>
-                <h2 class="section-title">보유 기술</h2>
-                <p class="section-description">모터 제어부터 차량 진단·통신까지의 개발 기술</p>
-            </div>
-
-            <div class="tech-grid">
-                <div class="tech-category">
-                    <h3>MCU 플랫폼</h3>
-                    <ul class="tech-list">
-                        <li class="tech-item"><strong>TI C2000</strong> PWM·ADC 동기화 및 FOC 제어</li>
-                        <li class="tech-item"><strong>NXP S12ZVM</strong> Q15 고정소수점 모터 제어</li>
-                        <li class="tech-item"><strong>STM32H7</strong> CMSIS-RTOS 기반 펌웨어</li>
-                        <li class="tech-item"><strong>STM32F4</strong> 실시간 제어 시스템</li>
-                        <li class="tech-item"><strong>ESP32</strong> 사물인터넷 게이트웨이</li>
-                        <li class="tech-item"><strong>FreeRTOS</strong> 멀티태스킹 시스템</li>
-                    </ul>
-                </div>
-
-                <div class="tech-category">
-                    <h3>통신 프로토콜</h3>
-                    <ul class="tech-list">
-                        <li class="tech-item"><strong>LIN</strong> 슬레이브 통신, LDF 신호 매핑·검증</li>
-                        <li class="tech-item"><strong>CAN</strong> DBC 데이터베이스 구축</li>
-                        <li class="tech-item"><strong>MQTT</strong> 명령채널 설계</li>
-                        <li class="tech-item"><strong>HTTPS</strong> 대용량 파일 다운로드</li>
-                        <li class="tech-item"><strong>WebSocket</strong> 실시간 데이터 전송</li>
-                        <li class="tech-item"><strong>RS485</strong> 모드버스 모터제어</li>
-                    </ul>
-                </div>
-
-                <div class="tech-category">
-                    <h3>보안 & 암호화</h3>
-                    <ul class="tech-list">
-                        <li class="tech-item"><strong>TLS/SSL</strong> 인증서 기반 보안통신</li>
-                        <li class="tech-item"><strong>PBKDF2</strong> 키 파생 알고리즘</li>
-                        <li class="tech-item"><strong>HSM</strong> 하드웨어 보안모듈 연동</li>
-                        <li class="tech-item"><strong>X.509</strong> 인증서 프로비저닝</li>
-                    </ul>
-                </div>
-
-                <div class="tech-category">
-                    <h3>개발 도구</h3>
-                    <ul class="tech-list">
-                        <li class="tech-item"><strong>CodeWarrior / CCS</strong> 빌드·디버깅·보드 구동</li>
-                        <li class="tech-item"><strong>FreeMASTER / PLIN</strong> 제어 변수 계측·LIN 시험</li>
-                        <li class="tech-item"><strong>MATLAB / Simulink</strong> 제어 분석·튜닝·시뮬레이션</li>
-                        <li class="tech-item"><strong>CANoe</strong> DBC 작성 및 테스트 자동화</li>
-                        <li class="tech-item"><strong>LabVIEW</strong> 계측 시스템 개발</li>
-                        <li class="tech-item"><strong>IAR EWARM</strong> 펌웨어 개발환경</li>
-                        <li class="tech-item"><strong>Git</strong> 버전관리</li>
-                    </ul>
-                </div>
-
-                <div class="tech-category">
-                    <h3>모터 제어</h3>
-                    <ul class="tech-list">
-                        <li class="tech-item"><strong>Sensorless FOC</strong> Clarke/Park, PI, SVPWM</li>
-                        <li class="tech-item"><strong>관측기</strong> SMC·자속 관측기 분석 및 비교</li>
-                        <li class="tech-item"><strong>기동 제어</strong> I-f 개루프·폐루프 전환 튜닝</li>
-                        <li class="tech-item"><strong>Single-shunt</strong> 전류 재구성·ADC 샘플링</li>
-                        <li class="tech-item"><strong>실시간 최적화</strong> ISR 계측·고정소수점 연산</li>
-                    </ul>
-                </div>
-
-                <div class="tech-category">
-                    <h3>SW 아키텍처·검증</h3>
-                    <ul class="tech-list">
-                        <li class="tech-item"><strong>Core SW</strong> 공통 알고리즘·제품 설정 분리</li>
-                        <li class="tech-item"><strong>AUTOSAR 구조</strong> SWC·RTE 포트·Runnable 설계</li>
-                        <li class="tech-item"><strong>C99 / MISRA-C</strong> 정적 할당·코딩 규칙 기반 개발</li>
-                        <li class="tech-item"><strong>회귀 검증</strong> 골든 벡터·수치 형식 교차 검증</li>
-                        <li class="tech-item"><strong>Python</strong> 계측·분석·패키지 생성 자동화</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Hanon Systems Experience -->
-        <section class="section fade-in" id="hanon" aria-labelledby="hanon-title">
-            <div class="section-header">
-                <div class="section-tag">한온시스템 · 현재 업무</div>
-                <h2 class="section-title" id="hanon-title">모터 제어 &amp; Core SW 개발</h2>
-                <p class="section-description">2026.05.18 ~ 현재 · Platform SW / Core SW Component</p>
-            </div>
-
-            <article class="project" id="hanon-platform">
-                <div class="project-header">
-                    <h3 class="project-title">모터 제어 공통 SW 플랫폼 개발</h3>
-                    <div class="project-meta"><span>공통 코어 구현 · 제품 적용 및 확장 진행 중</span></div>
-                </div>
-                <div class="project-content">
-                    <p>펌프와 팬 계열 제품에서 제어 알고리즘을 재사용할 수 있도록, MCU·보드 의존 코드와 제품별 설정을 분리한 모터 제어 플랫폼을 개발했습니다.</p>
-                    <ul>
-                        <li><strong>제어 코어:</strong> 좌표 변환, 전류·속도 PI 제어, SVPWM, 센서리스 관측기, 기동 상태머신을 공통 모듈로 구성</li>
-                        <li><strong>수치 형식:</strong> 16비트 Q15 고정소수점과 32비트 부동소수점 구현을 유지하고, 동일 입력의 출력 오차를 허용 범위 기준으로 교차 검증</li>
-                        <li><strong>계층 분리:</strong> ASW / 정적 RTE / BSW·CDD / MCAL 경계와 S/R·C/S 포트 인터페이스, Runnable·ISR 실행 책임을 설계</li>
-                        <li><strong>제품 변형:</strong> MCU, 통신, 수치 형식, 외부 드라이버와 제품 파라미터를 조합하는 패키지 생성 CLI·GUI 및 검증 흐름 구현</li>
-                    </ul>
-                    <div class="tech-tags"><span class="tech-tag">C99</span><span class="tech-tag">MISRA-C</span><span class="tech-tag">Q15 / Float</span><span class="tech-tag">Static RTE</span><span class="tech-tag">MCAL</span></div>
-                </div>
-            </article>
-
-            <article class="project" id="hanon-eop">
-                <div class="project-header">
-                    <h3 class="project-title">전동 오일펌프(eOP) 펌웨어 포팅·최적화</h3>
-                    <div class="project-meta"><span>평가보드 포팅 및 개루프·폐루프 구동 검증</span></div>
-                </div>
-                <div class="project-content">
-                    <p>기존 eOP 펌웨어의 제어 흐름과 하드웨어 의존성을 분석하고, 평가보드로 이식해 모터 구동과 계측 환경을 구성했습니다.</p>
-                    <ul>
-                        <li><strong>플랫폼 이식:</strong> 컴파일러·링커, 인터럽트 벡터, OSEK 기반 스케줄링, 고정소수점 연산의 이식 문제 분석 및 수정</li>
-                        <li><strong>구동 디버깅:</strong> PWM 극성, ADC 트리거, 전류 환산, 샘플링 시점과 single-shunt 전류 재구성 경로 점검</li>
-                        <li><strong>실시간 성능:</strong> FOC ISR 구간별 실행시간을 계측해 제어주기 초과 원인을 찾고, 수식 변환과 연산 구조 개선으로 실행시간 단축</li>
-                        <li><strong>센서리스 제어:</strong> 관측기 위상 지연·보상과 제어주기 의존 파라미터를 분석하고, 고정소수점 범위 검증 및 계측 기능 보강</li>
-                        <li><strong>검증 환경:</strong> FreeMASTER와 시리얼 콘솔을 이용한 속도 지령·상태 관측 및 개루프·폐루프 구동 확인</li>
-                    </ul>
-                    <div class="tech-tags"><span class="tech-tag">NXP S12ZVM</span><span class="tech-tag">CodeWarrior</span><span class="tech-tag">OSEK</span><span class="tech-tag">FOC ISR</span><span class="tech-tag">FreeMASTER</span></div>
-                </div>
-            </article>
-
-            <article class="project" id="hanon-blower">
-                <div class="project-header">
-                    <h3 class="project-title">차량 공조 블로워 센서리스 FOC 개발</h3>
-                    <div class="project-meta"><span>시제품 보드 폐루프 구동 확인 · 튜닝 및 개선 진행 중</span></div>
-                </div>
-                <div class="project-content">
-                    <p>공통 제어 코어를 블로워용 MCU와 시제품 보드에 적용하고, 실제 모터를 연결해 기동·폐루프 전환·속도 제어를 검증했습니다.</p>
-                    <ul>
-                        <li><strong>MCU 포팅:</strong> TI C2000 기반 PWM·ADC·타이머·GPIO·SPI·LIN 드라이버와 FOC 인터럽트 경로 통합</li>
-                        <li><strong>HW/SW 정합:</strong> 데이터시트·회로도·PCB를 대조해 핀맵과 GPIO MUX를 검토하고, 게이트 드라이버 설정 및 3상 상보 PWM 출력 확인</li>
-                        <li><strong>기동 튜닝:</strong> 정렬, I-f 개루프 가속, 관측기 동기 조건, 폐루프 인계와 정지 시퀀스의 파라미터 조정</li>
-                        <li><strong>실기 분석:</strong> SMC·자속 관측기의 거동을 비교하고, 벤치·동력계 시험에서 전류·속도·상태 기록을 분석해 기동 및 구속 조건 점검</li>
-                        <li><strong>후속 개선:</strong> 저속 속도 추정 리플, 계측값 환산, 클럭 편차와 역회전 대응을 분석하고 개선안 설계</li>
-                    </ul>
-                    <div class="tech-tags"><span class="tech-tag">TI C2000</span><span class="tech-tag">Sensorless FOC</span><span class="tech-tag">PWM / ADC</span><span class="tech-tag">Gate Driver</span><span class="tech-tag">Bench Test</span></div>
-                </div>
-            </article>
-
-            <article class="project" id="hanon-lin-protection">
-                <div class="project-header">
-                    <h3 class="project-title">LIN 통신·진단 및 Fail-Safety 로직</h3>
-                    <div class="project-meta"><span>통신·보호 로직 구현 · 제품별 통합 검증 진행 중</span></div>
-                </div>
-                <div class="project-content">
-                    <p>상위 제어기의 운전 명령과 모터 상태를 연결하는 LIN 통신 경로를 구성하고, 고장 검출·감속·정지·복구 정책을 제품 요구사항에 맞춰 구현했습니다.</p>
-                    <ul>
-                        <li><strong>LIN 통합:</strong> 슬레이브 스택, MCAL Lin, LinIf와 RTE 연계를 구성하고 LDF 기반 지령·상태 신호 매핑 구현</li>
-                        <li><strong>인터페이스 변경:</strong> 듀티 기반 지령과 RPM 직접 지령을 구분하고, 전압·전류·실제 속도 보고값의 단위·환산·범위 검증</li>
-                        <li><strong>고장 대응:</strong> 과전압·저전압·과전류·과온·구속·통신 이상에 대한 디바운스, 출력 제한, 정지 래치와 재시도 제한 구현</li>
-                        <li><strong>제품별 설정:</strong> 보호 채널 실장 여부, 임계값과 복구 정책을 분리하고, 요구사항·설계 판단·미확정 조건의 근거 추적</li>
-                        <li><strong>회귀 검증:</strong> 기동·정지·통신 상태와 보호 조건의 조합을 호스트에서 재현해 통합 경로의 결함 수정 및 시험 보강</li>
-                    </ul>
-                    <div class="tech-tags"><span class="tech-tag">LIN / LDF</span><span class="tech-tag">Diagnostics</span><span class="tech-tag">Fail-Safety</span><span class="tech-tag">State Machine</span></div>
-                </div>
-            </article>
-
-            <article class="project" id="hanon-tuning">
-                <div class="project-header">
-                    <h3 class="project-title">제어 파라미터 분석·튜닝 및 시뮬레이션</h3>
-                    <div class="project-meta"><span>분석·검증 환경 구축 · 자동 튜닝 절차 개발 중</span></div>
-                </div>
-                <div class="project-content">
-                    <p>모터·보드 측정값과 제어기 설정의 관계를 정리하고, 시뮬레이션과 실기 기록을 함께 사용해 튜닝 근거를 확인하는 환경을 개발했습니다.</p>
-                    <ul>
-                        <li><strong>게인 설계:</strong> 모터 전기 파라미터, 제어주기, 전류·속도 스케일에 따른 PI 게인과 관측기 계수의 종속관계 분석</li>
-                        <li><strong>모델 검증:</strong> MATLAB/Simulink 기반 플랜트·제어 모델과 폐루프 시뮬레이션을 이용해 기동 파라미터와 관측기 거동 비교</li>
-                        <li><strong>튜닝 도구:</strong> 측정 데이터 분석, 게인 유도, 파라미터 변경 영향 확인과 시험 절차를 연결하는 Motor Tuning Kit 시제품 개발</li>
-                        <li><strong>캘리브레이션:</strong> 개체별 모터 파라미터 저장·검증·적용 구조와 NVM 연동 구현, 전체 실기 절차 검증은 후속 과제로 관리</li>
-                        <li><strong>파라미터 관리:</strong> 보드·모터·시스템·제어기 설정을 구분하고, 단위·유도식·측정 근거와 변경 이력을 문서화</li>
-                    </ul>
-                    <div class="tech-tags"><span class="tech-tag">MATLAB / Simulink</span><span class="tech-tag">PI Tuning</span><span class="tech-tag">Simulation</span><span class="tech-tag">Calibration</span></div>
-                </div>
-            </article>
-
-            <article class="project" id="hanon-tools">
-                <div class="project-header">
-                    <h3 class="project-title">개발·계측·검증 도구 자동화</h3>
-                    <div class="project-meta"><span>LIN 제어 도구·검증 스크립트 구현 및 배포 패키지 제작</span></div>
-                </div>
-                <div class="project-content">
-                    <p>반복되는 통신 시험, 데이터 수집, 빌드와 다운로드 작업을 재현할 수 있도록 개발 도구와 실행 절차를 구성했습니다.</p>
-                    <ul>
-                        <li><strong>PLIN Control:</strong> PEAK PLIN-USB와 LDF를 사용하는 Python CLI·Windows GUI 개발. 속도 지령·정지·상태 조회·수신 모니터·로그 저장 지원</li>
-                        <li><strong>도구 배포:</strong> 제품 프로파일로 신호 매핑을 분리하고, Python이 없는 PC용 설치 패키지와 모의 통신 자가진단 구성</li>
-                        <li><strong>시험 자동화:</strong> 헤드리스 빌드, 디버거 기반 변수 판독, 벤치 데이터 수집과 골든 벡터·호스트 회귀 검증 스크립트 작성</li>
-                        <li><strong>장비 도입 검토:</strong> 추가 MCU용 프로그래머·USB LIN 장비의 드라이버 및 API 접근 확인과 Flash 시험 절차 준비. 대상 보드 Flash·구동 시험은 준비 단계</li>
-                        <li><strong>인계 자료:</strong> HW 담당자가 사용할 펌웨어 다운로드 안내, 튜닝 체크리스트와 오프라인 기술 문서 작성</li>
-                    </ul>
-                    <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">PLIN-USB</span><span class="tech-tag">CLI / GUI</span><span class="tech-tag">Test Automation</span></div>
-                </div>
-            </article>
-
-            <article class="project" id="hanon-reuse">
-                <div class="project-header">
-                    <h3 class="project-title">공통 컴포넌트·재사용 아키텍처 분석</h3>
-                    <div class="project-meta"><span>기존 SW 자산 분석 · 인터페이스 규약 및 이관 계획 수립</span></div>
-                </div>
-                <div class="project-content">
-                    <p>기존 열관리 제품의 SW·설계·검증 자산을 조사하고, 공통 알고리즘과 제품별 변형을 구분해 재사용 가능한 컴포넌트 구조와 적용안을 정리했습니다.</p>
-                    <ul>
-                        <li><strong>자산 분석:</strong> eOP·eWP·eRV 등 기존 코드의 제어 흐름, HW 의존성, 인터페이스와 변형 간 중복 구조 조사</li>
-                        <li><strong>구조 설계:</strong> 알고리즘, 하드웨어 접근, 제품 데이터의 분리 기준과 명명·데이터 교환·실행 컨텍스트 규약 정의</li>
-                        <li><strong>적용 계획:</strong> 공통 플랫폼에 재사용·이관·보완할 대상을 분류하고, 패키지 배포 기준과 변형 관리 방안 수립</li>
-                        <li><strong>검증 근거:</strong> 요구사항·설계·테스트·결함·릴리스 자산의 연결성을 검토하고 ASPICE 관점의 개발·검증 계획 정리</li>
-                        <li><strong>기술 협업:</strong> 글로벌 개발 거점과의 기술 협의·보고 자료, Jira 기반 개발 과제 관리와 팀 내 분석·인계 문서 작성</li>
-                    </ul>
-                    <div class="tech-tags"><span class="tech-tag">SW Architecture</span><span class="tech-tag">Component Reuse</span><span class="tech-tag">Traceability</span><span class="tech-tag">Jira / PTC</span></div>
-                </div>
-            </article>
-
-            <article class="project" id="hanon-thermal">
-                <div class="project-header">
-                    <h3 class="project-title">통합 열관리 SW·AUTOSAR 개발 지원</h3>
-                    <div class="project-meta"><span>요구사항·기존 모델·검증 자료 분석</span></div>
-                </div>
-                <div class="project-content">
-                    <p>통합 열관리 모듈의 개발 자료를 분석하고, 모터 제어 Core SW와 AUTOSAR 기반 애플리케이션·BSW 사이의 연계 및 재사용 범위를 검토했습니다.</p>
-                    <ul>
-                        <li><strong>요구사항 검토:</strong> 부품·제어 요구사항과 SW 인터페이스를 대조하고 개발 범위, 불일치 및 확인 필요 항목 정리</li>
-                        <li><strong>모델 분석:</strong> 기존 Simulink 사양·구현 모델의 계층, 데이터 사전, AUTOSAR 인터페이스와 릴리스 간 변경점 분석</li>
-                        <li><strong>검증 자료:</strong> 기존 MIL 테스트, 모델 검증 및 결함 이력을 검토하고 요구사항과의 연결 관계 정리</li>
-                        <li><strong>통합 검토:</strong> 선행 SW의 eWP·밸브 제어 구조와 MCU·구동 IC·통신·업데이트 구성을 분석해 Core SW 재사용 및 BSW 연계 검토 지원</li>
-                    </ul>
-                    <div class="tech-tags"><span class="tech-tag">Thermal Management</span><span class="tech-tag">AUTOSAR</span><span class="tech-tag">Simulink</span><span class="tech-tag">MIL Analysis</span></div>
-                </div>
-            </article>
-        </section>
-
-        <!-- Recent Projects -->
-        <section class="section fade-in" id="previous-projects">
-            <div class="section-header">
-                <div class="section-tag">기존 개발 경험</div>
-                <h2 class="section-title">주요 개발 경험</h2>
-                <p class="section-description">차량 진단·보안통신 디바이스 개발</p>
-            </div>
-
-            <!-- Project 1 -->
-            <div class="project">
-                <div class="project-header">
-                    <h3 class="project-title">클라우드 진단 플랫폼 대응 디바이스 펌웨어 리팩토링</h3>
-                    <div class="project-meta">
-                        <span>2024.04 착수</span>
-                        <span>STM32H7 · MQTT · HTTPS · WebSocket</span>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <p>차량 ECU를 원격 진단하는 클라우드 플랫폼에 대응하는 디바이스 펌웨어를 리팩토링했습니다. 기존 Bluetooth 기반 태블릿 통신에서 클라우드 서버 기반 MQTT/WebSocket/HTTPS 통신으로 전환하는 작업을 수행했습니다.</p>
-
-                    <h4>통신 프로토콜 전환 및 펌웨어 리팩토링</h4>
-                    <div class="highlight-box">
-                        <p>기존 Bluetooth 통신 체계와 디바이스 동작 시퀀스를 완전히 파악한 후, 클라우드 환경에 맞춰 펌웨어를 전면 리팩토링했습니다.</p>
-                    </div>
-
-                    <div class="architecture">
-                        <div class="architecture-title">통신 아키텍처 전환</div>
-                        <div class="architecture-diagram" style="gap: 32px;">
-                            <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
-                                <div style="font-size: 14px; font-weight: 700; color: var(--text-tertiary); margin-bottom: 8px;">[ 기존 ]</div>
-                                <div class="arch-box" style="background: #FFF9F0; border-color: var(--warning);">디바이스<br>(STM32H7)</div>
-                                <div class="arch-arrow" style="transform: rotate(90deg); margin: 4px 0;">→</div>
-                                <div class="arch-box" style="background: #FFF9F0; border-color: var(--warning);">태블릿</div>
-                                <div style="font-size: 13px; color: var(--text-tertiary); font-weight: 600; margin-top: 8px;">Bluetooth</div>
-                            </div>
-                            <div class="arch-arrow" style="font-size: 32px;">⇨</div>
-                            <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
-                                <div style="font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">[ 변경 후 ]</div>
-                                <div class="arch-box">디바이스<br>(STM32H7)</div>
-                                <div class="arch-arrow" style="transform: rotate(90deg); margin: 4px 0;">→</div>
-                                <div class="arch-box">클라우드 서버</div>
-                                <div style="font-size: 13px; color: var(--primary); font-weight: 600; margin-top: 8px;">MQTT / WebSocket / HTTPS</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h4>핵심 작업 내용</h4>
-                    <ul>
-                        <li><strong>시스템 분석:</strong> 기존 BT 통신 기반 디바이스 동작 시퀀스 전체 파악 및 문서화</li>
-                        <li><strong>프로토콜 전환:</strong> Bluetooth → MQTT/WebSocket/HTTPS 통신 계층 구현</li>
-                        <li><strong>성능 최적화:</strong> 무선 통신으로 증가한 데이터 처리를 위한 벌크 처리 기능 추가 (단일 명령 → 다중 명령 일괄 처리)</li>
-                        <li><strong>처리 속도 향상:</strong> 명령 큐 최적화 및 비동기 처리로 응답 속도 개선</li>
-                        <li><strong>시스템 확장:</strong> 클라우드 전환으로 추가된 OTA 업데이트 기능 구현 및 최적화</li>
-                        <li><strong>보안 통신 구현:</strong> Python 기반 TLS 테스트베드 자체 구축 및 PoC 검증</li>
-                        <li><strong>AWS IoT 연동:</strong> X.509 인증서 프로비저닝 및 mTLS 기반 End-to-End 보안 채널 수립</li>
-                    </ul>
-
-                    <h4>OTA 시스템 최적화</h4>
-                    <ul>
-                        <li>MQTT 명령채널과 HTTPS 다운로드채널 분리 설계</li>
-                        <li>플래시 메모리 쓰기 최적화 및 롤백 메커니즘</li>
-                        <li>HTTPS 분할 다운로드 및 무결성 검증 (체크섬)</li>
-                    </ul>
-
-                    <div class="tech-tags">
-                        <span class="tech-tag">STM32H7</span>
-                        <span class="tech-tag">FreeRTOS</span>
-                        <span class="tech-tag">MQTT</span>
-                        <span class="tech-tag">WebSocket</span>
-                        <span class="tech-tag">HTTPS</span>
-                        <span class="tech-tag">TLS/SSL</span>
-                        <span class="tech-tag">AWS IoT</span>
-                        <span class="tech-tag">X.509</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project: HSM -->
-            <div class="project">
-                <div class="project-header">
-                    <h3 class="project-title">VCI3 HSM 보안 모듈 개발</h3>
-                    <div class="project-meta">
-                        <span>2025.06 ~ 2025.12</span>
-                        <span>STM32H7 · HSM · SPI · UART · 암호화</span>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <p>차량 진단기(VCI3)에 하드웨어 보안 모듈(HSM)을 연동하여 보안 통신 및 암호화 기능을 구현했습니다. 기존 UART 기반 HSM(Coregate)과 신규 SPI 기반 HSM(Autocrypt)을 모두 지원하는 듀얼 HSM 아키텍처를 설계하고 구현했습니다.</p>
-
-                    <h4>HSM 듀얼 아키텍처 설계</h4>
-                    <div class="highlight-box">
-                        <p>하드웨어 ID 핀 감지를 통해 Old HSM(UART)과 New HSM(SPI)을 런타임에 자동 판별하고, 통합 API로 상위 레이어에서 HSM 종류와 무관하게 동일한 인터페이스로 보안 기능을 사용할 수 있도록 추상화 레이어를 설계했습니다.</p>
-                    </div>
-
-                    <div class="architecture">
-                        <div class="architecture-title">HSM 추상화 아키텍처</div>
-                        <div class="architecture-diagram">
-                            <div class="arch-box">Application Layer</div>
-                            <div class="arch-arrow">→</div>
-                            <div class="arch-box">HSM Abstraction API</div>
-                            <div class="arch-arrow">→</div>
-                            <div style="display: flex; flex-direction: column; gap: 8px;">
-                                <div class="arch-box" style="font-size: 14px;">Old HSM (UART)</div>
-                                <div class="arch-box" style="font-size: 14px;">New HSM (SPI)</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h4>핵심 작업 내용</h4>
-                    <ul>
-                        <li><strong>HSM 타입 자동 감지:</strong> BOARD_ID 핀 상태로 HSM 종류 런타임 판별, 동적 핀 할당 시스템 구현</li>
-                        <li><strong>SPI 통신 프로토콜 구현:</strong> New HSM용 SPI 명령 프로토콜 설계 및 DMA 기반 고속 전송 구현</li>
-                        <li><strong>암호화 기능 연동:</strong> AES-128/256, RSA-2048, ECDSA P-256, EdDSA 서명/검증, SHA-256 해시, HMAC, CMAC</li>
-                        <li><strong>키 관리 시스템:</strong> 슬롯 기반 키 저장/생성/삭제, 키 쌍 생성(RSA/ECC), 대칭키 생성(AES)</li>
-                        <li><strong>인증서 관리:</strong> X.509 인증서 저장/읽기, CRL(인증서 폐기 목록) eMMC 저장 관리</li>
-                        <li><strong>CLI 테스트 도구:</strong> hsmtest 명령어 기반 HSM 기능 검증 도구 개발 (DMA 순환 버퍼 기반)</li>
-                    </ul>
-
-                    <h4>성과</h4>
-                    <ul>
-                        <li>단일 펌웨어로 2종류 HSM 지원 - 하드웨어 변경 없이 HSM 교체 가능</li>
-                        <li>보안 통신 인프라 구축으로 클라우드 진단 플랫폼 보안 요구사항 충족</li>
-                        <li>CLI 도구로 HSM 기능 검증 시간 80% 단축</li>
-                    </ul>
-
-                    <div class="tech-tags">
-                        <span class="tech-tag">STM32H7</span>
-                        <span class="tech-tag">HSM</span>
-                        <span class="tech-tag">SPI</span>
-                        <span class="tech-tag">UART</span>
-                        <span class="tech-tag">AES</span>
-                        <span class="tech-tag">RSA</span>
-                        <span class="tech-tag">ECDSA</span>
-                        <span class="tech-tag">X.509</span>
-                        <span class="tech-tag">DMA</span>
-                        <span class="tech-tag">FreeRTOS</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project 2 -->
-            <div class="project">
-                <div class="project-header">
-                    <h3 class="project-title">ECOS 전장검사장비 내재화 프로젝트</h3>
-                    <div class="project-meta">
-                        <span>2024.04 ~ 2025.05</span>
-                        <span>STM32H7 · CMSIS-RTOS · CAN진단 · 리버스 엔지니어링</span>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <p>SP2 차량 전장검사에 사용되던 외부 장비를 자체 기술로 내재화하는 프로젝트를 수행했습니다. 하드웨어/사양팀과 협업하여 기존 9장의 보드를 회로 분석 및 리버스 엔지니어링으로 기능을 파악하고, 이를 5장으로 통합 고도화하여 최종 검사 시간(CT)을 15% 단축(28초 → 25초)했습니다.</p>
-
-                    <h4>리버스 엔지니어링 및 기능 분석</h4>
-                    <div class="highlight-box">
-                        <p>9장의 보드를 데이터시트와 회로도 기반으로 분석하여 각 보드의 기능을 파악하고 펌웨어 요구사항을 도출했습니다. (대표 기능: CAN 진단, 블로워 모터 전압 제어, 전원 제어 등)</p>
-                    </div>
-
-                    <h4>핵심 작업 내용</h4>
-                    <ul>
-                        <li><strong>회로 분석:</strong> 하드웨어/사양팀과 협업하여 9장 보드의 회로 및 동작 원리 분석</li>
-                        <li><strong>기능 파악:</strong> 보드별 고유 기능 리버스 엔지니어링 (CAN 진단, 전압 가변 제어, 전원 제어 등 9가지 기능)</li>
-                        <li><strong>보드 통합:</strong> 9장 보드를 5장으로 통합 설계 및 고도화</li>
-                        <li><strong>펌웨어 통합 설계:</strong> 진단 펌웨어와 제어 펌웨어 2종류로 구성, 보드 ID별 동작 지원으로 관리 효율화</li>
-                        <li><strong>STM32H7 + FreeRTOS:</strong> 멀티태스킹 기반 실시간 진단 및 제어 시스템 구현</li>
-                        <li><strong>성과:</strong> 최종 검사 시간(CT) 15% 단축 (28초 → 25초)</li>
-                    </ul>
-
-                    <div class="tech-tags">
-                        <span class="tech-tag">STM32H7</span>
-                        <span class="tech-tag">FreeRTOS</span>
-                        <span class="tech-tag">CAN 진단</span>
-                        <span class="tech-tag">리버스 엔지니어링</span>
-                        <span class="tech-tag">회로 분석</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Vehicle Diagnostics & Communication -->
-        <section class="section fade-in">
-            <div class="section-header">
-                <div class="section-tag">진단 & 통신</div>
-                <h2 class="section-title">차량 진단 & 통신 시스템</h2>
-                <p class="section-description">2018년 ~ 2026년</p>
-            </div>
-
-            <div class="project">
-                <div class="project-header">
-                    <h3 class="project-title">LVDS 멀티 ECU 통합 진단 시스템</h3>
-                    <div class="project-meta">
-                        <span>2025</span>
-                        <span>STM32 · CAN · 11비트/29비트 ID · 동적 필터링</span>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <p>여러 ECU를 통합 진단하기 위해 CAN 표준 ID(11비트)와 확장 ID(29비트)를 동시 처리하는 동적 필터 시스템을 개발했습니다. 기존 시스템은 제어기별로 ID 타입이 고정되어 있어, 확장성을 위한 구조 개선이 필요했습니다.</p>
-
-                    <h4>핵심 작업 내용</h4>
-                    <ul>
-                        <li><strong>CAN 필터 동적 설정 구조 설계:</strong> 런타임에 11비트/29비트 ID 혼용 처리 가능하도록 필터 뱅크 재설계</li>
-                        <li><strong>설정 데이터 기반 동적 처리:</strong> 제어기별 하드코딩 제거, 필터 설정 데이터 수신 → 검증 → 동적 적용 파이프라인 구현</li>
-                        <li><strong>레거시 코드 리팩토링:</strong> 예외 처리 남발 방지를 위해 CAN 필터 설정 함수를 ID 타입 매개변수화된 단일 모듈로 통합</li>
-                        <li><strong>시스템 구조 분석:</strong> CAN 설정 계층 전체 흐름 (필터링 → 데이터 수신 → 설정 확인) 체계적으로 분석</li>
-                    </ul>
-
-                    <h4>성과</h4>
-                    <ul>
-                        <li>멀티 ECU 통합 진단 지원 (11비트/29비트 혼용)</li>
-                        <li>차기 개발자를 고려한 유지보수성 확보</li>
-                    </ul>
-
-                    <div class="tech-tags">
-                        <span class="tech-tag">STM32</span>
-                        <span class="tech-tag">CAN</span>
-                        <span class="tech-tag">11비트/29비트 ID</span>
-                        <span class="tech-tag">동적 필터링</span>
-                        <span class="tech-tag">레거시 리팩토링</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project">
-                <div class="project-header">
-                    <h3 class="project-title">농기계 통합 제어 시스템</h3>
-                    <div class="project-meta">
-                        <span>2018.10 ~ 2020.09</span>
-                        <span>ESP32 · CAN · CANoe</span>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <p>트랙터 및 농기계의 여러 ECU를 CAN 통신으로 연결하는 통합 제어 시스템을 개발했습니다. 41개 CAN ID를 정의한 통신 데이터베이스를 구축했습니다.</p>
-
-                    <h4>CAN 데이터베이스 구축</h4>
-                    <div class="highlight-box">
-                        <p>41개 CAN ID를 체계적으로 정의하고 CANoe DBC 파일로 관리했습니다.</p>
-                    </div>
-
-                    <div class="architecture">
-                        <div class="architecture-title">CAN 신호 정의 예시</div>
-                        <div class="architecture-diagram">
-                            <div class="arch-box">GPS<br>위도/경도/속도</div>
-                            <div class="arch-box">엔진<br>RPM/온도/압력</div>
-                            <div class="arch-box">센서<br>가속/브레이크</div>
-                            <div class="arch-box">고장<br>DTC 코드</div>
-                        </div>
-                    </div>
-
-                    <h4>구현 내용</h4>
-                    <ul>
-                        <li>CAN 필터/마스크 설정 및 인터럽트 기반 수신</li>
-                        <li>신호 추출 및 물리값 변환 알고리즘</li>
-                        <li>CANoe DBC 파일 작성 및 실시간 모니터링</li>
-                        <li>CAN to UDP 게이트웨이 개발 (ESP32)</li>
-                    </ul>
-
-                    <div class="tech-tags">
-                        <span class="tech-tag">ESP32</span>
-                        <span class="tech-tag">CAN</span>
-                        <span class="tech-tag">CANoe</span>
-                        <span class="tech-tag">DBC</span>
-                        <span class="tech-tag">UDP</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- EV Charging Systems -->
-        <section class="section fade-in">
-            <div class="section-header">
-                <div class="section-tag">충전 시스템</div>
-                <h2 class="section-title">전기차 충전 시스템</h2>
-                <p class="section-description">2016년 ~ 2026년</p>
-            </div>
-
-            <div class="project">
-                <div class="project-header">
-                    <h3 class="project-title">급속충전검사장비 PoC 개발</h3>
-                    <div class="project-meta">
-                        <span>2025.06 ~ 2025.12</span>
-                        <span>AT32F403A · GBT/CHAdeMO/AC · 타이머 캡처 · 다채널 ADC</span>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <p>급속충전검사장비 PoC 펌웨어 개발 및 장비간 통신 시퀀스 검증을 수행했습니다. Artery AT32F403A 기반으로 GBT/CHAdeMO/AC 멀티 프로토콜 지원 환경에서 CP 신호 측정 정확도를 향상시키고, 통신 안정성을 확보했습니다.</p>
-
-                    <h4>핵심 작업 내용</h4>
-
-                    <div class="highlight-box">
-                        <p><strong>타이머 캡처 기반 ADC 샘플링 타이밍 최적화:</strong> CP 신호(1kHz PWM) 하이 레벨 중간 시점을 타이머 캡처로 감지하고, 해당 이벤트를 ADC 트리거 소스로 설정하여 정확한 전압 측정 구현. 기존 평균 전압 오차 문제 해결.</p>
-                    </div>
-
-                    <ul>
-                        <li><strong>핀 포팅:</strong> AT32F403A 레퍼런스 매뉴얼 분석하여 타이머 캡처 및 ADC 트리거 지원 핀 선정, 하드웨어 제약사항 고려한 핀 매핑 재설계</li>
-                        <li><strong>타이머-ADC 동기화:</strong> TIM 캡처 모드로 PWM 상승/하강 엣지 검출 → 하이 레벨 중간 시점 계산 → ADC 트리거 타이밍 동기화</li>
-                        <li><strong>다채널 ADC 구성:</strong> CP, PP, 전압, 전류 신호 동시 샘플링 및 DMA 전송</li>
-                        <li><strong>CP 전압 레벨 판별:</strong> 12V(Idle), 9V(Charging Request), 6V(Charging), 3V(Fault) 상태 정확히 구분</li>
-                        <li><strong>통신 시퀀스 검증:</strong> VCP 신호 디바운싱 로직 (3회 연속 검출 + 10초 타임아웃) 구현으로 오검출 방지</li>
-                        <li><strong>타이머 리소스 관리:</strong> 500ms 주기 VCP 모니터링 타이머의 생명주기를 통신 세션과 동기화하여 리소스 누수 해결</li>
-                    </ul>
-
-                    <h4>성과</h4>
-                    <ul>
-                        <li>CP 신호 측정 정확도 향상으로 오판정 제로화</li>
-                        <li>멀티 프로토콜(GBT/CHAdeMO/AC) 안정적 지원</li>
-                    </ul>
-
-                    <div class="tech-tags">
-                        <span class="tech-tag">AT32F403A</span>
-                        <span class="tech-tag">GBT/CHAdeMO/AC</span>
-                        <span class="tech-tag">핀 포팅</span>
-                        <span class="tech-tag">타이머 캡처</span>
-                        <span class="tech-tag">ADC 트리거</span>
-                        <span class="tech-tag">다채널 ADC</span>
-                        <span class="tech-tag">CP/PP 신호</span>
-                        <span class="tech-tag">PWM 동기화</span>
-                        <span class="tech-tag">MQTT</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project">
-                <div class="project-header">
-                    <h3 class="project-title">차량하부 자동충전 도킹 시스템</h3>
-                    <div class="project-meta">
-                        <span>2022.04 ~ 2024.04</span>
-                        <span>RS485 · 서보모터 · 스텝모터</span>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <p>전기차 하부에 자동으로 충전 커넥터가 도킹되는 시스템의 모터 제어 펌웨어를 개발했습니다.</p>
-
-                    <h4>모터 제어</h4>
-                    <ul>
-                        <li><strong>서보 모터:</strong> RS485 모드버스 통신, 위치/속도 제어 (±0.1mm 정밀도)</li>
-                        <li><strong>스텝 모터:</strong> PWM 기반 마이크로스텝핑, 탈조 방지 로직</li>
-                        <li><strong>상위제어기:</strong> Jetson 보드와 Python 통신 (UART/이더넷)</li>
-                    </ul>
-
-                    <div class="tech-tags">
-                        <span class="tech-tag">RS485</span>
-                        <span class="tech-tag">모드버스</span>
-                        <span class="tech-tag">PWM</span>
-                        <span class="tech-tag">Python</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project">
-                <div class="project-header">
-                    <h3 class="project-title">전기버스 자동충전 위치인식 시스템</h3>
-                    <div class="project-meta">
-                        <span>2021.04 ~ 2023.12</span>
-                        <span>STM32F4 · 초음파센서</span>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <p>지붕 접속 방식 팬터그래프 충전을 위한 차량 정위치 인식 시스템을 개발했습니다.</p>
-
-                    <h4>센서 융합 알고리즘</h4>
-                    <ul>
-                        <li>다중 초음파 센서 데이터 융합</li>
-                        <li>기울기 계산 (전후/좌우)</li>
-                        <li>거리 오차 ±5cm 달성</li>
-                        <li>실시간 위치 보정 로직</li>
-                    </ul>
-
-                    <h4>실증 경험</h4>
-                    <ul>
-                        <li>현장 구축 및 실제 운행 환경 테스트</li>
-                        <li>기상 조건별 검증 (온도/습도/강우)</li>
-                        <li>데이터 원격 수집 시스템 구축</li>
-                    </ul>
-
-                    <div class="tech-tags">
-                        <span class="tech-tag">STM32F4</span>
-                        <span class="tech-tag">초음파센서</span>
-                        <span class="tech-tag">센서융합</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project">
-                <div class="project-header">
-                    <h3 class="project-title">전기차 충전 분배 알고리즘 연구 및 시뮬레이터 개발</h3>
-                    <div class="project-meta">
-                        <span>2016.12 ~ 2019.12</span>
-                        <span>STM32F4 · J1772 · LabVIEW · Simulink</span>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <p>SAE J1772 표준 기반 전기차 충전 분배 알고리즘을 연구하고, LabVIEW 기반 EVSE/OBC 양방향 시뮬레이터를 개발했습니다.</p>
-
-                    <h4>핵심 작업 내용</h4>
-                    <ul>
-                        <li>J1772 Pilot 신호 전압 측정 및 상태 확인 (12V, 9V, 6V, 3V, 0V, -12V)</li>
-                        <li>PWM 듀티 사이클 기반 전류 제한 통신 구현</li>
-                        <li>프로그래머블 파워서플라이 연동으로 듀티에 따른 전류 출력 자동 제어</li>
-                        <li>LabVIEW 기반 EVSE 시뮬레이터 개발 (듀티 사이클 가변 제어)</li>
-                        <li>OBC 시뮬레이터: 전류 측정 및 Simulink 배터리 모델 연동으로 충전량 시각화</li>
-                        <li>충전 분배 알고리즘 검증용 실험 환경 구축</li>
-                    </ul>
-
-                    <h4>연구 성과</h4>
-                    <ul>
-                        <li>논문 2편: 한국자동차공학회 - 전기차 충전 분배 알고리즘, 팬터그래프 충전 테스트 환경</li>
-                        <li>특허 3건: 최대 전력사용 충전 장치, 전기차용 충전장치, 정위치 유도 장치</li>
-                    </ul>
-
-                    <div class="tech-tags">
-                        <span class="tech-tag">STM32F4</span>
-                        <span class="tech-tag">J1772</span>
-                        <span class="tech-tag">PWM</span>
-                        <span class="tech-tag">LabVIEW</span>
-                        <span class="tech-tag">Simulink</span>
-                        <span class="tech-tag">프로그래머블 파워서플라이</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Test Automation -->
-        <section class="section fade-in">
-            <div class="section-header">
-                <div class="section-tag">시험 자동화</div>
-                <h2 class="section-title">시험평가 시스템</h2>
-                <p class="section-description">2020년 ~ 2022년</p>
-            </div>
-
-            <div class="project">
-                <div class="project-header">
-                    <h3 class="project-title">팬터그래프 내구성 시험평가 시스템</h3>
-                    <div class="project-meta">
-                        <span>2020.04 ~ 2022.12</span>
-                        <span>CompactDAQ · LabVIEW</span>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <p>전기버스 팬터그래프 충전 시스템의 내구성을 평가하는 자동화 시험 시스템을 구축했습니다.</p>
-
-                    <h4>구현 내용</h4>
-                    <ul>
-                        <li>CompactDAQ 기반 전압/전류/저항/접촉력 동시 측정</li>
-                        <li>LabVIEW 데이터 수집 및 실시간 모니터링 소프트웨어</li>
-                        <li>동작 내구 시험 절차서 작성</li>
-                        <li>시험 시퀀스 자동 제어 및 리포트 생성</li>
-                        <li>시험 성적서 발급 (합격/불합격 판정)</li>
-                    </ul>
-
-                    <div class="tech-tags">
-                        <span class="tech-tag">CompactDAQ</span>
-                        <span class="tech-tag">LabVIEW</span>
-                        <span class="tech-tag">시험자동화</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Timeline -->
-        <section class="section fade-in">
-            <div class="section-header">
-                <div class="section-tag">타임라인</div>
-                <h2 class="section-title">전체 프로젝트 요약</h2>
-            </div>
-
-            <div class="table-scroll" role="region" aria-label="전체 프로젝트 요약 표" tabindex="0">
-            <table>
-                <thead>
-                    <tr>
-                        <th>기간</th>
-                        <th>프로젝트</th>
-                        <th>핵심 기술</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2026.05.18 ~ 현재</td>
-                        <td><a class="experience-link" href="#hanon-platform">한온시스템 · 공통 모터 제어 플랫폼</a></td>
-                        <td>FOC, Q15 / Float, 정적 RTE, MCU·제품 변형 관리</td>
-                    </tr>
-                    <tr>
-                        <td>2026 · 한온시스템</td>
-                        <td><a class="experience-link" href="#hanon-eop">eOP 포팅·실시간 최적화</a></td>
-                        <td>S12ZVM, OSEK, ISR 프로파일링, Single-shunt</td>
-                    </tr>
-                    <tr>
-                        <td>2026 · 한온시스템</td>
-                        <td><a class="experience-link" href="#hanon-blower">공조 블로워 제어·보드 구동</a></td>
-                        <td>TI C2000, 센서리스 FOC, PWM / ADC, 벤치 튜닝</td>
-                    </tr>
-                    <tr>
-                        <td>2026 · 한온시스템</td>
-                        <td><a class="experience-link" href="#hanon-lin-protection">LIN 통신·진단·Fail-Safety</a></td>
-                        <td>LIN / LDF, 보호·복구 상태머신, 통합 검증</td>
-                    </tr>
-                    <tr>
-                        <td>2026 · 한온시스템</td>
-                        <td><a class="experience-link" href="#hanon-tuning">제어 튜닝·시뮬레이션</a></td>
-                        <td>MATLAB / Simulink, PI 게인, 캘리브레이션</td>
-                    </tr>
-                    <tr>
-                        <td>2026 · 한온시스템</td>
-                        <td><a class="experience-link" href="#hanon-tools">개발·검증 도구 자동화</a></td>
-                        <td>Python, PLIN GUI / CLI, 빌드·계측 자동화</td>
-                    </tr>
-                    <tr>
-                        <td>2026 · 한온시스템</td>
-                        <td><a class="experience-link" href="#hanon-reuse">공통 컴포넌트·재사용 구조 분석</a></td>
-                        <td>인터페이스 규약, 변형 관리, 요구사항 추적성</td>
-                    </tr>
-                    <tr>
-                        <td>2026 · 한온시스템</td>
-                        <td><a class="experience-link" href="#hanon-thermal">통합 열관리 SW 분석·개발 지원</a></td>
-                        <td>AUTOSAR, Simulink 모델·MIL 자료 분석</td>
-                    </tr>
-                    <tr>
-                        <td>2025.06 ~ 2025.12</td>
-                        <td>급속충전검사장비 PoC</td>
-                        <td>AT32F403A, GBT/CHAdeMO/AC, 핀 포팅, 타이머 캡처</td>
-                    </tr>
-                    <tr>
-                        <td>2025</td>
-                        <td>LVDS 멀티 ECU 통합진단</td>
-                        <td>STM32, CAN, 11/29비트 ID, 동적 필터링</td>
-                    </tr>
-                    <tr>
-                        <td>2024.04 착수</td>
-                        <td>클라우드 진단 플랫폼</td>
-                        <td>STM32H7, MQTT, WebSocket, AWS IoT</td>
-                    </tr>
-                    <tr>
-                        <td>2025.06 ~ 2025.12</td>
-                        <td>VCI3 HSM 보안 모듈</td>
-                        <td>STM32H7, HSM, SPI, AES, RSA, ECDSA, X.509</td>
-                    </tr>
-                    <tr>
-                        <td>2024.04 ~ 2025.05</td>
-                        <td>ECOS 전장검사장비</td>
-                        <td>STM32H7, CMSIS-RTOS, 진단통신</td>
-                    </tr>
-                    <tr>
-                        <td>2022.04 ~ 2024.04</td>
-                        <td>차량하부 충전 도킹</td>
-                        <td>RS485 서보, PWM 스텝, Jetson</td>
-                    </tr>
-                    <tr>
-                        <td>2021.04 ~ 2023.12</td>
-                        <td>전기버스 자동충전</td>
-                        <td>STM32F4, 초음파센서, 위치인식</td>
-                    </tr>
-                    <tr>
-                        <td>2020.04 ~ 2022.12</td>
-                        <td>팬터그래프 내구성 평가</td>
-                        <td>CompactDAQ, LabVIEW, 시험자동화</td>
-                    </tr>
-                    <tr>
-                        <td>2018.10 ~ 2020.09</td>
-                        <td>농기계 통합시스템</td>
-                        <td>ESP32, CAN DB, CANoe</td>
-                    </tr>
-                    <tr>
-                        <td>2016.12 ~ 2019.12</td>
-                        <td>전기차 충전 분배 알고리즘</td>
-                        <td>STM32F4, J1772, LabVIEW, Simulink</td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-        </section>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>© 2026 이재석. 임베디드 시스템 개발자.</p>
-            <p style="margin-top: 12px; font-size: 15px;">개발·검증·기술 분석 경험을 프로젝트별로 정리했습니다.</p>
-        </div>
-    </footer>
-
-    <script>
-        (function() {
-            // 모바일 감지 함수
-            function isMobile() {
-                return window.innerWidth <= 768 ||
-                       window.matchMedia('(max-width: 768px)').matches ||
-                       /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            }
-
-            // 모든 fade-in 요소를 보이게 하는 함수
-            function showAllFadeIn() {
-                document.querySelectorAll('.fade-in').forEach(function(el) {
-                    el.classList.add('visible');
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                });
-            }
-
-            // 데스크톱용 Intersection Observer 설정
-            function setupDesktopAnimation() {
-                if ('IntersectionObserver' in window) {
-                    var observer = new IntersectionObserver(function(entries) {
-                        entries.forEach(function(entry) {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add('visible');
-                            }
-                        });
-                    }, {
-                        threshold: 0.01,
-                        rootMargin: '50px 0px 50px 0px'
-                    });
-
-                    document.querySelectorAll('.fade-in').forEach(function(el) {
-                        observer.observe(el);
-                    });
-                } else {
-                    // Intersection Observer 미지원 시 모두 보이게
-                    showAllFadeIn();
-                }
-            }
-
-            // 초기화 함수
-            function init() {
-                if (isMobile()) {
-                    showAllFadeIn();
-                } else {
-                    setupDesktopAnimation();
-                }
-            }
-
-            // DOM 로드 완료 시 실행
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', init);
-            } else {
-                init();
-            }
-
-            // 추가 안전장치: 페이지 로드 완료 후 재확인
-            window.addEventListener('load', function() {
-                if (isMobile()) {
-                    showAllFadeIn();
-                }
-            });
-
-            // 리사이즈 대응
-            window.addEventListener('resize', function() {
-                if (isMobile()) {
-                    showAllFadeIn();
-                }
-            });
-
-            // orientation 변경 대응 (모바일 회전)
-            window.addEventListener('orientationchange', function() {
-                setTimeout(function() {
-                    if (isMobile()) {
-                        showAllFadeIn();
-                    }
-                }, 100);
-            });
-        })();
-    </script>
-</body>
-</html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이재석 | 자동차 임베디드 SW 개발자</title>
+<meta name="description" content="이재석의 임베디드 SW 개발 포트폴리오. 한온시스템 모터 제어·Core SW와 차량 진단·보안·충전 시스템 개발 경험.">
+<link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
+<style>
+*{box-sizing:border-box} :root{--primary:#226bd6;--primary-light:#eaf2ff;--bg:#f8fafc;--surface:#fff;--text-primary:#182334;--text-secondary:#475569;--text-tertiary:#637389;--border:#dfe6ee;--code-bg:#f1f5f9;--warning:#a9680c}
+html{scroll-behavior:smooth} body{margin:0;font-family:'SUIT Variable',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;color:var(--text-primary);background:var(--bg);line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
+a{color:var(--primary);text-underline-offset:4px} button{font:inherit} a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--primary);outline-offset:5px}
+.skip-link{position:fixed;top:-100px;left:16px;z-index:300;background:white;padding:12px}.skip-link:focus{top:12px}
+.container{max-width:1080px;padding:0 32px;margin:auto} header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);border-bottom:1px solid var(--border)}
+.header-content{max-width:1080px;margin:auto;padding:20px 32px;display:flex;justify-content:space-between;gap:24px;align-items:center}.logo{font-size:17px;font-weight:800;color:var(--text-primary);text-decoration:none;white-space:nowrap}.logo span{font-weight:500;color:var(--text-tertiary)}
+.portfolio-nav{display:flex;flex-wrap:wrap;gap:10px 24px}.portfolio-nav a{font-size:14px;font-weight:700;text-decoration:none;color:var(--text-secondary)}.portfolio-nav a:hover{color:var(--primary)}
+.intro{padding:72px 0 52px;display:grid;grid-template-columns:minmax(0,1fr) 165px;gap:60px;align-items:center}.eyebrow{font-size:13px;letter-spacing:.08em;font-weight:800;color:var(--primary);margin:0 0 12px}.intro h1{font-size:54px;line-height:1.2;letter-spacing:-.03em;margin:0 0 18px}.intro-subtitle{font-size:24px;font-weight:700;line-height:1.45;margin:0 0 20px}.intro-description{max-width:710px;margin:0;color:var(--text-secondary);font-size:17px}.intro-current{font-size:14px;color:var(--text-tertiary);margin:18px 0 0}.profile-photo{width:165px;height:206px;object-fit:cover;border-radius:12px}.intro-links{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:26px;font-size:14px;font-weight:700}
+section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.section{padding:64px 0;border-top:1px solid var(--border)}.section-heading{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;margin-bottom:28px}.section h2{font-size:32px;letter-spacing:-.025em;line-height:1.35;margin:0 0 10px}.section-description{color:var(--text-secondary);font-size:16px;margin:0}.section-kicker{color:var(--primary);font-size:12px;font-weight:800;letter-spacing:.06em;margin:0 0 9px}.section-tools{white-space:nowrap;font-size:13px;border:1px solid var(--border);background:white;border-radius:6px;padding:8px 12px;cursor:pointer;color:var(--text-secondary)}
+.overview{padding:30px 0 48px}.overview h2{font-size:15px;letter-spacing:0;margin:0 0 12px;color:var(--text-tertiary)}.overview-row{display:grid;grid-template-columns:162px minmax(0,1fr) 22px;gap:24px;align-items:start;padding:18px 0;border-bottom:1px solid var(--border);text-decoration:none;color:var(--text-primary)}.overview-row:first-of-type{border-top:1px solid var(--border)}.overview-date{font-size:13px;color:var(--text-tertiary);padding-top:4px}.overview-row strong{font-size:18px}.overview-row p{font-size:14px;color:var(--text-secondary);margin:3px 0 0}.overview-arrow{color:var(--primary);font-size:20px}.overview-row:hover strong{color:var(--primary)}
+.company-note{border-left:3px solid var(--primary);padding:3px 0 3px 20px;color:var(--text-secondary);margin:0 0 32px;font-size:16px}.company-note strong{color:var(--text-primary)}
+.case{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin:0 0 18px;padding:28px 32px}.case-heading{display:flex;gap:18px;align-items:flex-start}.case-number{color:var(--primary);font-size:16px;font-weight:800;line-height:1.5;padding-top:4px}.case-meta{font-size:12px;color:var(--text-tertiary);margin:0 0 4px}.case h3,.case>.case-title{font-size:23px;line-height:1.4;letter-spacing:-.015em;margin:0}.case-intro{font-size:16px;color:var(--text-secondary);margin:18px 0}.case-facts{margin:18px 0 22px;font-size:15px}.case-facts>div{display:grid;grid-template-columns:82px minmax(0,1fr);gap:14px;margin:9px 0}.case-facts dt{font-weight:800;color:var(--text-primary)}.case-facts dd{margin:0;color:var(--text-secondary)}
+.detail-list{margin-top:22px}.work-detail{border-top:1px solid var(--border);font-size:15px}.work-detail summary{padding:13px 28px 13px 0;cursor:pointer;font-weight:700;color:var(--primary);position:relative;list-style:none}.work-detail summary::-webkit-details-marker{display:none}.work-detail summary::after{content:'+';position:absolute;right:3px;top:10px;font-size:21px;font-weight:500}.work-detail[open]>summary::after{content:'−'}.work-detail[open]>summary{color:var(--text-primary)}.detail-body{padding:8px 0 22px}.detail-status{font-size:13px;color:var(--text-tertiary);margin:0 0 14px}.project-content p{font-size:15px;color:var(--text-secondary);margin:0 0 18px}.project-content h4,.project-content h5{font-size:17px;margin:25px 0 10px}.project-content ul{padding-left:22px;margin:12px 0}.project-content li{padding:5px 0;color:var(--text-secondary);font-size:15px}.project-content strong{font-weight:700;color:var(--text-primary)}
+.tech-tags{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:18px}.tech-tag{font-size:12px;color:var(--text-tertiary);background:var(--code-bg);padding:3px 8px;border-radius:4px}
+.support-heading{font-size:19px;margin:32px 0 14px}.support-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.support-item{background:#fff;border:1px solid var(--border);border-radius:10px;padding:24px}.support-item h4{font-size:18px;margin:0 0 12px}.support-item>p{font-size:15px;color:var(--text-secondary);margin:0 0 18px}
+.project-group{margin-top:36px}.group-title{font-size:19px;font-weight:800;margin:0 0 16px}.group-period{color:var(--text-tertiary);font-weight:500;font-size:13px;margin-left:12px}.previous-case{padding:22px 28px}.previous-case>.case-title{font-size:20px}.project-meta{display:flex;flex-wrap:wrap;gap:3px 18px;font-size:12px;color:var(--text-tertiary);margin-top:8px}.previous-case .case-intro{font-size:15px;margin:12px 0 16px}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 38px}.tech-category{padding:22px 0;border-top:1px solid var(--border)}.tech-category h3{font-size:17px;margin:0 0 12px}.tech-list{list-style:none;padding:0;margin:0}.tech-item{font-size:14px;color:var(--text-secondary);padding:5px 0;display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px}.tech-item strong{color:var(--text-primary);font-weight:650}
+.background-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px}.background-grid h3{font-size:18px;margin:0 0 20px}.education-item{margin-bottom:24px}.education-item .project-title{font-size:16px;margin:0;line-height:1.6}.publication{font-size:15px;color:var(--text-secondary);margin:10px 0}.publication strong{color:var(--text-primary)}.contact{margin-top:38px;border-top:1px solid var(--border);padding-top:24px}.contact-main{display:flex;gap:12px 28px;flex-wrap:wrap;font-size:16px}.profile-extra{margin-top:20px}.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;padding-top:10px}.info-item{font-size:13px;display:flex;gap:12px}.info-label{min-width:60px;font-weight:700}.info-value{color:var(--text-secondary)}
+.highlight-box{border-left:3px solid var(--primary);background:var(--primary-light);padding:16px 18px;margin:18px 0}.highlight-box p{margin:0}.architecture{border:1px solid var(--border);padding:22px;margin:20px 0;border-radius:8px}.architecture-title{font-size:15px;font-weight:800;margin-bottom:18px;text-align:center}.architecture-diagram{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:20px}.arch-box{background:var(--primary-light);border:1px solid #bed4f6;border-radius:6px;padding:14px 20px;min-width:130px;text-align:center;font-size:14px}.arch-arrow{color:var(--primary);font-size:22px}.code-block{background:#1e293b;color:#fff;padding:18px;overflow:auto;border-radius:8px}pre{font-size:13px}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid var(--border);padding:10px;text-align:left}footer{border-top:1px solid var(--border);padding:25px 0;color:var(--text-tertiary);font-size:13px}footer .container{display:flex;justify-content:space-between;gap:20px}
+@media(max-width:760px){.container{padding:0 22px}.header-content{padding:14px 22px;gap:10px;flex-wrap:wrap}.logo{font-size:15px}.portfolio-nav{gap:7px 18px}.portfolio-nav a{font-size:12px}.intro{padding:42px 0 32px;grid-template-columns:minmax(0,1fr) 100px;gap:20px}.intro h1{font-size:38px}.intro-subtitle{font-size:20px}.intro-description{font-size:15px}.intro-current{font-size:12px}.profile-photo{width:100px;height:125px;align-self:start}.intro-photo{align-self:start;margin-top:4px}.intro-links{font-size:12px;gap:12px 18px}.eyebrow{font-size:11px}.section{padding:42px 0}.section h2{font-size:27px}.section-description{font-size:14px}.section-heading{align-items:start;flex-direction:column;gap:14px}.overview{padding:24px 0 34px}.overview-row{grid-template-columns:1fr 18px;gap:4px 12px;padding:16px 0}.overview-date{grid-column:1}.overview-row>div{grid-column:1}.overview-arrow{grid-column:2;grid-row:2}.overview-row strong{font-size:16px}.overview-row p{font-size:13px}.case{padding:22px}.case h3,.case>.case-title{font-size:20px}.case-number{font-size:14px}.case-heading{gap:12px}.case-intro{font-size:15px}.case-facts{font-size:14px}.case-facts>div{grid-template-columns:1fr;gap:3px;margin:13px 0}.work-detail{font-size:14px}.project-content p,.project-content li{font-size:14px}.company-note{font-size:14px;padding-left:15px}.support-grid,.tech-grid,.background-grid{grid-template-columns:1fr}.support-item{padding:22px}.support-item>p{font-size:14px}.group-title{font-size:17px}.group-period{display:block;margin:3px 0 0}.previous-case{padding:22px}.previous-case>.case-title{font-size:19px}.project-meta{font-size:11px}.tech-item{grid-template-columns:128px minmax(0,1fr);font-size:13px;gap:10px}.background-grid{gap:22px}.info-grid{grid-template-columns:1fr}.contact-main{font-size:14px}footer .container{flex-direction:column;gap:3px}}
+@media(max-width:420px){.intro{grid-template-columns:1fr;position:relative}.intro-photo{grid-row:1;position:absolute;right:0;top:42px}.intro h1{padding-right:120px;font-size:38px}.intro .eyebrow{padding-right:110px}.intro-subtitle{padding-right:116px;font-size:18px;min-height:62px}.intro-description{margin-top:15px}.tech-item{grid-template-columns:1fr;gap:0}.case{padding:20px}.support-item{padding:20px}.case h3,.case>.case-title{font-size:19px}.container{padding:0 20px}.header-content{padding:13px 20px}.portfolio-nav{gap:6px 14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{@page{size:A4;margin:15mm 18mm}html{scroll-behavior:auto}body{background:#fff;font-size:10pt}header,.intro-links,.section-tools,.skip-link{display:none}.container{max-width:none;padding:0}.intro{padding:0 0 20px;grid-template-columns:1fr 100px;gap:30px}.intro h1{font-size:30pt}.intro-subtitle{font-size:16pt}.intro-description{font-size:11pt}.profile-photo{width:100px;height:125px}.section{padding:24px 0}.section h2{font-size:20pt}.section-description,.case-intro,.company-note{font-size:10pt}.case{padding:16px;margin-bottom:14px;box-shadow:none}.case h3,.case>.case-title{font-size:14pt}.case-heading,summary,h2,h3,h4,.section-heading{break-after:avoid}.case-facts,.project-content p,.project-content li,.work-detail{font-size:10pt}.support-grid,.background-grid{display:block}.support-item{margin:12px 0}.work-detail>summary::after{display:none}.work-detail>.detail-body{display:block!important}.tech-grid{grid-template-columns:1fr 1fr}.tech-item{font-size:9pt;grid-template-columns:1fr;gap:0}.section-tools{display:none}.overview-row{padding:10px 0}.detail-body{padding-bottom:8px}.architecture{break-inside:avoid}.contact{margin-top:20px}.info-grid{grid-template-columns:1fr 1fr}footer{padding:14px 0}}
+</style></head><body>
+<a class="skip-link" href="#main">본문으로 이동</a>
+<header><div class="header-content"><a class="logo" href="#top">이재석 <span>· 임베디드 SW</span></a>
+<nav class="portfolio-nav" aria-label="포트폴리오 섹션"><a href="#overview">경험 개요</a><a href="#hanon">한온시스템</a><a href="#previous-projects">이전 프로젝트</a><a href="#skills">기술·학력</a></nav></div></header>
+<main class="container" id="main">
+<section class="intro" id="top" aria-labelledby="intro-title"><div class="intro-content">
+<p class="eyebrow">EMBEDDED SOFTWARE ENGINEER</p><h1 id="intro-title">이재석</h1><p class="intro-subtitle">자동차 임베디드 SW 개발자</p>
+<p class="intro-description">한온시스템에서 모터 제어 펌웨어와 재사용 가능한 Core SW를 개발합니다. 차량 진단·보안통신·충전 시스템을 개발해 왔으며, MCU 이식부터 하드웨어 연동과 시험 자동화까지 수행합니다.</p>
+<p class="intro-current">한온시스템 · Platform SW / Core SW Component · 2026.05.18 입사</p>
+<div class="intro-links"><a href="#hanon">현재 업무 보기</a><a href="#previous-projects">이전 개발 경험</a><a href="mailto:dayungh10@naver.com">이메일 연락</a></div></div>
+<div class="intro-photo"><img class="profile-photo" src="profile.jpg" width="165" height="206" alt="이재석 프로필 사진"></div></section>
+
+<section class="overview" id="overview" aria-labelledby="overview-title"><h2 id="overview-title">개발 경험 개요</h2>
+<a class="overview-row" href="#hanon"><span class="overview-date">2026.05.18 ~ 현재</span><div><strong>한온시스템 · 모터 제어 / Core SW</strong><p>공통 플랫폼 · eOP 포팅 · 블로워 센서리스 FOC</p></div><span class="overview-arrow" aria-hidden="true">↗</span></a>
+<a class="overview-row" href="#diagnostics"><span class="overview-date">2024년 이후 수행 프로젝트</span><div><strong>차량 진단·보안·충전 검사</strong><p>클라우드 진단 · HSM · 멀티 ECU 통신 · 검사장비</p></div><span class="overview-arrow" aria-hidden="true">↗</span></a>
+<a class="overview-row" href="#charging"><span class="overview-date">2016 ~ 2024 수행 프로젝트</span><div><strong>자동충전·계측·통신</strong><p>모터 구동 · 위치인식 · 내구성 시험 · CAN · 충전 제어 연구</p></div><span class="overview-arrow" aria-hidden="true">↗</span></a>
+</section>
+
+<section class="section" id="hanon" aria-labelledby="hanon-title"><div class="section-heading"><div><p class="section-kicker">CURRENT EXPERIENCE</p><h2 id="hanon-title">한온시스템</h2><p class="section-description">2026.05.18 ~ 현재 · Platform SW / Core SW Component 개발</p></div><button class="section-tools" id="toggle-details" type="button" aria-expanded="false">전체 상세 펼치기</button></div>
+<p class="company-note"><strong>자동차 열관리 부품의 모터 제어와 공통 SW 개발.</strong><br>공통 알고리즘을 만들고, 제품 보드에 적용하고, 실기·시뮬레이션으로 검증합니다.</p>
+<article class="case current-case">
+      <div class="case-heading"><span class="case-number">01</span><div>
+        <p class="case-meta">공통 코어 · 통신·보호 로직 · 재사용 아키텍처</p><h3>재사용 가능한 모터 제어 SW 플랫폼</h3>
+      </div></div>
+      <p class="case-intro">제품과 MCU가 바뀌어도 제어 알고리즘을 재사용할 수 있도록 공통 코어, 하드웨어 의존 코드, 제품 설정을 분리했습니다.</p>
+      <dl class="case-facts"><div><dt>주요 작업</dt><dd>FOC 공통 모듈, Q15·Float 구현, 정적 RTE 인터페이스, LIN·Fail-Safety 통합과 제품별 패키지 구성</dd></div><div><dt>검증·상태</dt><dd>동일 입력을 사용한 수치 형식 교차 검증과 호스트 회귀 검증 수행. 제품 적용·확장 및 통합 검증 진행 중.</dd></div></dl>
+      <div class="detail-list"><details class="work-detail" id="hanon-platform">
+      <summary>제어 코어·계층 설계·제품 변형</summary>
+      <div class="detail-body"><p class="detail-status">공통 코어 구현 · 제품 적용 및 확장 진행 중</p><div class="project-content">
+<p>펌프와 팬 계열 제품에서 제어 알고리즘을 재사용할 수 있도록, MCU·보드 의존 코드와 제품별 설정을 분리한 모터 제어 플랫폼을 개발했습니다.</p>
+<ul>
+<li><strong>제어 코어:</strong> 좌표 변환, 전류·속도 PI 제어, SVPWM, 센서리스 관측기, 기동 상태머신을 공통 모듈로 구성</li>
+<li><strong>수치 형식:</strong> 16비트 Q15 고정소수점과 32비트 부동소수점 구현을 유지하고, 동일 입력의 출력 오차를 허용 범위 기준으로 교차 검증</li>
+<li><strong>계층 분리:</strong> ASW / 정적 RTE / BSW·CDD / MCAL 경계와 S/R·C/S 포트 인터페이스, Runnable·ISR 실행 책임을 설계</li>
+<li><strong>제품 변형:</strong> MCU, 통신, 수치 형식, 외부 드라이버와 제품 파라미터를 조합하는 패키지 생성 CLI·GUI 및 검증 흐름 구현</li>
+</ul>
+<div class="tech-tags"><span class="tech-tag">C99</span><span class="tech-tag">MISRA-C</span><span class="tech-tag">Q15 / Float</span><span class="tech-tag">Static RTE</span><span class="tech-tag">MCAL</span></div>
+</div></div>
+    </details><details class="work-detail" id="hanon-lin-protection">
+      <summary>LIN 통신·진단·Fail-Safety</summary>
+      <div class="detail-body"><p class="detail-status">통신·보호 로직 구현 · 제품별 통합 검증 진행 중</p><div class="project-content">
+<p>상위 제어기의 운전 명령과 모터 상태를 연결하는 LIN 통신 경로를 구성하고, 고장 검출·감속·정지·복구 정책을 제품 요구사항에 맞춰 구현했습니다.</p>
+<ul>
+<li><strong>LIN 통합:</strong> 슬레이브 스택, MCAL Lin, LinIf와 RTE 연계를 구성하고 LDF 기반 지령·상태 신호 매핑 구현</li>
+<li><strong>인터페이스 변경:</strong> 듀티 기반 지령과 RPM 직접 지령을 구분하고, 전압·전류·실제 속도 보고값의 단위·환산·범위 검증</li>
+<li><strong>고장 대응:</strong> 과전압·저전압·과전류·과온·구속·통신 이상에 대한 디바운스, 출력 제한, 정지 래치와 재시도 제한 구현</li>
+<li><strong>제품별 설정:</strong> 보호 채널 실장 여부, 임계값과 복구 정책을 분리하고, 요구사항·설계 판단·미확정 조건의 근거 추적</li>
+<li><strong>회귀 검증:</strong> 기동·정지·통신 상태와 보호 조건의 조합을 호스트에서 재현해 통합 경로의 결함 수정 및 시험 보강</li>
+</ul>
+<div class="tech-tags"><span class="tech-tag">LIN / LDF</span><span class="tech-tag">Diagnostics</span><span class="tech-tag">Fail-Safety</span><span class="tech-tag">State Machine</span></div>
+</div></div>
+    </details><details class="work-detail" id="hanon-reuse">
+      <summary>기존 자산 분석·인터페이스 규약·재사용 계획</summary>
+      <div class="detail-body"><p class="detail-status">기존 SW 자산 분석 · 인터페이스 규약 및 이관 계획 수립</p><div class="project-content">
+<p>기존 열관리 제품의 SW·설계·검증 자산을 조사하고, 공통 알고리즘과 제품별 변형을 구분해 재사용 가능한 컴포넌트 구조와 적용안을 정리했습니다.</p>
+<ul>
+<li><strong>자산 분석:</strong> eOP·eWP·eRV 등 기존 코드의 제어 흐름, HW 의존성, 인터페이스와 변형 간 중복 구조 조사</li>
+<li><strong>구조 설계:</strong> 알고리즘, 하드웨어 접근, 제품 데이터의 분리 기준과 명명·데이터 교환·실행 컨텍스트 규약 정의</li>
+<li><strong>적용 계획:</strong> 공통 플랫폼에 재사용·이관·보완할 대상을 분류하고, 패키지 배포 기준과 변형 관리 방안 수립</li>
+<li><strong>검증 근거:</strong> 요구사항·설계·테스트·결함·릴리스 자산의 연결성을 검토하고 ASPICE 관점의 개발·검증 계획 정리</li>
+<li><strong>기술 협업:</strong> 글로벌 개발 거점과의 기술 협의·보고 자료, Jira 기반 개발 과제 관리와 팀 내 분석·인계 문서 작성</li>
+</ul>
+<div class="tech-tags"><span class="tech-tag">SW Architecture</span><span class="tech-tag">Component Reuse</span><span class="tech-tag">Traceability</span><span class="tech-tag">Jira / PTC</span></div>
+</div></div>
+    </details></div>
+    </article><article class="case current-case">
+      <div class="case-heading"><span class="case-number">02</span><div>
+        <p class="case-meta">NXP S12ZVM · 평가보드 적용</p><h3>eOP 펌웨어 포팅과 FOC ISR 최적화</h3>
+      </div></div>
+      <p class="case-intro">기존 전동 오일펌프 펌웨어를 평가보드에 이식하고, 구동 문제를 추적하며 실시간 제어 경로를 개선했습니다.</p>
+      <dl class="case-facts"><div><dt>주요 작업</dt><dd>컴파일러·링커·벡터 이식, PWM·ADC 동기화, single-shunt 전류 재구성, 관측기 분석과 ISR 실행시간 최적화</dd></div><div><dt>검증·상태</dt><dd>평가보드에서 개루프·폐루프 구동을 확인하고, FreeMASTER·시리얼 콘솔로 속도와 상태를 계측.</dd></div></dl>
+      <div class="detail-list"><details class="work-detail" id="hanon-eop">
+      <summary>포팅·구동 디버깅·실시간 최적화 상세</summary>
+      <div class="detail-body"><p class="detail-status">평가보드 포팅 및 개루프·폐루프 구동 검증</p><div class="project-content">
+<p>기존 eOP 펌웨어의 제어 흐름과 하드웨어 의존성을 분석하고, 평가보드로 이식해 모터 구동과 계측 환경을 구성했습니다.</p>
+<ul>
+<li><strong>플랫폼 이식:</strong> 컴파일러·링커, 인터럽트 벡터, OSEK 기반 스케줄링, 고정소수점 연산의 이식 문제 분석 및 수정</li>
+<li><strong>구동 디버깅:</strong> PWM 극성, ADC 트리거, 전류 환산, 샘플링 시점과 single-shunt 전류 재구성 경로 점검</li>
+<li><strong>실시간 성능:</strong> FOC ISR 구간별 실행시간을 계측해 제어주기 초과 원인을 찾고, 수식 변환과 연산 구조 개선으로 실행시간 단축</li>
+<li><strong>센서리스 제어:</strong> 관측기 위상 지연·보상과 제어주기 의존 파라미터를 분석하고, 고정소수점 범위 검증 및 계측 기능 보강</li>
+<li><strong>검증 환경:</strong> FreeMASTER와 시리얼 콘솔을 이용한 속도 지령·상태 관측 및 개루프·폐루프 구동 확인</li>
+</ul>
+<div class="tech-tags"><span class="tech-tag">NXP S12ZVM</span><span class="tech-tag">CodeWarrior</span><span class="tech-tag">OSEK</span><span class="tech-tag">FOC ISR</span><span class="tech-tag">FreeMASTER</span></div>
+</div></div>
+    </details></div>
+    </article><article class="case current-case">
+      <div class="case-heading"><span class="case-number">03</span><div>
+        <p class="case-meta">TI C2000 · 시제품 보드 구동·튜닝</p><h3>공조 블로워 센서리스 FOC 개발</h3>
+      </div></div>
+      <p class="case-intro">공통 제어 코어를 블로워 보드에 적용하고, 실제 모터의 기동부터 폐루프 전환·속도 제어까지 검증했습니다.</p>
+      <dl class="case-facts"><div><dt>주요 작업</dt><dd>MCAL·게이트 드라이버 통합, 핀맵·PWM·ADC 정합, I-f 기동·관측기 인계, PI 게인과 모터 파라미터 분석</dd></div><div><dt>검증·상태</dt><dd>시제품 보드에서 센서리스 폐루프 구동 확인. 벤치·동력계 데이터와 시뮬레이션을 이용한 튜닝·개선 진행 중.</dd></div></dl>
+      <div class="detail-list"><details class="work-detail" id="hanon-blower">
+      <summary>보드 구동·기동 제어·실기 분석</summary>
+      <div class="detail-body"><p class="detail-status">시제품 보드 폐루프 구동 확인 · 튜닝 및 개선 진행 중</p><div class="project-content">
+<p>공통 제어 코어를 블로워용 MCU와 시제품 보드에 적용하고, 실제 모터를 연결해 기동·폐루프 전환·속도 제어를 검증했습니다.</p>
+<ul>
+<li><strong>MCU 포팅:</strong> TI C2000 기반 PWM·ADC·타이머·GPIO·SPI·LIN 드라이버와 FOC 인터럽트 경로 통합</li>
+<li><strong>HW/SW 정합:</strong> 데이터시트·회로도·PCB를 대조해 핀맵과 GPIO MUX를 검토하고, 게이트 드라이버 설정 및 3상 상보 PWM 출력 확인</li>
+<li><strong>기동 튜닝:</strong> 정렬, I-f 개루프 가속, 관측기 동기 조건, 폐루프 인계와 정지 시퀀스의 파라미터 조정</li>
+<li><strong>실기 분석:</strong> SMC·자속 관측기의 거동을 비교하고, 벤치·동력계 시험에서 전류·속도·상태 기록을 분석해 기동 및 구속 조건 점검</li>
+<li><strong>후속 개선:</strong> 저속 속도 추정 리플, 계측값 환산, 클럭 편차와 역회전 대응을 분석하고 개선안 설계</li>
+</ul>
+<div class="tech-tags"><span class="tech-tag">TI C2000</span><span class="tech-tag">Sensorless FOC</span><span class="tech-tag">PWM / ADC</span><span class="tech-tag">Gate Driver</span><span class="tech-tag">Bench Test</span></div>
+</div></div>
+    </details><details class="work-detail" id="hanon-tuning">
+      <summary>파라미터·시뮬레이션·캘리브레이션</summary>
+      <div class="detail-body"><p class="detail-status">분석·검증 환경 구축 · 자동 튜닝 절차 개발 중</p><div class="project-content">
+<p>모터·보드 측정값과 제어기 설정의 관계를 정리하고, 시뮬레이션과 실기 기록을 함께 사용해 튜닝 근거를 확인하는 환경을 개발했습니다.</p>
+<ul>
+<li><strong>게인 설계:</strong> 모터 전기 파라미터, 제어주기, 전류·속도 스케일에 따른 PI 게인과 관측기 계수의 종속관계 분석</li>
+<li><strong>모델 검증:</strong> MATLAB/Simulink 기반 플랜트·제어 모델과 폐루프 시뮬레이션을 이용해 기동 파라미터와 관측기 거동 비교</li>
+<li><strong>튜닝 도구:</strong> 측정 데이터 분석, 게인 유도, 파라미터 변경 영향 확인과 시험 절차를 연결하는 Motor Tuning Kit 시제품 개발</li>
+<li><strong>캘리브레이션:</strong> 개체별 모터 파라미터 저장·검증·적용 구조와 NVM 연동 구현, 전체 실기 절차 검증은 후속 과제로 관리</li>
+<li><strong>파라미터 관리:</strong> 보드·모터·시스템·제어기 설정을 구분하고, 단위·유도식·측정 근거와 변경 이력을 문서화</li>
+</ul>
+<div class="tech-tags"><span class="tech-tag">MATLAB / Simulink</span><span class="tech-tag">PI Tuning</span><span class="tech-tag">Simulation</span><span class="tech-tag">Calibration</span></div>
+</div></div>
+    </details></div>
+    </article>
+<h3 class="support-heading">개발 도구·기술 지원</h3><div class="support-grid">
+<article class="support-item"><h4>계측·검증 자동화</h4><p>LIN 운전·상태 조회용 Windows 도구와 빌드·계측·회귀 검증 스크립트를 개발했습니다.</p><details class="work-detail" id="hanon-tools">
+      <summary>PLIN·시험 자동화·장비 준비 상세</summary>
+      <div class="detail-body"><p class="detail-status">LIN 제어 도구·검증 스크립트 구현 및 배포 패키지 제작</p><div class="project-content">
+<p>반복되는 통신 시험, 데이터 수집, 빌드와 다운로드 작업을 재현할 수 있도록 개발 도구와 실행 절차를 구성했습니다.</p>
+<ul>
+<li><strong>PLIN Control:</strong> PEAK PLIN-USB와 LDF를 사용하는 Python CLI·Windows GUI 개발. 속도 지령·정지·상태 조회·수신 모니터·로그 저장 지원</li>
+<li><strong>도구 배포:</strong> 제품 프로파일로 신호 매핑을 분리하고, Python이 없는 PC용 설치 패키지와 모의 통신 자가진단 구성</li>
+<li><strong>시험 자동화:</strong> 헤드리스 빌드, 디버거 기반 변수 판독, 벤치 데이터 수집과 골든 벡터·호스트 회귀 검증 스크립트 작성</li>
+<li><strong>장비 도입 검토:</strong> 추가 MCU용 프로그래머·USB LIN 장비의 드라이버 및 API 접근 확인과 Flash 시험 절차 준비. 대상 보드 Flash·구동 시험은 준비 단계</li>
+<li><strong>인계 자료:</strong> HW 담당자가 사용할 펌웨어 다운로드 안내, 튜닝 체크리스트와 오프라인 기술 문서 작성</li>
+</ul>
+<div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">PLIN-USB</span><span class="tech-tag">CLI / GUI</span><span class="tech-tag">Test Automation</span></div>
+</div></div>
+    </details></article>
+<article class="support-item"><h4>통합 열관리 SW 분석</h4><p>요구사항과 기존 Simulink·AUTOSAR 모델, MIL 검증 자료를 분석하고 재사용·통합 검토를 지원했습니다.</p><details class="work-detail" id="hanon-thermal">
+      <summary>요구사항·모델·검증 자료 분석 상세</summary>
+      <div class="detail-body"><p class="detail-status">요구사항·기존 모델·검증 자료 분석</p><div class="project-content">
+<p>통합 열관리 모듈의 개발 자료를 분석하고, 모터 제어 Core SW와 AUTOSAR 기반 애플리케이션·BSW 사이의 연계 및 재사용 범위를 검토했습니다.</p>
+<ul>
+<li><strong>요구사항 검토:</strong> 부품·제어 요구사항과 SW 인터페이스를 대조하고 개발 범위, 불일치 및 확인 필요 항목 정리</li>
+<li><strong>모델 분석:</strong> 기존 Simulink 사양·구현 모델의 계층, 데이터 사전, AUTOSAR 인터페이스와 릴리스 간 변경점 분석</li>
+<li><strong>검증 자료:</strong> 기존 MIL 테스트, 모델 검증 및 결함 이력을 검토하고 요구사항과의 연결 관계 정리</li>
+<li><strong>통합 검토:</strong> 선행 SW의 eWP·밸브 제어 구조와 MCU·구동 IC·통신·업데이트 구성을 분석해 Core SW 재사용 및 BSW 연계 검토 지원</li>
+</ul>
+<div class="tech-tags"><span class="tech-tag">Thermal Management</span><span class="tech-tag">AUTOSAR</span><span class="tech-tag">Simulink</span><span class="tech-tag">MIL Analysis</span></div>
+</div></div>
+    </details></article>
+</div></section>
+
+<section class="section" id="previous-projects" aria-labelledby="previous-title"><div class="section-heading"><div><p class="section-kicker">PREVIOUS PROJECTS</p><h2 id="previous-title">이전 개발 경험</h2><p class="section-description">차량 진단 디바이스, 충전 제어와 시험평가 시스템의 펌웨어 개발</p></div></div>
+<div class="project-group" id="diagnostics"><h3 class="group-title">차량 진단·보안·충전 검사 <span class="group-period">2024년 이후 수행 프로젝트</span></h3><article class="case previous-case" id="project-hsm">
+      <h4 class="case-title">차량 진단기 HSM 보안 모듈</h4><div class="project-meta">
+<span>2025.06 ~ 2025.12</span>
+<span>STM32H7 · HSM · SPI · UART · 암호화</span>
+</div>
+      <p class="case-intro">UART·SPI 방식의 두 HSM을 단일 펌웨어에서 지원하도록 인터페이스를 통합하고, 암호화·키·인증서 관리와 CLI 시험 기능을 구현했습니다.</p>
+      <details class="work-detail"><summary>차량 진단기 HSM 보안 모듈 상세</summary>
+      <div class="detail-body"><div class="project-content">
+<p>차량 진단기(VCI3)에 하드웨어 보안 모듈(HSM)을 연동하여 보안 통신 및 암호화 기능을 구현했습니다. 기존 UART 기반 HSM(Coregate)과 신규 SPI 기반 HSM(Autocrypt)을 모두 지원하는 듀얼 HSM 아키텍처를 설계하고 구현했습니다.</p>
+<h5>HSM 듀얼 아키텍처 설계</h5>
+<div class="highlight-box">
+<p>하드웨어 ID 핀 감지를 통해 Old HSM(UART)과 New HSM(SPI)을 런타임에 자동 판별하고, 통합 API로 상위 레이어에서 HSM 종류와 무관하게 동일한 인터페이스로 보안 기능을 사용할 수 있도록 추상화 레이어를 설계했습니다.</p>
+</div>
+<div class="architecture">
+<div class="architecture-title">HSM 추상화 아키텍처</div>
+<div class="architecture-diagram">
+<div class="arch-box">Application Layer</div>
+<div class="arch-arrow">→</div>
+<div class="arch-box">HSM Abstraction API</div>
+<div class="arch-arrow">→</div>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<div class="arch-box" style="font-size: 14px;">Old HSM (UART)</div>
+<div class="arch-box" style="font-size: 14px;">New HSM (SPI)</div>
+</div>
+</div>
+</div>
+<h5>핵심 작업 내용</h5>
+<ul>
+<li><strong>HSM 타입 자동 감지:</strong> BOARD_ID 핀 상태로 HSM 종류 런타임 판별, 동적 핀 할당 시스템 구현</li>
+<li><strong>SPI 통신 프로토콜 구현:</strong> New HSM용 SPI 명령 프로토콜 설계 및 DMA 기반 고속 전송 구현</li>
+<li><strong>암호화 기능 연동:</strong> AES-128/256, RSA-2048, ECDSA P-256, EdDSA 서명/검증, SHA-256 해시, HMAC, CMAC</li>
+<li><strong>키 관리 시스템:</strong> 슬롯 기반 키 저장/생성/삭제, 키 쌍 생성(RSA/ECC), 대칭키 생성(AES)</li>
+<li><strong>인증서 관리:</strong> X.509 인증서 저장/읽기, CRL(인증서 폐기 목록) eMMC 저장 관리</li>
+<li><strong>CLI 테스트 도구:</strong> hsmtest 명령어 기반 HSM 기능 검증 도구 개발 (DMA 순환 버퍼 기반)</li>
+</ul>
+<h5>성과</h5>
+<ul>
+<li>단일 펌웨어로 2종류 HSM 지원 - 하드웨어 변경 없이 HSM 교체 가능</li>
+<li>보안 통신 인프라 구축으로 클라우드 진단 플랫폼 보안 요구사항 충족</li>
+<li>CLI 도구로 HSM 기능 검증 시간 80% 단축</li>
+</ul>
+<div class="tech-tags">
+<span class="tech-tag">STM32H7</span>
+<span class="tech-tag">HSM</span>
+<span class="tech-tag">SPI</span>
+<span class="tech-tag">UART</span>
+<span class="tech-tag">AES</span>
+<span class="tech-tag">RSA</span>
+<span class="tech-tag">ECDSA</span>
+<span class="tech-tag">X.509</span>
+<span class="tech-tag">DMA</span>
+<span class="tech-tag">FreeRTOS</span>
+</div>
+</div></div></details>
+    </article><article class="case previous-case" id="project-charger">
+      <h4 class="case-title">급속충전검사장비 PoC</h4><div class="project-meta">
+<span>2025.06 ~ 2025.12</span>
+<span>AT32F403A · GBT/CHAdeMO/AC · 타이머 캡처 · 다채널 ADC</span>
+</div>
+      <p class="case-intro">AT32 기반 검사장비에서 타이머 캡처와 ADC 트리거를 동기화해 CP 전압 측정을 개선하고, 충전 프로토콜별 통신 시퀀스를 검증했습니다.</p>
+      <details class="work-detail"><summary>급속충전검사장비 PoC 상세</summary>
+      <div class="detail-body"><div class="project-content">
+<p>급속충전검사장비 PoC 펌웨어 개발 및 장비간 통신 시퀀스 검증을 수행했습니다. Artery AT32F403A 기반으로 GBT/CHAdeMO/AC 멀티 프로토콜 지원 환경에서 CP 신호 측정 정확도를 향상시키고, 통신 안정성을 확보했습니다.</p>
+<h5>핵심 작업 내용</h5>
+<div class="highlight-box">
+<p><strong>타이머 캡처 기반 ADC 샘플링 타이밍 최적화:</strong> CP 신호(1kHz PWM) 하이 레벨 중간 시점을 타이머 캡처로 감지하고, 해당 이벤트를 ADC 트리거 소스로 설정하여 정확한 전압 측정 구현. 기존 평균 전압 오차 문제 해결.</p>
+</div>
+<ul>
+<li><strong>핀 포팅:</strong> AT32F403A 레퍼런스 매뉴얼 분석하여 타이머 캡처 및 ADC 트리거 지원 핀 선정, 하드웨어 제약사항 고려한 핀 매핑 재설계</li>
+<li><strong>타이머-ADC 동기화:</strong> TIM 캡처 모드로 PWM 상승/하강 엣지 검출 → 하이 레벨 중간 시점 계산 → ADC 트리거 타이밍 동기화</li>
+<li><strong>다채널 ADC 구성:</strong> CP, PP, 전압, 전류 신호 동시 샘플링 및 DMA 전송</li>
+<li><strong>CP 전압 레벨 판별:</strong> 12V(Idle), 9V(Charging Request), 6V(Charging), 3V(Fault) 상태 정확히 구분</li>
+<li><strong>통신 시퀀스 검증:</strong> VCP 신호 디바운싱 로직 (3회 연속 검출 + 10초 타임아웃) 구현으로 오검출 방지</li>
+<li><strong>타이머 리소스 관리:</strong> 500ms 주기 VCP 모니터링 타이머의 생명주기를 통신 세션과 동기화하여 리소스 누수 해결</li>
+</ul>
+<h5>성과</h5>
+<ul>
+<li>CP 신호 측정 정확도 향상으로 오판정 제로화</li>
+<li>멀티 프로토콜(GBT/CHAdeMO/AC) 안정적 지원</li>
+</ul>
+<div class="tech-tags">
+<span class="tech-tag">AT32F403A</span>
+<span class="tech-tag">GBT/CHAdeMO/AC</span>
+<span class="tech-tag">핀 포팅</span>
+<span class="tech-tag">타이머 캡처</span>
+<span class="tech-tag">ADC 트리거</span>
+<span class="tech-tag">다채널 ADC</span>
+<span class="tech-tag">CP/PP 신호</span>
+<span class="tech-tag">PWM 동기화</span>
+<span class="tech-tag">MQTT</span>
+</div>
+</div></div></details>
+    </article><article class="case previous-case" id="project-multi-ecu">
+      <h4 class="case-title">멀티 ECU 통합 진단</h4><div class="project-meta">
+<span>2025</span>
+<span>STM32 · CAN · 11비트/29비트 ID · 동적 필터링</span>
+</div>
+      <p class="case-intro">11비트·29비트 CAN ID를 함께 처리하도록 필터를 재구성하고, 제어기별 설정을 데이터 기반으로 적용하는 구조를 개발했습니다.</p>
+      <details class="work-detail"><summary>멀티 ECU 통합 진단 상세</summary>
+      <div class="detail-body"><div class="project-content">
+<p>여러 ECU를 통합 진단하기 위해 CAN 표준 ID(11비트)와 확장 ID(29비트)를 동시 처리하는 동적 필터 시스템을 개발했습니다. 기존 시스템은 제어기별로 ID 타입이 고정되어 있어, 확장성을 위한 구조 개선이 필요했습니다.</p>
+<h5>핵심 작업 내용</h5>
+<ul>
+<li><strong>CAN 필터 동적 설정 구조 설계:</strong> 런타임에 11비트/29비트 ID 혼용 처리 가능하도록 필터 뱅크 재설계</li>
+<li><strong>설정 데이터 기반 동적 처리:</strong> 제어기별 하드코딩 제거, 필터 설정 데이터 수신 → 검증 → 동적 적용 파이프라인 구현</li>
+<li><strong>레거시 코드 리팩토링:</strong> 예외 처리 남발 방지를 위해 CAN 필터 설정 함수를 ID 타입 매개변수화된 단일 모듈로 통합</li>
+<li><strong>시스템 구조 분석:</strong> CAN 설정 계층 전체 흐름 (필터링 → 데이터 수신 → 설정 확인) 체계적으로 분석</li>
+</ul>
+<h5>성과</h5>
+<ul>
+<li>멀티 ECU 통합 진단 지원 (11비트/29비트 혼용)</li>
+<li>차기 개발자를 고려한 유지보수성 확보</li>
+</ul>
+<div class="tech-tags">
+<span class="tech-tag">STM32</span>
+<span class="tech-tag">CAN</span>
+<span class="tech-tag">11비트/29비트 ID</span>
+<span class="tech-tag">동적 필터링</span>
+<span class="tech-tag">레거시 리팩토링</span>
+</div>
+</div></div></details>
+    </article><article class="case previous-case" id="project-cloud">
+      <h4 class="case-title">클라우드 진단 디바이스 펌웨어</h4><div class="project-meta">
+<span>2024.04 착수</span>
+<span>STM32H7 · MQTT · HTTPS · WebSocket</span>
+</div>
+      <p class="case-intro">Bluetooth 기반 디바이스 통신을 MQTT·HTTPS·WebSocket으로 전환하고, 벌크 처리·OTA·TLS 및 인증서 기반 보안 연결을 구현했습니다.</p>
+      <details class="work-detail"><summary>클라우드 진단 디바이스 펌웨어 상세</summary>
+      <div class="detail-body"><div class="project-content">
+<p>차량 ECU를 원격 진단하는 클라우드 플랫폼에 대응하는 디바이스 펌웨어를 리팩토링했습니다. 기존 Bluetooth 기반 태블릿 통신에서 클라우드 서버 기반 MQTT/WebSocket/HTTPS 통신으로 전환하는 작업을 수행했습니다.</p>
+<h5>통신 프로토콜 전환 및 펌웨어 리팩토링</h5>
+<div class="highlight-box">
+<p>기존 Bluetooth 통신 체계와 디바이스 동작 시퀀스를 완전히 파악한 후, 클라우드 환경에 맞춰 펌웨어를 전면 리팩토링했습니다.</p>
+</div>
+<div class="architecture">
+<div class="architecture-title">통신 아키텍처 전환</div>
+<div class="architecture-diagram" style="gap: 32px;">
+<div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+<div style="font-size: 14px; font-weight: 700; color: var(--text-tertiary); margin-bottom: 8px;">[ 기존 ]</div>
+<div class="arch-box" style="background: #FFF9F0; border-color: var(--warning);">디바이스<br/>(STM32H7)</div>
+<div class="arch-arrow" style="transform: rotate(90deg); margin: 4px 0;">→</div>
+<div class="arch-box" style="background: #FFF9F0; border-color: var(--warning);">태블릿</div>
+<div style="font-size: 13px; color: var(--text-tertiary); font-weight: 600; margin-top: 8px;">Bluetooth</div>
+</div>
+<div class="arch-arrow" style="font-size: 32px;">⇨</div>
+<div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+<div style="font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">[ 변경 후 ]</div>
+<div class="arch-box">디바이스<br/>(STM32H7)</div>
+<div class="arch-arrow" style="transform: rotate(90deg); margin: 4px 0;">→</div>
+<div class="arch-box">클라우드 서버</div>
+<div style="font-size: 13px; color: var(--primary); font-weight: 600; margin-top: 8px;">MQTT / WebSocket / HTTPS</div>
+</div>
+</div>
+</div>
+<h5>핵심 작업 내용</h5>
+<ul>
+<li><strong>시스템 분석:</strong> 기존 BT 통신 기반 디바이스 동작 시퀀스 전체 파악 및 문서화</li>
+<li><strong>프로토콜 전환:</strong> Bluetooth → MQTT/WebSocket/HTTPS 통신 계층 구현</li>
+<li><strong>성능 최적화:</strong> 무선 통신으로 증가한 데이터 처리를 위한 벌크 처리 기능 추가 (단일 명령 → 다중 명령 일괄 처리)</li>
+<li><strong>처리 속도 향상:</strong> 명령 큐 최적화 및 비동기 처리로 응답 속도 개선</li>
+<li><strong>시스템 확장:</strong> 클라우드 전환으로 추가된 OTA 업데이트 기능 구현 및 최적화</li>
+<li><strong>보안 통신 구현:</strong> Python 기반 TLS 테스트베드 자체 구축 및 PoC 검증</li>
+<li><strong>AWS IoT 연동:</strong> X.509 인증서 프로비저닝 및 mTLS 기반 End-to-End 보안 채널 수립</li>
+</ul>
+<h5>OTA 시스템 최적화</h5>
+<ul>
+<li>MQTT 명령채널과 HTTPS 다운로드채널 분리 설계</li>
+<li>플래시 메모리 쓰기 최적화 및 롤백 메커니즘</li>
+<li>HTTPS 분할 다운로드 및 무결성 검증 (체크섬)</li>
+</ul>
+<div class="tech-tags">
+<span class="tech-tag">STM32H7</span>
+<span class="tech-tag">FreeRTOS</span>
+<span class="tech-tag">MQTT</span>
+<span class="tech-tag">WebSocket</span>
+<span class="tech-tag">HTTPS</span>
+<span class="tech-tag">TLS/SSL</span>
+<span class="tech-tag">AWS IoT</span>
+<span class="tech-tag">X.509</span>
+</div>
+</div></div></details>
+    </article><article class="case previous-case" id="project-ecos">
+      <h4 class="case-title">전장검사장비 내재화</h4><div class="project-meta">
+<span>2024.04 ~ 2025.05</span>
+<span>STM32H7 · CMSIS-RTOS · CAN진단 · 리버스 엔지니어링</span>
+</div>
+      <p class="case-intro">외부 장비의 회로·동작을 분석해 9개 보드를 5개로 통합하는 펌웨어를 개발하고, 검사 시간을 28초에서 25초로 단축했습니다.</p>
+      <details class="work-detail"><summary>전장검사장비 내재화 상세</summary>
+      <div class="detail-body"><div class="project-content">
+<p>SP2 차량 전장검사에 사용되던 외부 장비를 자체 기술로 내재화하는 프로젝트를 수행했습니다. 하드웨어/사양팀과 협업하여 기존 9장의 보드를 회로 분석 및 리버스 엔지니어링으로 기능을 파악하고, 이를 5장으로 통합 고도화하여 최종 검사 시간(CT)을 28초에서 25초로 단축했습니다.</p>
+<h5>리버스 엔지니어링 및 기능 분석</h5>
+<div class="highlight-box">
+<p>9장의 보드를 데이터시트와 회로도 기반으로 분석하여 각 보드의 기능을 파악하고 펌웨어 요구사항을 도출했습니다. (대표 기능: CAN 진단, 블로워 모터 전압 제어, 전원 제어 등)</p>
+</div>
+<h5>핵심 작업 내용</h5>
+<ul>
+<li><strong>회로 분석:</strong> 하드웨어/사양팀과 협업하여 9장 보드의 회로 및 동작 원리 분석</li>
+<li><strong>기능 파악:</strong> 보드별 고유 기능 리버스 엔지니어링 (CAN 진단, 전압 가변 제어, 전원 제어 등 9가지 기능)</li>
+<li><strong>보드 통합:</strong> 9장 보드를 5장으로 통합 설계 및 고도화</li>
+<li><strong>펌웨어 통합 설계:</strong> 진단 펌웨어와 제어 펌웨어 2종류로 구성, 보드 ID별 동작 지원으로 관리 효율화</li>
+<li><strong>STM32H7 + FreeRTOS:</strong> 멀티태스킹 기반 실시간 진단 및 제어 시스템 구현</li>
+<li><strong>성과:</strong> 최종 검사 시간(CT) 28초 → 25초로 단축</li>
+</ul>
+<div class="tech-tags">
+<span class="tech-tag">STM32H7</span>
+<span class="tech-tag">FreeRTOS</span>
+<span class="tech-tag">CAN 진단</span>
+<span class="tech-tag">리버스 엔지니어링</span>
+<span class="tech-tag">회로 분석</span>
+</div>
+</div></div></details>
+    </article></div>
+<div class="project-group" id="charging"><h3 class="group-title">자동충전·계측·통신 <span class="group-period">2016 ~ 2024 수행 프로젝트</span></h3><article class="case previous-case" id="project-docking">
+      <h4 class="case-title">차량하부 자동충전 도킹</h4><div class="project-meta">
+<span>2022.04 ~ 2024.04</span>
+<span>RS485 · 서보모터 · 스텝모터</span>
+</div>
+      <p class="case-intro">충전 커넥터의 자동 도킹을 위한 서보·스텝 모터 제어와 상위 제어기 통신을 구현했습니다.</p>
+      <details class="work-detail"><summary>차량하부 자동충전 도킹 상세</summary>
+      <div class="detail-body"><div class="project-content">
+<p>전기차 하부에 자동으로 충전 커넥터가 도킹되는 시스템의 모터 제어 펌웨어를 개발했습니다.</p>
+<h5>모터 제어</h5>
+<ul>
+<li><strong>서보 모터:</strong> RS485 모드버스 통신, 위치/속도 제어 (±0.1mm 정밀도)</li>
+<li><strong>스텝 모터:</strong> PWM 기반 마이크로스텝핑, 탈조 방지 로직</li>
+<li><strong>상위제어기:</strong> Jetson 보드와 Python 통신 (UART/이더넷)</li>
+</ul>
+<div class="tech-tags">
+<span class="tech-tag">RS485</span>
+<span class="tech-tag">모드버스</span>
+<span class="tech-tag">PWM</span>
+<span class="tech-tag">Python</span>
+</div>
+</div></div></details>
+    </article><article class="case previous-case" id="project-position">
+      <h4 class="case-title">전기버스 자동충전 위치인식</h4><div class="project-meta">
+<span>2021.04 ~ 2023.12</span>
+<span>STM32F4 · 초음파센서</span>
+</div>
+      <p class="case-intro">다중 초음파 센서의 데이터를 이용해 차량 거리·기울기를 계산하고, 현장 환경에서 정위치 인식과 보정 로직을 검증했습니다.</p>
+      <details class="work-detail"><summary>전기버스 자동충전 위치인식 상세</summary>
+      <div class="detail-body"><div class="project-content">
+<p>지붕 접속 방식 팬터그래프 충전을 위한 차량 정위치 인식 시스템을 개발했습니다.</p>
+<h5>센서 융합 알고리즘</h5>
+<ul>
+<li>다중 초음파 센서 데이터 융합</li>
+<li>기울기 계산 (전후/좌우)</li>
+<li>거리 오차 ±5cm 달성</li>
+<li>실시간 위치 보정 로직</li>
+</ul>
+<h5>실증 경험</h5>
+<ul>
+<li>현장 구축 및 실제 운행 환경 테스트</li>
+<li>기상 조건별 검증 (온도/습도/강우)</li>
+<li>데이터 원격 수집 시스템 구축</li>
+</ul>
+<div class="tech-tags">
+<span class="tech-tag">STM32F4</span>
+<span class="tech-tag">초음파센서</span>
+<span class="tech-tag">센서융합</span>
+</div>
+</div></div></details>
+    </article><article class="case previous-case" id="project-test-rig">
+      <h4 class="case-title">팬터그래프 내구성 시험평가</h4><div class="project-meta">
+<span>2020.04 ~ 2022.12</span>
+<span>CompactDAQ · LabVIEW</span>
+</div>
+      <p class="case-intro">CompactDAQ·LabVIEW로 전압·전류·저항·접촉력을 수집하고, 시험 시퀀스 제어와 리포트 생성을 자동화했습니다.</p>
+      <details class="work-detail"><summary>팬터그래프 내구성 시험평가 상세</summary>
+      <div class="detail-body"><div class="project-content">
+<p>전기버스 팬터그래프 충전 시스템의 내구성을 평가하는 자동화 시험 시스템을 구축했습니다.</p>
+<h5>구현 내용</h5>
+<ul>
+<li>CompactDAQ 기반 전압/전류/저항/접촉력 동시 측정</li>
+<li>LabVIEW 데이터 수집 및 실시간 모니터링 소프트웨어</li>
+<li>동작 내구 시험 절차서 작성</li>
+<li>시험 시퀀스 자동 제어 및 리포트 생성</li>
+<li>시험 성적서 발급 (합격/불합격 판정)</li>
+</ul>
+<div class="tech-tags">
+<span class="tech-tag">CompactDAQ</span>
+<span class="tech-tag">LabVIEW</span>
+<span class="tech-tag">시험자동화</span>
+</div>
+</div></div></details>
+    </article><article class="case previous-case" id="project-can">
+      <h4 class="case-title">농기계 CAN 통신 시스템</h4><div class="project-meta">
+<span>2018.10 ~ 2020.09</span>
+<span>ESP32 · CAN · CANoe</span>
+</div>
+      <p class="case-intro">41개 CAN ID의 신호 데이터베이스를 구성하고, 인터럽트 기반 수신·물리값 변환과 CAN–UDP 게이트웨이를 구현했습니다.</p>
+      <details class="work-detail"><summary>농기계 CAN 통신 시스템 상세</summary>
+      <div class="detail-body"><div class="project-content">
+<p>트랙터 및 농기계의 여러 ECU를 CAN 통신으로 연결하는 통합 제어 시스템을 개발했습니다. 41개 CAN ID를 정의한 통신 데이터베이스를 구축했습니다.</p>
+<h5>CAN 데이터베이스 구축</h5>
+<div class="highlight-box">
+<p>41개 CAN ID를 체계적으로 정의하고 CANoe DBC 파일로 관리했습니다.</p>
+</div>
+<div class="architecture">
+<div class="architecture-title">CAN 신호 정의 예시</div>
+<div class="architecture-diagram">
+<div class="arch-box">GPS<br/>위도/경도/속도</div>
+<div class="arch-box">엔진<br/>RPM/온도/압력</div>
+<div class="arch-box">센서<br/>가속/브레이크</div>
+<div class="arch-box">고장<br/>DTC 코드</div>
+</div>
+</div>
+<h5>구현 내용</h5>
+<ul>
+<li>CAN 필터/마스크 설정 및 인터럽트 기반 수신</li>
+<li>신호 추출 및 물리값 변환 알고리즘</li>
+<li>CANoe DBC 파일 작성 및 실시간 모니터링</li>
+<li>CAN to UDP 게이트웨이 개발 (ESP32)</li>
+</ul>
+<div class="tech-tags">
+<span class="tech-tag">ESP32</span>
+<span class="tech-tag">CAN</span>
+<span class="tech-tag">CANoe</span>
+<span class="tech-tag">DBC</span>
+<span class="tech-tag">UDP</span>
+</div>
+</div></div></details>
+    </article><article class="case previous-case" id="project-research">
+      <h4 class="case-title">전기차 충전 분배 알고리즘·시뮬레이터</h4><div class="project-meta">
+<span>2016.12 ~ 2019.12</span>
+<span>STM32F4 · J1772 · LabVIEW · Simulink</span>
+</div>
+      <p class="case-intro">SAE J1772 기반 충전 제어를 연구하고, LabVIEW EVSE/OBC 시뮬레이터와 Simulink 배터리 모델을 연동한 실험 환경을 구축했습니다.</p>
+      <details class="work-detail"><summary>전기차 충전 분배 알고리즘·시뮬레이터 상세</summary>
+      <div class="detail-body"><div class="project-content">
+<p>SAE J1772 표준 기반 전기차 충전 분배 알고리즘을 연구하고, LabVIEW 기반 EVSE/OBC 양방향 시뮬레이터를 개발했습니다.</p>
+<h5>핵심 작업 내용</h5>
+<ul>
+<li>J1772 Pilot 신호 전압 측정 및 상태 확인 (12V, 9V, 6V, 3V, 0V, -12V)</li>
+<li>PWM 듀티 사이클 기반 전류 제한 통신 구현</li>
+<li>프로그래머블 파워서플라이 연동으로 듀티에 따른 전류 출력 자동 제어</li>
+<li>LabVIEW 기반 EVSE 시뮬레이터 개발 (듀티 사이클 가변 제어)</li>
+<li>OBC 시뮬레이터: 전류 측정 및 Simulink 배터리 모델 연동으로 충전량 시각화</li>
+<li>충전 분배 알고리즘 검증용 실험 환경 구축</li>
+</ul>
+<h5>연구 성과</h5>
+<ul>
+<li>논문 2편: 한국자동차공학회 - 전기차 충전 분배 알고리즘, 팬터그래프 충전 테스트 환경</li>
+<li>특허 3건: 최대 전력사용 충전 장치, 전기차용 충전장치, 정위치 유도 장치</li>
+</ul>
+<div class="tech-tags">
+<span class="tech-tag">STM32F4</span>
+<span class="tech-tag">J1772</span>
+<span class="tech-tag">PWM</span>
+<span class="tech-tag">LabVIEW</span>
+<span class="tech-tag">Simulink</span>
+<span class="tech-tag">프로그래머블 파워서플라이</span>
+</div>
+</div></div></details>
+    </article></div>
+</section>
+
+<section class="section" id="skills" aria-labelledby="skills-title"><div class="section-heading"><div><p class="section-kicker">TECHNICAL SKILLS</p><h2 id="skills-title">보유 기술</h2><p class="section-description">프로젝트에서 사용한 제어·통신·플랫폼 기술과 개발 도구</p></div></div><div class="tech-grid"><div class="tech-category">
+<h3>모터 제어</h3>
+<ul class="tech-list">
+<li class="tech-item"><strong>Sensorless FOC</strong> Clarke/Park, PI, SVPWM</li>
+<li class="tech-item"><strong>관측기</strong> SMC·자속 관측기 분석 및 비교</li>
+<li class="tech-item"><strong>기동 제어</strong> I-f 개루프·폐루프 전환 튜닝</li>
+<li class="tech-item"><strong>Single-shunt</strong> 전류 재구성·ADC 샘플링</li>
+<li class="tech-item"><strong>실시간 최적화</strong> ISR 계측·고정소수점 연산</li>
+</ul>
+</div><div class="tech-category">
+<h3>SW 아키텍처·검증</h3>
+<ul class="tech-list">
+<li class="tech-item"><strong>Core SW</strong> 공통 알고리즘·제품 설정 분리</li>
+<li class="tech-item"><strong>AUTOSAR 구조</strong> SWC·RTE 포트·Runnable 설계</li>
+<li class="tech-item"><strong>C99 / MISRA-C</strong> 정적 할당·코딩 규칙 기반 개발</li>
+<li class="tech-item"><strong>회귀 검증</strong> 골든 벡터·수치 형식 교차 검증</li>
+<li class="tech-item"><strong>Python</strong> 계측·분석·패키지 생성 자동화</li>
+</ul>
+</div><div class="tech-category">
+<h3>MCU 플랫폼</h3>
+<ul class="tech-list">
+<li class="tech-item"><strong>TI C2000</strong> PWM·ADC 동기화 및 FOC 제어</li>
+<li class="tech-item"><strong>NXP S12ZVM</strong> Q15 고정소수점 모터 제어</li>
+<li class="tech-item"><strong>STM32H7</strong> CMSIS-RTOS 기반 펌웨어</li>
+<li class="tech-item"><strong>STM32F4</strong> 실시간 제어 시스템</li>
+<li class="tech-item"><strong>ESP32</strong> 사물인터넷 게이트웨이</li>
+<li class="tech-item"><strong>FreeRTOS</strong> 멀티태스킹 시스템</li>
+</ul>
+</div><div class="tech-category">
+<h3>통신 프로토콜</h3>
+<ul class="tech-list">
+<li class="tech-item"><strong>LIN</strong> 슬레이브 통신, LDF 신호 매핑·검증</li>
+<li class="tech-item"><strong>CAN</strong> DBC 데이터베이스 구축</li>
+<li class="tech-item"><strong>MQTT</strong> 명령채널 설계</li>
+<li class="tech-item"><strong>HTTPS</strong> 대용량 파일 다운로드</li>
+<li class="tech-item"><strong>WebSocket</strong> 실시간 데이터 전송</li>
+<li class="tech-item"><strong>RS485</strong> 모드버스 모터제어</li>
+</ul>
+</div><div class="tech-category">
+<h3>보안 &amp; 암호화</h3>
+<ul class="tech-list">
+<li class="tech-item"><strong>TLS/SSL</strong> 인증서 기반 보안통신</li>
+<li class="tech-item"><strong>PBKDF2</strong> 키 파생 알고리즘</li>
+<li class="tech-item"><strong>HSM</strong> 하드웨어 보안모듈 연동</li>
+<li class="tech-item"><strong>X.509</strong> 인증서 프로비저닝</li>
+</ul>
+</div><div class="tech-category">
+<h3>개발 도구</h3>
+<ul class="tech-list">
+<li class="tech-item"><strong>CodeWarrior / CCS</strong> 빌드·디버깅·보드 구동</li>
+<li class="tech-item"><strong>FreeMASTER / PLIN</strong> 제어 변수 계측·LIN 시험</li>
+<li class="tech-item"><strong>MATLAB / Simulink</strong> 제어 분석·튜닝·시뮬레이션</li>
+<li class="tech-item"><strong>CANoe</strong> DBC 작성 및 테스트 자동화</li>
+<li class="tech-item"><strong>LabVIEW</strong> 계측 시스템 개발</li>
+<li class="tech-item"><strong>IAR EWARM</strong> 펌웨어 개발환경</li>
+<li class="tech-item"><strong>Git</strong> 버전관리</li>
+</ul>
+</div></div></section>
+
+<section class="section" id="background" aria-labelledby="background-title"><div class="section-heading"><div><p class="section-kicker">BACKGROUND &amp; CONTACT</p><h2 id="background-title">학력·연구·연락처</h2></div></div>
+<div class="background-grid"><div><h3>학력</h3><article class="education-item"><div class="project-header">
+<h4 class="project-title">공주대학교 대학원 정보통신공학과</h4>
+<div class="project-meta">
+<span>2020.03 ~ 2022.02</span>
+<span>석사과정 수료</span>
+<span>평점 4.38 / 4.5</span>
+</div>
+</div></article><article class="education-item"><div class="project-header">
+<h4 class="project-title">단국대학교 전자공학과</h4>
+<div class="project-meta">
+<span>2011.03 ~ 2017.02</span>
+<span>학사 졸업</span>
+<span>평점 3.09 / 4.5</span>
+</div>
+</div></article></div><div><h3>연구 성과</h3><p class="publication"><strong>논문 2편</strong><br>전기차 충전 분배 알고리즘 · 팬터그래프 충전 테스트 환경</p><p class="publication"><strong>특허 3건</strong><br>최대 전력사용 충전 장치 · 전기차용 충전장치 · 정위치 유도 장치</p><a href="#project-research">관련 연구 프로젝트 보기</a></div></div>
+<div class="contact"><div class="contact-main"><a href="mailto:dayungh10@naver.com">dayungh10@naver.com</a><a href="tel:+821090547352">010-9054-7352</a></div>
+<details class="work-detail profile-extra"><summary>추가 프로필</summary><div class="detail-body"><div class="info-grid">
+<div class="info-item">
+<span class="info-label">이메일</span>
+<span class="info-value">dayungh10@naver.com</span>
+</div>
+<div class="info-item">
+<span class="info-label">연락처</span>
+<span class="info-value">010-9054-7352</span>
+</div>
+<div class="info-item">
+<span class="info-label">생년월일</span>
+<span class="info-value">1992.08.18</span>
+</div>
+<div class="info-item">
+<span class="info-label">거주지</span>
+<span class="info-value">서울특별시 송파구</span>
+</div>
+<div class="info-item">
+<span class="info-label">병역</span>
+<span class="info-value">육군 헌병 병장 만기제대 (2012.04 ~ 2014.01)</span>
+</div>
+<div class="info-item">
+<span class="info-label">특기</span>
+<span class="info-value">마라톤 / 골프</span>
+</div>
+</div></div></details></div>
+</section></main>
+<footer><div class="container"><span>© 2026 이재석 · Embedded Software Engineer</span><a href="#top">맨 위로</a></div></footer>
+<script>
+// Keep deep links and print output usable with collapsed project details.
+(() => {
+  const items = Array.from(document.querySelectorAll('.work-detail'));
+  const toggle = document.getElementById('toggle-details');
+  function updateToggle() {
+    const expanded = items.every(item => item.open);
+    toggle.textContent = expanded ? '전체 상세 접기' : '전체 상세 펼치기';
+    toggle.setAttribute('aria-expanded', String(expanded));
+  }
+  toggle.addEventListener('click', () => {
+    const expand = !items.every(item => item.open);
+    items.forEach(item => { item.open = expand; });
+    updateToggle();
+  });
+  items.forEach(item => item.addEventListener('toggle', updateToggle));
+  function openHash() {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const target = document.getElementById(id);
+    if (!target) return;
+    let parent = target;
+    while (parent) {
+      if (parent.tagName === 'DETAILS') parent.open = true;
+      parent = parent.parentElement;
+    }
+    requestAnimationFrame(() => target.scrollIntoView({block:'start'}));
+  }
+  window.addEventListener('hashchange', openHash);
+  openHash();
+  let printState = [];
+  window.addEventListener('beforeprint', () => {
+    printState = items.map(item => item.open);
+    items.forEach(item => { item.open = true; });
+  });
+  window.addEventListener('afterprint', () => {
+    items.forEach((item,index) => { item.open = Boolean(printState[index]); });
+  });
+})();
+</script></body></html>
