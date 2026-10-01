@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이재석 | 임베디드 시스템 개발자</title>
+    <title>이재석 | 임베디드 SW · 모터 제어 · Core SW Component</title>
+    <meta name="description" content="한온시스템 Core SW Component 개발자 이재석의 포트폴리오. BLDC/PMSM 센서리스 FOC, 모터 제어 공통 플랫폼, MCU 포팅, LIN 통신, 임베디드 시스템 개발 경험을 소개합니다.">
     <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
     <style>
         * {
@@ -66,6 +67,51 @@
 
         .logo span {
             color: var(--primary);
+        }
+
+        /* Portfolio navigation and current role */
+        .portfolio-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+        }
+
+        .portfolio-nav a, .experience-link {
+            color: var(--primary-dark);
+            font-weight: 700;
+            text-underline-offset: 4px;
+        }
+
+        .portfolio-nav a {
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        a:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 5px;
+        }
+
+        section[id], article[id] {
+            scroll-margin-top: 120px;
+        }
+
+        .current-role {
+            border-left: 6px solid var(--primary);
+        }
+
+        .current-role h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .current-role p {
+            color: var(--text-secondary);
+            margin-top: 16px;
+        }
+
+        .table-scroll {
+            overflow-x: auto;
         }
 
         /* Container */
@@ -679,6 +725,35 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .portfolio-nav {
+                gap: 12px 16px;
+            }
+
+            .portfolio-nav a {
+                font-size: 13px;
+            }
+
+            .info-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .info-item {
+                flex-wrap: wrap;
+            }
+
+            .info-value {
+                overflow-wrap: anywhere;
+            }
+
+            .table-scroll table {
+                min-width: 620px;
+            }
+
             .intro {
                 flex-direction: column;
                 gap: 40px;
@@ -697,7 +772,7 @@
             }
 
             .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: minmax(0, 1fr);
             }
 
             .tech-grid {
@@ -1028,6 +1103,11 @@
     <header>
         <div class="header-content">
             <div class="logo">이재석 <span>·</span> 임베디드 개발자</div>
+            <nav class="portfolio-nav" aria-label="포트폴리오 섹션">
+                <a href="#hanon">한온시스템</a>
+                <a href="#skills">보유 기술</a>
+                <a href="#previous-projects">기존 개발 경험</a>
+            </nav>
         </div>
     </header>
 
@@ -1036,10 +1116,11 @@
         <section class="intro fade-in">
             <div class="intro-content">
                 <h1 class="intro-title">이재석</h1>
-                <p class="intro-subtitle">임베디드 시스템 개발자 · 8년차</p>
+                <p class="intro-subtitle">임베디드 SW · 모터 제어 · Core SW Component</p>
                 <div class="intro-meta">
-                    <div class="meta-item"><strong>전문분야</strong> STM32, CMSIS-RTOS, UDS</div>
-                    <div class="meta-item"><strong>핵심역량</strong> 진단시스템, 무선업데이트, 보안통신</div>
+                    <div class="meta-item"><strong>현재</strong> 한온시스템 · Platform SW</div>
+                    <div class="meta-item"><strong>전문분야</strong> 센서리스 FOC, 모터 제어 공통 플랫폼</div>
+                    <div class="meta-item"><strong>개발경험</strong> 차량 진단, 충전 시스템, 보안통신</div>
                 </div>
             </div>
             <div class="intro-photo">
@@ -1076,6 +1157,18 @@
                 </div>
             </div>
         </div>
+
+        <!-- Current Employment -->
+        <section class="profile-info current-role fade-in" aria-labelledby="current-role-title">
+            <div class="section-tag">현재 경력</div>
+            <h2 id="current-role-title">한온시스템 <span lang="en">Hanon Systems</span></h2>
+            <div class="project-meta">
+                <span><time datetime="2026-05-18">2026.05.18</time> ~ 현재</span>
+                <span>Platform SW · Core SW Component 개발</span>
+            </div>
+            <p>자동차 열관리 부품용 BLDC/PMSM 모터 제어 펌웨어와 재사용 가능한 Core SW를 개발합니다. 공통 제어 알고리즘 설계, MCU 포팅, 보드 구동, LIN 통신, 보호 로직, 벤치 튜닝과 검증 도구 개발을 수행하고 있습니다.</p>
+            <p><a class="experience-link" href="#hanon">한온시스템 업무 상세 보기</a></p>
+        </section>
 
         <!-- Education -->
         <section class="section fade-in">
@@ -1114,8 +1207,8 @@
                 <div class="stat-label">개발 경력 (년)</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">10</div>
-                <div class="stat-label">완료 프로젝트</div>
+                <div class="stat-number">Core SW</div>
+                <div class="stat-label">현재 개발 직무</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">5</div>
@@ -1124,17 +1217,19 @@
         </div>
 
         <!-- Core Skills Visual -->
-        <section class="section fade-in">
+        <section class="section fade-in" id="skills">
             <div class="section-header">
                 <div class="section-tag">핵심 역량</div>
                 <h2 class="section-title">보유 기술</h2>
-                <p class="section-description">실무 프로젝트에서 검증된 기술 스택</p>
+                <p class="section-description">모터 제어부터 차량 진단·통신까지의 개발 기술</p>
             </div>
 
             <div class="tech-grid">
                 <div class="tech-category">
                     <h3>MCU 플랫폼</h3>
                     <ul class="tech-list">
+                        <li class="tech-item"><strong>TI C2000</strong> PWM·ADC 동기화 및 FOC 제어</li>
+                        <li class="tech-item"><strong>NXP S12ZVM</strong> Q15 고정소수점 모터 제어</li>
                         <li class="tech-item"><strong>STM32H7</strong> CMSIS-RTOS 기반 펌웨어</li>
                         <li class="tech-item"><strong>STM32F4</strong> 실시간 제어 시스템</li>
                         <li class="tech-item"><strong>ESP32</strong> 사물인터넷 게이트웨이</li>
@@ -1145,6 +1240,7 @@
                 <div class="tech-category">
                     <h3>통신 프로토콜</h3>
                     <ul class="tech-list">
+                        <li class="tech-item"><strong>LIN</strong> 슬레이브 통신, LDF 신호 매핑·검증</li>
                         <li class="tech-item"><strong>CAN</strong> DBC 데이터베이스 구축</li>
                         <li class="tech-item"><strong>MQTT</strong> 명령채널 설계</li>
                         <li class="tech-item"><strong>HTTPS</strong> 대용량 파일 다운로드</li>
@@ -1166,21 +1262,197 @@
                 <div class="tech-category">
                     <h3>개발 도구</h3>
                     <ul class="tech-list">
+                        <li class="tech-item"><strong>CodeWarrior / CCS</strong> 빌드·디버깅·보드 구동</li>
+                        <li class="tech-item"><strong>FreeMASTER / PLIN</strong> 제어 변수 계측·LIN 시험</li>
+                        <li class="tech-item"><strong>MATLAB / Simulink</strong> 제어 분석·튜닝·시뮬레이션</li>
                         <li class="tech-item"><strong>CANoe</strong> DBC 작성 및 테스트 자동화</li>
                         <li class="tech-item"><strong>LabVIEW</strong> 계측 시스템 개발</li>
                         <li class="tech-item"><strong>IAR EWARM</strong> 펌웨어 개발환경</li>
                         <li class="tech-item"><strong>Git</strong> 버전관리</li>
                     </ul>
                 </div>
+
+                <div class="tech-category">
+                    <h3>모터 제어</h3>
+                    <ul class="tech-list">
+                        <li class="tech-item"><strong>Sensorless FOC</strong> Clarke/Park, PI, SVPWM</li>
+                        <li class="tech-item"><strong>관측기</strong> SMC·자속 관측기 분석 및 비교</li>
+                        <li class="tech-item"><strong>기동 제어</strong> I-f 개루프·폐루프 전환 튜닝</li>
+                        <li class="tech-item"><strong>Single-shunt</strong> 전류 재구성·ADC 샘플링</li>
+                        <li class="tech-item"><strong>실시간 최적화</strong> ISR 계측·고정소수점 연산</li>
+                    </ul>
+                </div>
+
+                <div class="tech-category">
+                    <h3>SW 아키텍처·검증</h3>
+                    <ul class="tech-list">
+                        <li class="tech-item"><strong>Core SW</strong> 공통 알고리즘·제품 설정 분리</li>
+                        <li class="tech-item"><strong>AUTOSAR 구조</strong> SWC·RTE 포트·Runnable 설계</li>
+                        <li class="tech-item"><strong>C99 / MISRA-C</strong> 정적 할당·코딩 규칙 기반 개발</li>
+                        <li class="tech-item"><strong>회귀 검증</strong> 골든 벡터·수치 형식 교차 검증</li>
+                        <li class="tech-item"><strong>Python</strong> 계측·분석·패키지 생성 자동화</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
-        <!-- Recent Projects -->
-        <section class="section fade-in">
+        <!-- Hanon Systems Experience -->
+        <section class="section fade-in" id="hanon" aria-labelledby="hanon-title">
             <div class="section-header">
-                <div class="section-tag">최근 프로젝트</div>
+                <div class="section-tag">한온시스템 · 현재 업무</div>
+                <h2 class="section-title" id="hanon-title">모터 제어 &amp; Core SW 개발</h2>
+                <p class="section-description">2026.05.18 ~ 현재 · Platform SW / Core SW Component</p>
+            </div>
+
+            <article class="project" id="hanon-platform">
+                <div class="project-header">
+                    <h3 class="project-title">모터 제어 공통 SW 플랫폼 개발</h3>
+                    <div class="project-meta"><span>공통 코어 구현 · 제품 적용 및 확장 진행 중</span></div>
+                </div>
+                <div class="project-content">
+                    <p>펌프와 팬 계열 제품에서 제어 알고리즘을 재사용할 수 있도록, MCU·보드 의존 코드와 제품별 설정을 분리한 모터 제어 플랫폼을 개발했습니다.</p>
+                    <ul>
+                        <li><strong>제어 코어:</strong> 좌표 변환, 전류·속도 PI 제어, SVPWM, 센서리스 관측기, 기동 상태머신을 공통 모듈로 구성</li>
+                        <li><strong>수치 형식:</strong> 16비트 Q15 고정소수점과 32비트 부동소수점 구현을 유지하고, 동일 입력의 출력 오차를 허용 범위 기준으로 교차 검증</li>
+                        <li><strong>계층 분리:</strong> ASW / 정적 RTE / BSW·CDD / MCAL 경계와 S/R·C/S 포트 인터페이스, Runnable·ISR 실행 책임을 설계</li>
+                        <li><strong>제품 변형:</strong> MCU, 통신, 수치 형식, 외부 드라이버와 제품 파라미터를 조합하는 패키지 생성 CLI·GUI 및 검증 흐름 구현</li>
+                    </ul>
+                    <div class="tech-tags"><span class="tech-tag">C99</span><span class="tech-tag">MISRA-C</span><span class="tech-tag">Q15 / Float</span><span class="tech-tag">Static RTE</span><span class="tech-tag">MCAL</span></div>
+                </div>
+            </article>
+
+            <article class="project" id="hanon-eop">
+                <div class="project-header">
+                    <h3 class="project-title">전동 오일펌프(eOP) 펌웨어 포팅·최적화</h3>
+                    <div class="project-meta"><span>평가보드 포팅 및 개루프·폐루프 구동 검증</span></div>
+                </div>
+                <div class="project-content">
+                    <p>기존 eOP 펌웨어의 제어 흐름과 하드웨어 의존성을 분석하고, 평가보드로 이식해 모터 구동과 계측 환경을 구성했습니다.</p>
+                    <ul>
+                        <li><strong>플랫폼 이식:</strong> 컴파일러·링커, 인터럽트 벡터, OSEK 기반 스케줄링, 고정소수점 연산의 이식 문제 분석 및 수정</li>
+                        <li><strong>구동 디버깅:</strong> PWM 극성, ADC 트리거, 전류 환산, 샘플링 시점과 single-shunt 전류 재구성 경로 점검</li>
+                        <li><strong>실시간 성능:</strong> FOC ISR 구간별 실행시간을 계측해 제어주기 초과 원인을 찾고, 수식 변환과 연산 구조 개선으로 실행시간 단축</li>
+                        <li><strong>센서리스 제어:</strong> 관측기 위상 지연·보상과 제어주기 의존 파라미터를 분석하고, 고정소수점 범위 검증 및 계측 기능 보강</li>
+                        <li><strong>검증 환경:</strong> FreeMASTER와 시리얼 콘솔을 이용한 속도 지령·상태 관측 및 개루프·폐루프 구동 확인</li>
+                    </ul>
+                    <div class="tech-tags"><span class="tech-tag">NXP S12ZVM</span><span class="tech-tag">CodeWarrior</span><span class="tech-tag">OSEK</span><span class="tech-tag">FOC ISR</span><span class="tech-tag">FreeMASTER</span></div>
+                </div>
+            </article>
+
+            <article class="project" id="hanon-blower">
+                <div class="project-header">
+                    <h3 class="project-title">차량 공조 블로워 센서리스 FOC 개발</h3>
+                    <div class="project-meta"><span>시제품 보드 폐루프 구동 확인 · 튜닝 및 개선 진행 중</span></div>
+                </div>
+                <div class="project-content">
+                    <p>공통 제어 코어를 블로워용 MCU와 시제품 보드에 적용하고, 실제 모터를 연결해 기동·폐루프 전환·속도 제어를 검증했습니다.</p>
+                    <ul>
+                        <li><strong>MCU 포팅:</strong> TI C2000 기반 PWM·ADC·타이머·GPIO·SPI·LIN 드라이버와 FOC 인터럽트 경로 통합</li>
+                        <li><strong>HW/SW 정합:</strong> 데이터시트·회로도·PCB를 대조해 핀맵과 GPIO MUX를 검토하고, 게이트 드라이버 설정 및 3상 상보 PWM 출력 확인</li>
+                        <li><strong>기동 튜닝:</strong> 정렬, I-f 개루프 가속, 관측기 동기 조건, 폐루프 인계와 정지 시퀀스의 파라미터 조정</li>
+                        <li><strong>실기 분석:</strong> SMC·자속 관측기의 거동을 비교하고, 벤치·동력계 시험에서 전류·속도·상태 기록을 분석해 기동 및 구속 조건 점검</li>
+                        <li><strong>후속 개선:</strong> 저속 속도 추정 리플, 계측값 환산, 클럭 편차와 역회전 대응을 분석하고 개선안 설계</li>
+                    </ul>
+                    <div class="tech-tags"><span class="tech-tag">TI C2000</span><span class="tech-tag">Sensorless FOC</span><span class="tech-tag">PWM / ADC</span><span class="tech-tag">Gate Driver</span><span class="tech-tag">Bench Test</span></div>
+                </div>
+            </article>
+
+            <article class="project" id="hanon-lin-protection">
+                <div class="project-header">
+                    <h3 class="project-title">LIN 통신·진단 및 Fail-Safety 로직</h3>
+                    <div class="project-meta"><span>통신·보호 로직 구현 · 제품별 통합 검증 진행 중</span></div>
+                </div>
+                <div class="project-content">
+                    <p>상위 제어기의 운전 명령과 모터 상태를 연결하는 LIN 통신 경로를 구성하고, 고장 검출·감속·정지·복구 정책을 제품 요구사항에 맞춰 구현했습니다.</p>
+                    <ul>
+                        <li><strong>LIN 통합:</strong> 슬레이브 스택, MCAL Lin, LinIf와 RTE 연계를 구성하고 LDF 기반 지령·상태 신호 매핑 구현</li>
+                        <li><strong>인터페이스 변경:</strong> 듀티 기반 지령과 RPM 직접 지령을 구분하고, 전압·전류·실제 속도 보고값의 단위·환산·범위 검증</li>
+                        <li><strong>고장 대응:</strong> 과전압·저전압·과전류·과온·구속·통신 이상에 대한 디바운스, 출력 제한, 정지 래치와 재시도 제한 구현</li>
+                        <li><strong>제품별 설정:</strong> 보호 채널 실장 여부, 임계값과 복구 정책을 분리하고, 요구사항·설계 판단·미확정 조건의 근거 추적</li>
+                        <li><strong>회귀 검증:</strong> 기동·정지·통신 상태와 보호 조건의 조합을 호스트에서 재현해 통합 경로의 결함 수정 및 시험 보강</li>
+                    </ul>
+                    <div class="tech-tags"><span class="tech-tag">LIN / LDF</span><span class="tech-tag">Diagnostics</span><span class="tech-tag">Fail-Safety</span><span class="tech-tag">State Machine</span></div>
+                </div>
+            </article>
+
+            <article class="project" id="hanon-tuning">
+                <div class="project-header">
+                    <h3 class="project-title">제어 파라미터 분석·튜닝 및 시뮬레이션</h3>
+                    <div class="project-meta"><span>분석·검증 환경 구축 · 자동 튜닝 절차 개발 중</span></div>
+                </div>
+                <div class="project-content">
+                    <p>모터·보드 측정값과 제어기 설정의 관계를 정리하고, 시뮬레이션과 실기 기록을 함께 사용해 튜닝 근거를 확인하는 환경을 개발했습니다.</p>
+                    <ul>
+                        <li><strong>게인 설계:</strong> 모터 전기 파라미터, 제어주기, 전류·속도 스케일에 따른 PI 게인과 관측기 계수의 종속관계 분석</li>
+                        <li><strong>모델 검증:</strong> MATLAB/Simulink 기반 플랜트·제어 모델과 폐루프 시뮬레이션을 이용해 기동 파라미터와 관측기 거동 비교</li>
+                        <li><strong>튜닝 도구:</strong> 측정 데이터 분석, 게인 유도, 파라미터 변경 영향 확인과 시험 절차를 연결하는 Motor Tuning Kit 시제품 개발</li>
+                        <li><strong>캘리브레이션:</strong> 개체별 모터 파라미터 저장·검증·적용 구조와 NVM 연동 구현, 전체 실기 절차 검증은 후속 과제로 관리</li>
+                        <li><strong>파라미터 관리:</strong> 보드·모터·시스템·제어기 설정을 구분하고, 단위·유도식·측정 근거와 변경 이력을 문서화</li>
+                    </ul>
+                    <div class="tech-tags"><span class="tech-tag">MATLAB / Simulink</span><span class="tech-tag">PI Tuning</span><span class="tech-tag">Simulation</span><span class="tech-tag">Calibration</span></div>
+                </div>
+            </article>
+
+            <article class="project" id="hanon-tools">
+                <div class="project-header">
+                    <h3 class="project-title">개발·계측·검증 도구 자동화</h3>
+                    <div class="project-meta"><span>LIN 제어 도구·검증 스크립트 구현 및 배포 패키지 제작</span></div>
+                </div>
+                <div class="project-content">
+                    <p>반복되는 통신 시험, 데이터 수집, 빌드와 다운로드 작업을 재현할 수 있도록 개발 도구와 실행 절차를 구성했습니다.</p>
+                    <ul>
+                        <li><strong>PLIN Control:</strong> PEAK PLIN-USB와 LDF를 사용하는 Python CLI·Windows GUI 개발. 속도 지령·정지·상태 조회·수신 모니터·로그 저장 지원</li>
+                        <li><strong>도구 배포:</strong> 제품 프로파일로 신호 매핑을 분리하고, Python이 없는 PC용 설치 패키지와 모의 통신 자가진단 구성</li>
+                        <li><strong>시험 자동화:</strong> 헤드리스 빌드, 디버거 기반 변수 판독, 벤치 데이터 수집과 골든 벡터·호스트 회귀 검증 스크립트 작성</li>
+                        <li><strong>장비 도입 검토:</strong> 추가 MCU용 프로그래머·USB LIN 장비의 드라이버 및 API 접근 확인과 Flash 시험 절차 준비. 대상 보드 Flash·구동 시험은 준비 단계</li>
+                        <li><strong>인계 자료:</strong> HW 담당자가 사용할 펌웨어 다운로드 안내, 튜닝 체크리스트와 오프라인 기술 문서 작성</li>
+                    </ul>
+                    <div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">PLIN-USB</span><span class="tech-tag">CLI / GUI</span><span class="tech-tag">Test Automation</span></div>
+                </div>
+            </article>
+
+            <article class="project" id="hanon-reuse">
+                <div class="project-header">
+                    <h3 class="project-title">공통 컴포넌트·재사용 아키텍처 분석</h3>
+                    <div class="project-meta"><span>기존 SW 자산 분석 · 인터페이스 규약 및 이관 계획 수립</span></div>
+                </div>
+                <div class="project-content">
+                    <p>기존 열관리 제품의 SW·설계·검증 자산을 조사하고, 공통 알고리즘과 제품별 변형을 구분해 재사용 가능한 컴포넌트 구조와 적용안을 정리했습니다.</p>
+                    <ul>
+                        <li><strong>자산 분석:</strong> eOP·eWP·eRV 등 기존 코드의 제어 흐름, HW 의존성, 인터페이스와 변형 간 중복 구조 조사</li>
+                        <li><strong>구조 설계:</strong> 알고리즘, 하드웨어 접근, 제품 데이터의 분리 기준과 명명·데이터 교환·실행 컨텍스트 규약 정의</li>
+                        <li><strong>적용 계획:</strong> 공통 플랫폼에 재사용·이관·보완할 대상을 분류하고, 패키지 배포 기준과 변형 관리 방안 수립</li>
+                        <li><strong>검증 근거:</strong> 요구사항·설계·테스트·결함·릴리스 자산의 연결성을 검토하고 ASPICE 관점의 개발·검증 계획 정리</li>
+                        <li><strong>기술 협업:</strong> 글로벌 개발 거점과의 기술 협의·보고 자료, Jira 기반 개발 과제 관리와 팀 내 분석·인계 문서 작성</li>
+                    </ul>
+                    <div class="tech-tags"><span class="tech-tag">SW Architecture</span><span class="tech-tag">Component Reuse</span><span class="tech-tag">Traceability</span><span class="tech-tag">Jira / PTC</span></div>
+                </div>
+            </article>
+
+            <article class="project" id="hanon-thermal">
+                <div class="project-header">
+                    <h3 class="project-title">통합 열관리 SW·AUTOSAR 개발 지원</h3>
+                    <div class="project-meta"><span>요구사항·기존 모델·검증 자료 분석</span></div>
+                </div>
+                <div class="project-content">
+                    <p>통합 열관리 모듈의 개발 자료를 분석하고, 모터 제어 Core SW와 AUTOSAR 기반 애플리케이션·BSW 사이의 연계 및 재사용 범위를 검토했습니다.</p>
+                    <ul>
+                        <li><strong>요구사항 검토:</strong> 부품·제어 요구사항과 SW 인터페이스를 대조하고 개발 범위, 불일치 및 확인 필요 항목 정리</li>
+                        <li><strong>모델 분석:</strong> 기존 Simulink 사양·구현 모델의 계층, 데이터 사전, AUTOSAR 인터페이스와 릴리스 간 변경점 분석</li>
+                        <li><strong>검증 자료:</strong> 기존 MIL 테스트, 모델 검증 및 결함 이력을 검토하고 요구사항과의 연결 관계 정리</li>
+                        <li><strong>통합 검토:</strong> 선행 SW의 eWP·밸브 제어 구조와 MCU·구동 IC·통신·업데이트 구성을 분석해 Core SW 재사용 및 BSW 연계 검토 지원</li>
+                    </ul>
+                    <div class="tech-tags"><span class="tech-tag">Thermal Management</span><span class="tech-tag">AUTOSAR</span><span class="tech-tag">Simulink</span><span class="tech-tag">MIL Analysis</span></div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Recent Projects -->
+        <section class="section fade-in" id="previous-projects">
+            <div class="section-header">
+                <div class="section-tag">기존 개발 경험</div>
                 <h2 class="section-title">주요 개발 경험</h2>
-                <p class="section-description">2024년 ~ 현재</p>
+                <p class="section-description">차량 진단·보안통신 디바이스 개발</p>
             </div>
 
             <!-- Project 1 -->
@@ -1188,7 +1460,7 @@
                 <div class="project-header">
                     <h3 class="project-title">클라우드 진단 플랫폼 대응 디바이스 펌웨어 리팩토링</h3>
                     <div class="project-meta">
-                        <span>2024.04 ~ 현재</span>
+                        <span>2024.04 착수</span>
                         <span>STM32H7 · MQTT · HTTPS · WebSocket</span>
                     </div>
                 </div>
@@ -1639,6 +1911,7 @@
                 <h2 class="section-title">전체 프로젝트 요약</h2>
             </div>
 
+            <div class="table-scroll" role="region" aria-label="전체 프로젝트 요약 표" tabindex="0">
             <table>
                 <thead>
                     <tr>
@@ -1648,6 +1921,46 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td>2026.05.18 ~ 현재</td>
+                        <td><a class="experience-link" href="#hanon-platform">한온시스템 · 공통 모터 제어 플랫폼</a></td>
+                        <td>FOC, Q15 / Float, 정적 RTE, MCU·제품 변형 관리</td>
+                    </tr>
+                    <tr>
+                        <td>2026 · 한온시스템</td>
+                        <td><a class="experience-link" href="#hanon-eop">eOP 포팅·실시간 최적화</a></td>
+                        <td>S12ZVM, OSEK, ISR 프로파일링, Single-shunt</td>
+                    </tr>
+                    <tr>
+                        <td>2026 · 한온시스템</td>
+                        <td><a class="experience-link" href="#hanon-blower">공조 블로워 제어·보드 구동</a></td>
+                        <td>TI C2000, 센서리스 FOC, PWM / ADC, 벤치 튜닝</td>
+                    </tr>
+                    <tr>
+                        <td>2026 · 한온시스템</td>
+                        <td><a class="experience-link" href="#hanon-lin-protection">LIN 통신·진단·Fail-Safety</a></td>
+                        <td>LIN / LDF, 보호·복구 상태머신, 통합 검증</td>
+                    </tr>
+                    <tr>
+                        <td>2026 · 한온시스템</td>
+                        <td><a class="experience-link" href="#hanon-tuning">제어 튜닝·시뮬레이션</a></td>
+                        <td>MATLAB / Simulink, PI 게인, 캘리브레이션</td>
+                    </tr>
+                    <tr>
+                        <td>2026 · 한온시스템</td>
+                        <td><a class="experience-link" href="#hanon-tools">개발·검증 도구 자동화</a></td>
+                        <td>Python, PLIN GUI / CLI, 빌드·계측 자동화</td>
+                    </tr>
+                    <tr>
+                        <td>2026 · 한온시스템</td>
+                        <td><a class="experience-link" href="#hanon-reuse">공통 컴포넌트·재사용 구조 분석</a></td>
+                        <td>인터페이스 규약, 변형 관리, 요구사항 추적성</td>
+                    </tr>
+                    <tr>
+                        <td>2026 · 한온시스템</td>
+                        <td><a class="experience-link" href="#hanon-thermal">통합 열관리 SW 분석·개발 지원</a></td>
+                        <td>AUTOSAR, Simulink 모델·MIL 자료 분석</td>
+                    </tr>
                     <tr>
                         <td>2025.06 ~ 2025.12</td>
                         <td>급속충전검사장비 PoC</td>
@@ -1659,7 +1972,7 @@
                         <td>STM32, CAN, 11/29비트 ID, 동적 필터링</td>
                     </tr>
                     <tr>
-                        <td>2024.04 ~ 현재</td>
+                        <td>2024.04 착수</td>
                         <td>클라우드 진단 플랫폼</td>
                         <td>STM32H7, MQTT, WebSocket, AWS IoT</td>
                     </tr>
@@ -1700,6 +2013,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
         </section>
     </div>
 
@@ -1707,7 +2021,7 @@
     <footer>
         <div class="container">
             <p>© 2026 이재석. 임베디드 시스템 개발자.</p>
-            <p style="margin-top: 12px; font-size: 15px;">모든 프로젝트는 실제 양산 적용된 시스템입니다.</p>
+            <p style="margin-top: 12px; font-size: 15px;">개발·검증·기술 분석 경험을 프로젝트별로 정리했습니다.</p>
         </div>
     </footer>
 
