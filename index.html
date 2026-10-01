@@ -27,6 +27,14 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 @media(max-width:420px){.intro{grid-template-columns:1fr;position:relative}.intro-photo{grid-row:1;position:absolute;right:0;top:42px}.intro h1{padding-right:120px;font-size:38px}.intro .eyebrow{padding-right:110px}.intro-subtitle{padding-right:116px;font-size:18px;min-height:62px}.intro-description{margin-top:15px}.tech-item{grid-template-columns:1fr;gap:0}.case{padding:20px}.support-item{padding:20px}.case h3,.case>.case-title{font-size:19px}.container{padding:0 20px}.header-content{padding:13px 20px}.portfolio-nav{gap:6px 14px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media print{@page{size:A4;margin:15mm 18mm}html{scroll-behavior:auto}body{background:#fff;font-size:10pt}header,.intro-links,.section-tools,.skip-link{display:none}.container{max-width:none;padding:0}.intro{padding:0 0 20px;grid-template-columns:1fr 100px;gap:30px}.intro h1{font-size:30pt}.intro-subtitle{font-size:16pt}.intro-description{font-size:11pt}.profile-photo{width:100px;height:125px}.section{padding:24px 0}.section h2{font-size:20pt}.section-description,.case-intro,.company-note{font-size:10pt}.case{padding:16px;margin-bottom:14px;box-shadow:none}.case h3,.case>.case-title{font-size:14pt}.case-heading,summary,h2,h3,h4,.section-heading{break-after:avoid}.case-facts,.project-content p,.project-content li,.work-detail{font-size:10pt}.support-grid,.background-grid{display:block}.support-item{margin:12px 0}.work-detail>summary::after{display:none}.work-detail>.detail-body{display:block!important}.tech-grid{grid-template-columns:1fr 1fr}.tech-item{font-size:9pt;grid-template-columns:1fr;gap:0}.section-tools{display:none}.overview-row{padding:10px 0}.detail-body{padding-bottom:8px}.architecture{break-inside:avoid}.contact{margin-top:20px}.info-grid{grid-template-columns:1fr 1fr}footer{padding:14px 0}}
+
+/* Evidence and role summaries */
+.case-number{flex-shrink:0;white-space:nowrap}.case-heading>div{min-width:0}.case-scope{font-size:13px;color:var(--text-secondary);margin:12px 0 18px;line-height:1.7}.case-scope strong{color:var(--text-primary);margin-right:8px}.previous-case .case-scope{margin:10px 0 16px}
+.result-figure{margin:24px 0;background:#f4f8ff;border:1px solid #d7e5fa;border-radius:9px;padding:20px 24px}.result-figure figcaption{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 16px;font-size:14px;margin-bottom:18px}.result-number{font-size:29px;line-height:1.2;color:var(--primary)}.comparison-row{display:grid;grid-template-columns:76px minmax(0,1fr) 45px;gap:12px;align-items:center;font-size:13px;margin:10px 0}.comparison-row>strong{text-align:right}.comparison-track{display:block;height:10px;border-radius:3px;background:#e2eaf5;overflow:hidden}.comparison-fill{display:block;height:100%;background:var(--primary)}.before-fill{background:#889cb7}.result-context{font-size:12px!important;color:var(--text-tertiary)!important;line-height:1.65;margin:14px 0 0!important}
+.composition-figure{margin:22px 0;border:1px solid var(--border);padding:20px;border-radius:8px}.composition-figure figcaption{font-size:16px;font-weight:750;margin-bottom:16px}.composition-stack{display:flex;flex-direction:column;align-items:stretch;gap:5px;max-width:600px;margin:auto}.composition-part{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:13px 16px;border:1px solid #d6e1ef;border-radius:6px;background:#f8fafc;font-size:13px}.composition-part strong{white-space:nowrap}.composition-part span{color:var(--text-secondary);text-align:right}.composition-operator{text-align:center;color:var(--text-tertiary);font-size:18px;line-height:1.2}.composition-output{text-align:center;padding:13px;background:var(--primary-light);color:var(--primary);border-radius:6px;font-size:14px;font-weight:750}
+.validation-evidence{margin:24px 0}.validation-table{table-layout:fixed;font-size:13px;margin:12px 0}.validation-table th,.validation-table td{vertical-align:top;padding:12px}.validation-table thead th{background:var(--code-bg)}.validation-table th:first-child{width:24%}.validation-table th:nth-child(2){width:32%}
+@media(max-width:760px){.case-scope{font-size:12px}.result-figure{padding:17px 16px}.result-number{font-size:26px}.comparison-row{grid-template-columns:62px minmax(0,1fr) 36px;gap:8px;font-size:12px}.composition-figure{padding:15px}.composition-part{flex-direction:column;align-items:start;gap:3px}.composition-part span{text-align:left}.validation-table{font-size:12px}.validation-table th,.validation-table td{padding:8px}}
+@media print{.result-figure,.composition-figure,.validation-evidence{break-inside:avoid}.case-scope{font-size:9pt}.result-number{font-size:18pt}.result-context{font-size:9pt!important}.validation-table{font-size:9pt}.composition-part{font-size:9pt}}
 </style></head><body>
 <a class="skip-link" href="#main">본문으로 이동</a>
 <header><div class="header-content"><a class="logo" href="#top">이재석 <span>· 임베디드 SW</span></a>
@@ -41,18 +49,18 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 
 <section class="overview" id="overview" aria-labelledby="overview-title"><h2 id="overview-title">경력 개요</h2>
 <a class="overview-row" href="#hanon"><span class="overview-date"><time datetime="2026-05-18">2026.05</time> ~ 현재</span><div><strong>한온시스템 · 선임연구원</strong><p>Platform SW · Core SW Component · 모터 제어</p></div><span class="overview-arrow" aria-hidden="true">↗</span></a>
-<a class="overview-row" href="#project-cloud"><span class="overview-date"><time datetime="2024-04-23">2024.04</time> ~ <time datetime="2026-05-11">2026.05</time></span><div><strong>지아이티 (GIT)</strong><p>클라우드 진단 디바이스 · 전장검사장비 펌웨어</p></div><span class="overview-arrow" aria-hidden="true">↗</span></a>
+<a class="overview-row" href="#diagnostics"><span class="overview-date"><time datetime="2024-04-23">2024.04</time> ~ <time datetime="2026-05-11">2026.05</time></span><div><strong>지아이티 (GIT)</strong><p>클라우드 진단 디바이스 · 전장검사장비 펌웨어</p></div><span class="overview-arrow" aria-hidden="true">↗</span></a>
 <a class="overview-row" href="#charging"><span class="overview-date"><time datetime="2017-10-15">2017.10</time> ~ <time datetime="2024-04-22">2024.04</time></span><div><strong>한국자동차연구원 (KATECH)</strong><p>자동충전 제어 · 위치인식 · 내구성 시험 · CAN 통신</p></div><span class="overview-arrow" aria-hidden="true">↗</span></a>
 </section>
 
 <section class="section" id="hanon" aria-labelledby="hanon-title"><div class="section-heading"><div><p class="section-kicker">CURRENT EXPERIENCE</p><h2 id="hanon-title">한온시스템</h2><p class="section-description">2026.05 ~ 현재 · Platform SW팀 선임연구원 · Core SW Component 개발</p></div><button class="section-tools" id="toggle-details" type="button" aria-expanded="false">전체 상세 펼치기</button></div>
 <p class="company-note"><strong>자동차 열관리 부품의 모터 제어와 공통 SW 개발.</strong><br>공통 알고리즘을 만들고, 제품 보드에 적용하고, 실기·시뮬레이션으로 검증합니다.</p>
-<article class="case current-case">
+<article class="case current-case" id="case-platform">
       <div class="case-heading"><span class="case-number">01</span><div>
         <p class="case-meta">공통 코어 · 통신·보호 로직 · 재사용 아키텍처</p><h3>재사용 가능한 모터 제어 SW 플랫폼</h3>
       </div></div>
-      <p class="case-intro">제품과 MCU가 바뀌어도 제어 알고리즘을 재사용할 수 있도록 공통 코어, 하드웨어 의존 코드, 제품 설정을 분리했습니다.</p>
-      <dl class="case-facts"><div><dt>주요 작업</dt><dd>FOC 공통 모듈, Q15·Float 구현, 정적 데이터 교환 인터페이스, LIN·보호 로직과 제품별 패키지 구성</dd></div><div><dt>검증·상태</dt><dd>Q15·Float 교차 검증 환경과 제품별 패키지 구성 구현. 블로워 적용 기능의 추가·개선 및 호스트 회귀 검증 진행.</dd></div></dl>
+      <p class="case-intro">모터 제어 알고리즘을 여러 MCU와 제품에서 사용할 수 있도록 공통 코드, 타깃 의존 코드와 제품 파라미터를 분리했습니다.</p><p class="case-scope"><strong>담당 범위</strong> 공통 모듈 구조·수치 형식 분리·제품별 패키지 구성·호스트 검증</p>
+      <dl class="case-facts"><div><dt>과제</dt><dd>기존 SW의 알고리즘·하드웨어 접근·제품 설정을 구분하고, MCU와 제품 변경에 따른 수정 범위를 줄일 구조가 필요했습니다.</dd></div><div><dt>구현</dt><dd>공통 제어부와 MCU 드라이버·제품 설정을 분리하고, Q15·Float 구현 및 선택한 조합의 패키지 생성 기능을 구성했습니다.</dd></div><div><dt>확인 결과</dt><dd>같은 입력을 사용하는 수치 형식 교차 검증과 제품별 빌드·호스트 시험 경로를 마련하고, S12Z 평가보드와 C2000 블로워에 적용했습니다.</dd></div></dl>
       <div class="detail-list"><details class="work-detail" id="hanon-platform">
       <summary>제어 코어·계층 설계·제품 변형</summary>
       <div class="detail-body"><p class="detail-status">공통 코어 구현 · 제품 적용 및 확장 진행 중</p><div class="project-content">
@@ -63,7 +71,17 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <li><strong>구조 분리:</strong> 제어 알고리즘·MCU 드라이버·제품 설정을 분리하고, 태스크와 ISR 사이의 데이터 교환 및 실행 역할 구성</li>
 <li><strong>제품 변형:</strong> MCU, 통신, 수치 형식, 외부 드라이버와 제품 파라미터를 조합하는 패키지 생성 CLI·GUI 및 검증 흐름 구현</li>
 </ul>
-<div class="tech-tags"><span class="tech-tag">C99</span><span class="tech-tag">MISRA-C</span><span class="tech-tag">Q15 / Float</span><span class="tech-tag">정적 인터페이스</span><span class="tech-tag">MCAL</span></div>
+<figure class="composition-figure" aria-labelledby="composition-title">
+<figcaption id="composition-title">공통 코드와 제품별 선택 항목</figcaption>
+<div class="composition-stack">
+<div class="composition-part"><strong>공통 제어 코드</strong><span>FOC · 기동 · 통신 · 보호 로직</span></div>
+<span class="composition-operator" aria-hidden="true">+</span>
+<div class="composition-part"><strong>타깃별 선택</strong><span>Q15 / Float · MCU 드라이버 · 외부 디바이스</span></div>
+<span class="composition-operator" aria-hidden="true">+</span>
+<div class="composition-part"><strong>제품별 설정</strong><span>모터·보드 파라미터 · 통신 신호 매핑</span></div>
+<span class="composition-operator" aria-hidden="true">↓</span>
+<div class="composition-output">제품별 패키지 구성 · 빌드 · 호스트 시험</div>
+</div></figure><div class="tech-tags"><span class="tech-tag">C99</span><span class="tech-tag">MISRA-C</span><span class="tech-tag">Q15 / Float</span><span class="tech-tag">정적 인터페이스</span><span class="tech-tag">MCAL</span></div>
 </div></div>
     </details><details class="work-detail" id="hanon-lin-protection">
       <summary>LIN 통신·진단·Fail-Safety</summary>
@@ -93,12 +111,17 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <div class="tech-tags"><span class="tech-tag">SW Architecture</span><span class="tech-tag">Component Reuse</span><span class="tech-tag">Traceability</span><span class="tech-tag">Jira / PTC</span></div>
 </div></div>
     </details></div>
-    </article><article class="case current-case">
+    </article><article class="case current-case" id="case-eop">
       <div class="case-heading"><span class="case-number">02</span><div>
         <p class="case-meta">NXP S12ZVM · 평가보드 적용</p><h3>eOP 펌웨어 포팅과 FOC ISR 최적화</h3>
       </div></div>
-      <p class="case-intro">기존 전동 오일펌프 펌웨어를 평가보드에 이식하고, 구동 문제를 추적하며 실시간 제어 경로를 개선했습니다.</p>
-      <dl class="case-facts"><div><dt>주요 작업</dt><dd>컴파일러·링커·벡터 이식, PWM·ADC 동기화, single-shunt 전류 재구성, 관측기 분석과 ISR 실행시간 최적화</dd></div><div><dt>검증·상태</dt><dd>평가보드 포팅과 개루프·폐루프 구동 확인. FreeMASTER·시리얼 계측 및 ISR 실행시간 최적화 반영.</dd></div></dl>
+      <p class="case-intro">레거시 eOP 펌웨어를 평가보드에 이식한 뒤, 공통 제어 코어의 S12Z ISR 실행시간을 계측하고 최적화했습니다.</p><p class="case-scope"><strong>담당 범위</strong> 펌웨어 포팅·ISR 계측·컴파일러/타깃 연산 최적화·평가보드 구동 확인</p>
+      <dl class="case-facts"><div><dt>문제</dt><dd>공통 제어 코어의 ISR이 제어주기 대부분을 사용해, 제어주기를 더 짧게 설정하기 위한 실행시간 여유가 부족했습니다.</dd></div><div><dt>조치</dt><dd>구간별 실행시간과 생성 코드를 확인하고, 컴파일러 최적화 설정·타깃 명령·불필요한 수학 연산을 순서대로 개선했습니다.</dd></div><div><dt>확인 결과</dt><dd>평가보드 측정에서 평균 ISR 실행시간을 약 62% 줄였습니다. 최적화 단계별 폐루프 운전을 확인하고, 제어주기를 단축한 구성도 시험했습니다.</dd></div></dl><figure class="result-figure" aria-labelledby="isr-result-title">
+<figcaption id="isr-result-title"><strong class="result-number">약 62% 단축</strong><span>평균 제어 ISR 실행시간</span></figcaption>
+<div class="comparison-row"><span>최적화 전</span><span class="comparison-track"><span class="comparison-fill before-fill" style="width:100%"></span></span><strong>100</strong></div>
+<div class="comparison-row"><span>최적화 후</span><span class="comparison-track"><span class="comparison-fill" style="width:38.3%"></span></span><strong>38.3</strong></div>
+<p class="result-context">2026.08 S12Z 평가보드 측정 · 동일 자속 관측기 구성<br>최적화 전 평균 실행시간을 100으로 정규화한 비교</p>
+</figure>
       <div class="detail-list"><details class="work-detail" id="hanon-eop">
       <summary>포팅·구동 디버깅·실시간 최적화 상세</summary>
       <div class="detail-body"><p class="detail-status">평가보드 포팅 및 개루프·폐루프 구동 검증</p><div class="project-content">
@@ -106,19 +129,19 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <ul>
 <li><strong>플랫폼 이식:</strong> 컴파일러·링커, 인터럽트 벡터, OSEK 기반 스케줄링, 고정소수점 연산의 이식 문제 분석 및 수정</li>
 <li><strong>구동 디버깅:</strong> PWM 극성, ADC 트리거, 전류 환산, 샘플링 시점과 single-shunt 전류 재구성 경로 점검</li>
-<li><strong>실시간 성능:</strong> FOC ISR 구간별 실행시간을 계측해 제어주기 초과 원인을 찾고, 수식 변환과 연산 구조 개선으로 실행시간 단축</li>
+<li><strong>실시간 성능:</strong> ISR 구간별 계측과 생성 코드 분석을 바탕으로 컴파일러 최적화 설정, S12Z 타깃 명령과 수학 연산을 개선</li>
 <li><strong>센서리스 제어:</strong> 관측기 위상 지연·보상과 제어주기 의존 파라미터를 분석하고, 고정소수점 범위 검증 및 계측 기능 보강</li>
 <li><strong>검증 환경:</strong> FreeMASTER와 시리얼 콘솔을 이용한 속도 지령·상태 관측 및 개루프·폐루프 구동 확인</li>
 </ul>
 <div class="tech-tags"><span class="tech-tag">NXP S12ZVM</span><span class="tech-tag">CodeWarrior</span><span class="tech-tag">OSEK</span><span class="tech-tag">FOC ISR</span><span class="tech-tag">FreeMASTER</span></div>
 </div></div>
     </details></div>
-    </article><article class="case current-case">
+    </article><article class="case current-case" id="case-blower">
       <div class="case-heading"><span class="case-number">03</span><div>
         <p class="case-meta">TI C2000 · 시제품 보드 구동·튜닝</p><h3>공조 블로워 센서리스 FOC 개발</h3>
       </div></div>
-      <p class="case-intro">공통 제어 코어를 블로워 보드에 적용하고, 실제 모터의 기동부터 폐루프 전환·속도 제어까지 검증했습니다.</p>
-      <dl class="case-facts"><div><dt>주요 작업</dt><dd>MCAL·게이트 드라이버 통합, 핀맵·PWM·ADC 정합, I-f 기동·관측기 인계, PI 게인과 모터 파라미터 분석</dd></div><div><dt>검증·상태</dt><dd>시제품 보드 폐루프 구동 확인. LIN 지령·상태 보고와 과온 감속 로직을 개선하고, 호스트 시험·타깃 빌드·보드 다운로드 검증 수행.</dd></div></dl>
+      <p class="case-intro">공통 제어 코어를 시제품 보드에 적용해 센서리스 구동을 확인하고, 시험에서 드러난 통신·속도 보고·보호 로직을 개선했습니다.</p><p class="case-scope"><strong>담당 범위</strong> MCU 드라이버·기동/관측기 튜닝·LIN/보호 로직·시험 스크립트 / HW 담당자와 회로·핀맵 확인</p>
+      <dl class="case-facts"><div><dt>과제</dt><dd>새 보드의 PWM·ADC·게이트 드라이버를 맞추고, 개루프 기동부터 관측기 폐루프 전환까지 실제 모터에서 확인해야 했습니다.</dd></div><div><dt>조치</dt><dd>회로·핀맵과 주변장치 설정을 대조하고 기동·인계 파라미터를 조정했습니다. 이후 LIN 속도 보고 필터와 과온 감속 기준을 수정했습니다.</dd></div><div><dt>확인 결과</dt><dd>개방 벤치에서 폐루프 운전과 LIN 명령에 따른 기동·유지·정지를 확인했습니다. 후속 로직 변경은 호스트 회귀시험·타깃 빌드로, 펌웨어 기록은 시제품 보드에서 검증했습니다.</dd></div></dl>
       <div class="detail-list"><details class="work-detail" id="hanon-blower">
       <summary>보드 구동·기동 제어·실기 분석</summary>
       <div class="detail-body"><p class="detail-status">폐루프 구동 확인 · 통신·보호 로직 개선 및 시제품 보드 다운로드 검증</p><div class="project-content">
@@ -132,7 +155,15 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <li><strong>추가 분석:</strong> 클럭 편차·역회전 대응의 제약과 개선 방안 정리</li>
 <li><strong>시제품 보드:</strong> 부트 설정·펌웨어 다운로드·기록 검증과 반복 다운로드 스크립트 구성</li>
 </ul>
-<div class="tech-tags"><span class="tech-tag">TI C2000</span><span class="tech-tag">Sensorless FOC</span><span class="tech-tag">PWM / ADC</span><span class="tech-tag">Gate Driver</span><span class="tech-tag">Bench Test</span></div>
+<div class="validation-evidence">
+<h4>검증 방법과 확인 범위</h4>
+<table class="validation-table"><thead><tr><th scope="col">항목</th><th scope="col">검증 방법</th><th scope="col">확인 결과</th></tr></thead><tbody>
+<tr><th scope="row">기동·운전·정지</th><td>모터·임펠러 개방 벤치, LIN 명령</td><td>폐루프 기동·유지·정지 확인</td></tr>
+<tr><th scope="row">통신·보호 로직</th><td>호스트 회귀시험, 타깃 빌드</td><td>속도 보고 필터·과온 감속 기준·온도 주입 경로 반영 확인</td></tr>
+<tr><th scope="row">펌웨어 기록</th><td>시제품 보드 다운로드 후 판독·검증</td><td>펌웨어와 부트 설정 기록 확인</td></tr>
+</tbody></table>
+<p class="result-context">개방 벤치의 구동 결과는 정격 부하·전체 온도 조건의 제품 평가와 구분합니다.</p>
+</div><div class="tech-tags"><span class="tech-tag">TI C2000</span><span class="tech-tag">Sensorless FOC</span><span class="tech-tag">PWM / ADC</span><span class="tech-tag">Gate Driver</span><span class="tech-tag">Bench Test</span></div>
 </div></div>
     </details><details class="work-detail" id="hanon-tuning">
       <summary>파라미터·시뮬레이션·캘리브레이션</summary>
@@ -151,13 +182,14 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
     </details></div>
     </article>
 <h3 class="support-heading">개발 도구·자료 분석</h3><div class="support-grid">
-<article class="support-item"><h4>계측·검증 자동화</h4><p>LIN 운전·상태 조회용 Windows 도구와 빌드·계측·회귀 검증 스크립트를 개발했습니다.</p><details class="work-detail" id="hanon-tools">
+<article class="support-item"><h4>계측·검증 자동화</h4><p>LDF와 제품별 신호명이 달라질 때도 사용할 수 있도록 통신 정의와 프로파일을 분리한 LIN GUI·CLI를 개발하고, 독립 실행 설치 패키지를 구성했습니다.</p><details class="work-detail" id="hanon-tools">
       <summary>PLIN·시험 자동화·장비 준비 상세</summary>
       <div class="detail-body"><p class="detail-status">LDF·프로파일 기반 LIN 도구와 설치 패키지 제작 · 오프라인·독립 실행 검증</p><div class="project-content">
 <p>반복되는 통신 시험, 데이터 수집, 빌드와 다운로드 작업을 재현할 수 있도록 개발 도구와 실행 절차를 구성했습니다.</p>
 <ul>
 <li><strong>PLIN Control:</strong> PEAK PLIN-USB와 LDF를 사용하는 Python CLI·Windows GUI 개발. 속도 지령·정지·상태 조회·수신 모니터·로그 저장 지원</li>
-<li><strong>도구 배포:</strong> 제품 프로파일로 신호 매핑을 분리하고, Python이 없는 PC용 설치 패키지와 모의 통신 자가진단 구성</li>
+<li><strong>신호 매핑:</strong> LDF의 통신 정의와 제품별 프로파일을 분리하고, 제품마다 다른 신호명을 GUI 계기에 연결</li>
+<li><strong>실행 환경:</strong> Python이 없는 PC용 설치 패키지와 모의 통신 자가진단을 구성하고, 오프라인 시험 및 독립 EXE 실행 확인</li>
 <li><strong>시험 자동화:</strong> 헤드리스 빌드, 디버거 기반 변수 판독, 벤치 데이터 수집과 골든 벡터·호스트 회귀 검증 스크립트 작성</li>
 <li><strong>장비 도입 검토:</strong> 추가 MCU용 프로그래머·USB LIN 장비의 드라이버 및 API 접근 확인과 Flash 시험 절차 준비. 대상 보드 Flash·구동 시험은 준비 단계</li>
 <li><strong>인계 자료:</strong> HW 담당자가 사용할 펌웨어 다운로드 안내, 튜닝 체크리스트와 오프라인 기술 문서 작성</li>
@@ -185,7 +217,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <span>2025.06 ~ 2025.12</span>
 <span>STM32H7 · HSM · SPI · UART · 암호화</span>
 </div>
-      <p class="case-intro">UART·SPI 방식의 두 HSM을 단일 펌웨어에서 지원하도록 인터페이스를 통합하고, 암호화·키·인증서 관리와 CLI 시험 기능을 구현했습니다.</p>
+      <p class="case-intro">UART·SPI 방식의 두 HSM을 단일 펌웨어에서 지원하도록 인터페이스를 통합하고, 암호화·키·인증서 관리와 CLI 시험 기능을 구현했습니다.</p><p class="case-scope"><strong>담당 범위</strong> HSM 통신·공통 API·암호 기능 연동·시험 CLI</p>
       <details class="work-detail"><summary>차량 진단기 HSM 보안 모듈 상세</summary>
       <div class="detail-body"><div class="project-content">
 <p>차량 진단기(VCI3)에 하드웨어 보안 모듈(HSM)을 연동하여 보안 통신 및 암호화 기능을 구현했습니다. 기존 UART 기반 HSM(Coregate)과 신규 SPI 기반 HSM(Autocrypt)을 모두 지원하는 듀얼 HSM 아키텍처를 설계하고 구현했습니다.</p>
@@ -239,7 +271,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <span>2025.06 ~ 2025.12</span>
 <span>AT32F403A · GB/T · CHAdeMO · AC · 타이머 캡처 · 다채널 ADC</span>
 </div>
-      <p class="case-intro">AT32F403A 기반 검사장비에서 타이머 캡처와 ADC 트리거를 동기화해 CP 전압 측정을 개선하고, 충전 프로토콜별 통신 시퀀스를 검증했습니다.</p>
+      <p class="case-intro">AT32F403A 기반 검사장비에서 타이머 캡처와 ADC 트리거를 동기화해 CP 전압 측정을 개선하고, 충전 프로토콜별 통신 시퀀스를 검증했습니다.</p><p class="case-scope"><strong>담당 범위</strong> 타이머·ADC 연동·CP 상태 판별·통신 시퀀스 시험</p>
       <details class="work-detail"><summary>급속충전검사장비 PoC 상세</summary>
       <div class="detail-body"><div class="project-content">
 <p>급속충전검사장비 PoC 펌웨어 개발 및 장비간 통신 시퀀스 검증을 수행했습니다. Artery AT32F403A 기반으로 GB/T · CHAdeMO · AC 멀티 프로토콜 지원 환경에서 CP 전압 측정과 통신 시퀀스 처리 로직을 개선했습니다.</p>
@@ -276,7 +308,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <span>2025</span>
 <span>STM32 · CAN · 11비트/29비트 ID · 동적 필터링</span>
 </div>
-      <p class="case-intro">11비트·29비트 CAN ID를 함께 처리하도록 필터를 재구성하고, 제어기별 설정을 데이터 기반으로 적용하는 구조를 개발했습니다.</p>
+      <p class="case-intro">11비트·29비트 CAN ID를 함께 처리하도록 필터를 재구성하고, 제어기별 설정을 데이터 기반으로 적용하는 구조를 개발했습니다.</p><p class="case-scope"><strong>담당 범위</strong> CAN 필터·수신 처리·설정 데이터 적용 로직</p>
       <details class="work-detail"><summary>멀티 ECU 통합 진단 상세</summary>
       <div class="detail-body"><div class="project-content">
 <p>여러 ECU를 통합 진단하기 위해 CAN 표준 ID(11비트)와 확장 ID(29비트)를 동시 처리하는 동적 필터 시스템을 개발했습니다. 기존 시스템은 제어기별로 ID 타입이 고정되어 있어, 확장성을 위한 구조 개선이 필요했습니다.</p>
@@ -306,7 +338,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <span>2024.04 시작 · 이전 직장 수행</span>
 <span>STM32H7 · MQTT · HTTPS · WebSocket</span>
 </div>
-      <p class="case-intro">Bluetooth 기반 디바이스 통신을 MQTT·HTTPS·WebSocket으로 전환하고, 벌크 처리·OTA·TLS 및 인증서 기반 보안 연결을 구현했습니다.</p>
+      <p class="case-intro">Bluetooth 기반 디바이스 통신을 MQTT·HTTPS·WebSocket으로 전환하고, 벌크 처리·OTA·TLS 및 인증서 기반 보안 연결을 구현했습니다.</p><p class="case-scope"><strong>담당 범위</strong> 디바이스 통신 계층·OTA·보안 채널</p>
       <details class="work-detail"><summary>클라우드 진단 디바이스 펌웨어 상세</summary>
       <div class="detail-body"><div class="project-content">
 <p>차량 ECU를 원격 진단하는 클라우드 플랫폼에 대응하는 디바이스 펌웨어를 리팩토링했습니다. 기존 Bluetooth 기반 태블릿 통신에서 클라우드 서버 기반 MQTT/WebSocket/HTTPS 통신으로 전환하는 작업을 수행했습니다.</p>
@@ -367,7 +399,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <span>2024.04 ~ 2025.05</span>
 <span>STM32H7 · CMSIS-RTOS · CAN진단 · 리버스 엔지니어링</span>
 </div>
-      <p class="case-intro">외부 장비의 회로·동작을 분석하고, 하드웨어·사양 담당자와 협업해 9개 보드를 5개로 통합하는 장비의 펌웨어를 개발했습니다.</p>
+      <p class="case-intro">외부 장비의 회로·동작을 분석하고, 하드웨어·사양 담당자와 협업해 9개 보드를 5개로 통합하는 장비의 펌웨어를 개발했습니다.</p><p class="case-scope"><strong>담당 범위</strong> 장비 펌웨어 구현 / 하드웨어·사양 담당자와 보드 기능 확인</p>
       <details class="work-detail"><summary>전장검사장비 내재화 상세</summary>
       <div class="detail-body"><div class="project-content">
 <p>SP2 차량 전장검사에 사용되던 외부 장비를 자체 기술로 내재화하는 프로젝트를 수행했습니다. 하드웨어/사양팀과 협업하여 기존 9장의 보드를 회로 분석 및 리버스 엔지니어링으로 기능을 파악하고, 5개 보드로 통합하는 장비 구성에 맞춰 펌웨어를 재구성했습니다.</p>
@@ -398,7 +430,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <span>2022.04 ~ 2024.04</span>
 <span>RS485 · 서보모터 · 스텝모터</span>
 </div>
-      <p class="case-intro">충전 커넥터의 자동 도킹을 위한 서보·스텝 모터 제어와 상위 제어기 통신을 구현했습니다.</p>
+      <p class="case-intro">충전 커넥터의 자동 도킹을 위한 서보·스텝 모터 제어와 상위 제어기 통신을 구현했습니다.</p><p class="case-scope"><strong>담당 범위</strong> 모터 구동 펌웨어·상위 제어기 통신</p>
       <details class="work-detail"><summary>차량하부 자동충전 도킹 상세</summary>
       <div class="detail-body"><div class="project-content">
 <p>전기차 하부에 자동으로 충전 커넥터가 도킹되는 시스템의 모터 제어 펌웨어를 개발했습니다.</p>
@@ -421,7 +453,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <span>2021.04 ~ 2023.12</span>
 <span>STM32F4 · 초음파센서</span>
 </div>
-      <p class="case-intro">다중 초음파 센서의 데이터를 이용해 차량 거리·기울기를 계산하고, 현장 환경에서 정위치 인식과 보정 로직을 검증했습니다.</p>
+      <p class="case-intro">다중 초음파 센서의 데이터를 이용해 차량 거리·기울기를 계산하고, 현장 환경에서 정위치 인식과 보정 로직을 검증했습니다.</p><p class="case-scope"><strong>담당 범위</strong> 초음파 센서 처리·정위치 인식 및 보정 로직</p>
       <details class="work-detail"><summary>전기버스 자동충전 위치인식 상세</summary>
       <div class="detail-body"><div class="project-content">
 <p>지붕 접속 방식 팬터그래프 충전을 위한 차량 정위치 인식 시스템을 개발했습니다.</p>
@@ -451,7 +483,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <span>2020.04 ~ 2022.12</span>
 <span>CompactDAQ · LabVIEW</span>
 </div>
-      <p class="case-intro">CompactDAQ·LabVIEW로 전압·전류·저항·접촉력을 수집하고, 시험 시퀀스 제어와 리포트 생성을 자동화했습니다.</p>
+      <p class="case-intro">CompactDAQ·LabVIEW로 전압·전류·저항·접촉력을 수집하고, 시험 시퀀스 제어와 리포트 생성을 자동화했습니다.</p><p class="case-scope"><strong>담당 범위</strong> 데이터 수집·시험 시퀀스·리포트 생성 SW</p>
       <details class="work-detail"><summary>팬터그래프 내구성 시험평가 상세</summary>
       <div class="detail-body"><div class="project-content">
 <p>전기버스 팬터그래프 충전 시스템의 내구성을 평가하는 자동화 시험 시스템을 구축했습니다.</p>
@@ -476,7 +508,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <span>2018.10 ~ 2020.09</span>
 <span>ESP32 · CAN · CANoe</span>
 </div>
-      <p class="case-intro">41개 CAN ID의 신호 데이터베이스를 구성하고, 인터럽트 기반 수신·물리값 변환과 CAN–UDP 게이트웨이를 구현했습니다.</p>
+      <p class="case-intro">41개 CAN ID의 신호 데이터베이스를 구성하고, 인터럽트 기반 수신·물리값 변환과 CAN–UDP 게이트웨이를 구현했습니다.</p><p class="case-scope"><strong>담당 범위</strong> CAN 신호 정의·데이터 수신/변환·CAN–UDP 게이트웨이</p>
       <details class="work-detail"><summary>농기계 CAN 통신 시스템 상세</summary>
       <div class="detail-body"><div class="project-content">
 <p>트랙터 및 농기계의 여러 ECU를 CAN 통신으로 연결하는 통합 제어 시스템을 개발했습니다. 41개 CAN ID를 정의한 통신 데이터베이스를 구축했습니다.</p>
@@ -514,7 +546,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <span>2019.12 종료</span>
 <span>STM32F4 · J1772 · LabVIEW · Simulink</span>
 </div>
-      <p class="case-intro">SAE J1772 기반 충전 제어를 연구하고, LabVIEW EVSE/OBC 시뮬레이터와 Simulink 배터리 모델을 연동한 실험 환경을 구축했습니다.</p>
+      <p class="case-intro">SAE J1772 기반 충전 제어를 연구하고, LabVIEW EVSE/OBC 시뮬레이터와 Simulink 배터리 모델을 연동한 실험 환경을 구축했습니다.</p><p class="case-scope"><strong>담당 범위</strong> 충전 제어 로직·EVSE/OBC 시뮬레이터·실험 환경</p>
       <details class="work-detail"><summary>전기차 충전 분배 알고리즘·시뮬레이터 상세</summary>
       <div class="detail-body"><div class="project-content">
 <p>SAE J1772 표준 기반 전기차 충전 분배 알고리즘을 연구하고, LabVIEW 기반 EVSE/OBC 양방향 시뮬레이터를 개발했습니다.</p>
@@ -563,7 +595,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 <li class="tech-item"><strong>Python</strong> 계측·분석·패키지 생성 자동화</li>
 </ul>
 </div><div class="tech-category">
-<h3>MCU 플랫폼</h3>
+<h3>MCU·RTOS</h3>
 <ul class="tech-list">
 <li class="tech-item"><strong>TI C2000</strong> PWM·ADC 동기화 및 FOC 제어</li>
 <li class="tech-item"><strong>NXP S12ZVM</strong> Q15 고정소수점 모터 제어</li>
@@ -629,14 +661,8 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 </div></div>
 <div class="contact"><div class="contact-main"><a href="mailto:dayungh10@naver.com">dayungh10@naver.com</a><a href="tel:+821090547352">010-9054-7352</a></div>
 <details class="work-detail profile-extra"><summary>추가 프로필</summary><div class="detail-body"><div class="info-grid">
-<div class="info-item">
-<span class="info-label">이메일</span>
-<span class="info-value">dayungh10@naver.com</span>
-</div>
-<div class="info-item">
-<span class="info-label">연락처</span>
-<span class="info-value">010-9054-7352</span>
-</div>
+
+
 <div class="info-item">
 <span class="info-label">생년월일</span>
 <span class="info-value">1992.08.18</span>
@@ -655,7 +681,7 @@ section[id],article[id],details[id],.project-group[id]{scroll-margin-top:108px}.
 </div>
 </div></div></details></div>
 </section></main>
-<footer><div class="container"><span>© 2026 이재석 · Embedded Software Engineer</span><span>내용 기준 <time datetime="2026-10-01">2026.10.01</time></span><a href="#top">맨 위로</a></div></footer>
+<footer><div class="container"><span>© 2026 이재석 · Embedded Software Engineer</span><span>내용 기준 <time datetime="2026-10-02">2026.10.02</time></span><a href="#top">맨 위로</a></div></footer>
 <script>
 // Keep deep links and print output usable with collapsed project details.
 (() => {
